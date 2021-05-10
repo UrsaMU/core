@@ -1,0 +1,11 @@
+
+'||'''|,                  ||`                 ||                               
+ ||   ||          ''      ||                  ||                               
+ ||;;;;   '||''|  ||  .|''||  .|''|, .|''|, ''||''  .|''|, '\\    //` `||''|,  
+ ||   ||   ||     ||  ||  ||  ||  || ||..||   ||    ||  ||   \\/\//    ||  ||  
+.||...|'  .||.   .||. `|..||. `|..|| `|...    `|..' `|..|'    \/\/    .||  ||. 
+                                  ||                                           
+ An Anita Blake  RPG           `..|'                                           
+
+create  <Name> <Password> to create a new character.
+Connect <Name> <Password> to connect to an established character.
