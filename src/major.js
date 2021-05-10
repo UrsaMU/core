@@ -1,5 +1,7 @@
 const { app, server } = require("./app");
 const { MU } = require("./mu");
+const authRoutes = require("./routes/authRoutes");
+const express = require("express");
 const commands = require("./hooks/commands");
 const player = require("./hooks/player");
 const auth = require("./hooks/auth");
@@ -70,18 +72,14 @@ mu.subs(
   { before: /%b/g, after: " ", strip: " " }
 );
 
-(async () => {
-  const rooms = await mu.db.find({
-    $where: function () {
-      return mu.flags.check(this.flags || "", "room");
-    },
-  });
+// Add the mu instance to any incoming requests.
+mu.app.use((req, res, next) => {
+  req.mu = mu;
+  next();
+});
 
-  if (!rooms.length) {
-    const entity = await mu.entity("Limbo", "Room");
-    console.log(`Limbo created (${entity._id})`);
-  }
-})().catch((err) => console.log(err));
+mu.app.use(express.json());
+mu.app.use("/api/v1/auth", authRoutes);
 
 mu.hooks.use(auth, player, commands);
 mu.start(4200);

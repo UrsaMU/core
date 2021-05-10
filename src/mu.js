@@ -61,12 +61,6 @@ class MU extends EventEmitter {
       });
     });
 
-    // Add the mu instance to any incoming requests.
-    this.app.use((req, res, next) => {
-      req.mu = this;
-      next();
-    });
-
     this.server.listen(port, () =>
       console.log(`UrsaMU Listening on Port ${port}`)
     );
@@ -134,6 +128,8 @@ class MU extends EventEmitter {
 
     return await this.db.create(entity);
   }
+
+  token(name, password) {}
 
   async login(socket, name, password) {
     const regex = new RegExp(name, "i");
