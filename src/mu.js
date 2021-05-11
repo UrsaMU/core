@@ -53,11 +53,8 @@ class MU extends EventEmitter {
         ctx.mu = this;
         ctx.id = socket.id;
         ctx.data.socket = socket;
+        console.log(ctx.data.width);
         await this.hooks.execute(ctx);
-
-        if (!ctx.found && ctx.player) {
-          this.send(socket.id, "Huh? Type 'help' for help.");
-        }
       });
     });
 
@@ -129,8 +126,6 @@ class MU extends EventEmitter {
     return await this.db.create(entity);
   }
 
-  token(name, password) {}
-
   async login(socket, name, password) {
     const regex = new RegExp(name, "i");
     const player = (await this.db.find({ name: regex }))[0];
@@ -146,6 +141,10 @@ class MU extends EventEmitter {
       socket.join(player.location);
       return await sign(player._id);
     }
+  }
+
+  configure(...plugins) {
+    plugins.forEach((plugin) => plugin(this));
   }
 }
 

@@ -2,7 +2,6 @@ const { verify } = require("../utils/utils");
 
 module.exports = async (ctx, next) => {
   const conn = ctx.mu.connections.get(ctx.id);
-  console.log(ctx.data.token);
   if (ctx.data.token && !conn) {
     const id = await verify(ctx.data.token);
     let player = await ctx.mu.db.get(id.id);

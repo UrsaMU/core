@@ -8,5 +8,8 @@ module.exports = async (ctx, next) => {
       }
     }
   }
+
+  if (!ctx.found && ctx.player)
+    ctx.mu.send(ctx.id, "Huh? Type 'help' for help.");
   next();
 };
