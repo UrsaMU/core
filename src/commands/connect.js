@@ -10,5 +10,6 @@ module.exports = {
       token ? "%chWelcome%cn to the %chgame%cn!" : "permission denied.",
       { token, login: true }
     );
+    ctx.mu.force(ctx, "l");
   },
 };

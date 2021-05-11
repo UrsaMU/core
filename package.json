@@ -9,7 +9,7 @@
   "private": false,
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
-    "@digibear/tags": "^0.2.9",
+    "@digibear/tags": "^0.2.11",
     "@ursamu/parser": "^1.0.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",

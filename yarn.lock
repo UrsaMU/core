@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@digibear/middleware/-/middleware-0.2.3.tgz#2b4f5e860021bf67380b099c11915c79280069d5"
   integrity sha512-aZffpROKZ5OQFQheqxBJLzxbNSDV8+SZ+aJET669N/eIMqRInKIDehPz4J+di+DCOkeN7OCItpOsXdX3R6zYHQ==
 
-"@digibear/tags@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@digibear/tags/-/tags-0.2.9.tgz#d0fd2c5af52b2aa4250457e44d2cb7cef1db3463"
-  integrity sha512-ruj8md5npJyGAXsikWpPU76qOM7WUoHrjW8KsJy/XBu9185xMAmUk6HNcmwQNaLjuselPUPfjURjKrPsUzzCSA==
+"@digibear/tags@^0.2.11":
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@digibear/tags/-/tags-0.2.11.tgz#b04c3269975cb580b169dd0804413d5b1817614b"
+  integrity sha512-a94BzVok+dAg9SU8XauruRumU4D7y2pBRSqhknYPKGMsisnegJwe6htTHnUj4f4mrd0qS7MFnPBVT5PrsYAIuA==
 
 "@mapbox/node-pre-gyp@^1.0.0":
   version "1.0.4"

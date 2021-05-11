@@ -26,6 +26,12 @@ module.exports = (mu) => {
       },
     },
     {
+      name: "staff",
+      lvl: 5,
+      lock: "wizard+",
+      code: "S",
+    },
+    {
       code: "E",
       lvl: 0,
       lock: "immortal",
