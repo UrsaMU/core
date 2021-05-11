@@ -107,8 +107,8 @@ class MU extends EventEmitter {
     return this;
   }
 
-  force(ctx, command) {
-    ctx.data.socket.send(command);
+  force(ctx, command, data = {}) {
+    this.hooks.execute({ ...ctx, ...{ msg: command, data } });
   }
 
   async entity(name, flgs, data = {}) {
