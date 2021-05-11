@@ -66,9 +66,11 @@ module.exports = {
     }
 
     if (slash && slash.match(/tel|teleport/i)) {
+      ctx.data.socket.leave(player.location);
       player.location = room1._id;
       await ctx.mu.db.update({ _id: player._id }, player);
       ctx.mu.send(ctx.id, "Teleporting!");
+      ctx, data.socket.join(player.location);
       ctx.mu.force(ctx, "look");
     }
   },
