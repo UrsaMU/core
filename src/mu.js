@@ -21,6 +21,9 @@ class MU extends EventEmitter {
     this.hooks = pipeline();
     this.db = new DB();
     this.config = require("../config/default.json");
+    this.motd = readFileSync(join(__dirname, "../text/motd.txt"), {
+      encoding: "utf8",
+    });
 
     this.connections = new Map();
   }
@@ -91,17 +94,23 @@ class MU extends EventEmitter {
     return this.io.to(str);
   }
 
-  send(id, msg, data = {}) {
+  async send(id, msg, data = {}) {
     this.io.to(id).emit("message", {
-      msg: this.parser.substitute(data.type || "telnet", msg),
+      msg: this.parser.substitute(
+        data.type || "telnet",
+        await this.parser.string(data.type || "telnet", { msg, data })
+      ),
       data,
     });
     return this;
   }
 
-  broadcast(msg, data = {}) {
+  async broadcast(msg, data = {}) {
     this.io.emit("message", {
-      msg: this.parser.substitute(data.type || "telnet", msg),
+      msg: this.parser.substitute(
+        data.type || "telnet",
+        await this.parser.string(data.type || "telnet", { msg, data })
+      ),
       data,
     });
     return this;

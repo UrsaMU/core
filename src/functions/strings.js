@@ -39,7 +39,10 @@ module.exports = (mu) => {
     let len = parseInt(args[2]) || 0;
     let wordlen = mu.parser.stripSubs("telnet", str).length;
     let left = Math.floor(len / 2 - wordlen);
-    let right = Math.floor(len - left - wordlen);
-    return `${repeatString(fill, left)}${str}${repeatString(fill, right)}`;
+    let remainder = Math.floor((len - left - wordlen - left) / 2);
+    return `${repeatString(fill, left + remainder)}${str}${repeatString(
+      fill,
+      left + remainder
+    )}`;
   });
 };

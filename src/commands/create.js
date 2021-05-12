@@ -11,7 +11,8 @@ module.exports = {
     const taken = await ctx.mu.db.find({ name: regName });
     const players = await ctx.mu.db.find({ type: "player" });
 
-    if (taken.length) return ctx.mu.send(ctx.id, "That name is unavailable.");
+    if (taken.length)
+      return await ctx.mu.send(ctx.id, "That name is unavailable.");
 
     const player = await ctx.mu.entity(
       args[1],
@@ -24,6 +25,6 @@ module.exports = {
 
     const token = await ctx.mu.login(ctx.data.socket, player.name, args[2]);
 
-    ctx.mu.send(ctx.id, "Character created!", { token });
+    await ctx.mu.send(ctx.id, "Character created!", { token });
   },
 };

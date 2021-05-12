@@ -22,7 +22,7 @@ module.exports = {
     }
 
     // Save room1
-    ctx.mu.send(
+    await ctx.mu.send(
       ctx.id,
       `%chDone.%cn Room ${room1.name.split(";")[0]} (%ch%cx${
         room1._id
@@ -69,7 +69,7 @@ module.exports = {
       ctx.data.socket.leave(player.location);
       player.location = room1._id;
       await ctx.mu.db.update({ _id: player._id }, player);
-      ctx.mu.send(ctx.id, "Teleporting!");
+      await ctx.mu.send(ctx.id, "Teleporting!");
       ctx, data.socket.join(player.location);
       ctx.mu.force(ctx, "look");
     }

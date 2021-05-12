@@ -15,19 +15,19 @@ module.exports = {
       if (!target) return "I can't find that here.";
       const contents = await ctx.mu.db.find({ location: target._id });
 
-      let output = "\n";
+      let output = "";
       const name = (target) => {
         if (ctx.mu.flags.check(ctx.player.flags, "staff+")) {
           return `${target.name} (%ch%cx${target._id}-${ctx.mu.flags.codes(
             target.flags.trim()
-          )}%cn)\n`;
+          )}%cn)`;
         } else {
-          return target.name + "\n";
+          return target.name;
         }
       };
 
-      output += name(target);
-      output += target.description + "\n";
+      output += name(target) + "\n";
+      output += target.description + "\n\n";
       output += target.flags.split(" ").includes("player")
         ? "Carrying:"
         : "Contents:";
@@ -39,11 +39,11 @@ module.exports = {
     args[1] = args[1] ? args[1] : "";
 
     if (args[1].toLowerCase() === "here" || args[1].toLowerCase() === "") {
-      buildDesc(ctx.player.location).then((desc) => ctx.mu.send(ctx.id, desc));
+      await ctx.mu.send(ctx.id, await buildDesc(ctx.player.location));
     } else if (args[1].toLowerCase() === "me") {
-      buildDesc(ctx.player._id).then((desc) => ctx.mu.send(ctx.id, desc));
+      await ctx.mu.send(ctx.id, await buildDesc(ctx.player._is));
     } else {
-      buildDesc(args[1]).then((desc) => ctx.mu.send(ctx.id, desc));
+      await ctx.mu.send(ctx.id, await buildDesc(args[1]));
     }
   },
 };

@@ -7,16 +7,7 @@ module.exports = {
     const player = await ctx.mu.db.get(conn.player);
     const regex = new RegExp(player.location, "i");
 
-    const str = {
-      msg: args[1],
-      data: { ctx },
-      scope: {},
-    };
-
     if (player)
-      ctx.mu.send(
-        player.location,
-        `${player.name} says "${await ctx.mu.parser.string("telnet", str)}"`
-      );
+      await ctx.mu.send(player.location, `${player.name} says "${args[1]}"`);
   },
 };
