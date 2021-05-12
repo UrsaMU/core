@@ -55,8 +55,8 @@ class MU extends EventEmitter {
       socket.on("message", async (ctx) => {
         ctx.mu = this;
         ctx.id = socket.id;
+        socket.width = ctx.data.width;
         ctx.data.socket = socket;
-        console.log(ctx.data.width);
         await this.hooks.execute(ctx);
       });
     });
@@ -98,9 +98,13 @@ class MU extends EventEmitter {
     this.io.to(id).emit("message", {
       msg: this.parser.substitute(
         data.type || "telnet",
-        await this.parser.string(data.type || "telnet", { msg, data })
+        await this.parser.string(data.type || "telnet", {
+          msg,
+          data,
+          scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
+        })
       ),
-      data,
+      data: {},
     });
     return this;
   }
@@ -109,15 +113,19 @@ class MU extends EventEmitter {
     this.io.emit("message", {
       msg: this.parser.substitute(
         data.type || "telnet",
-        await this.parser.string(data.type || "telnet", { msg, data })
+        await this.parser.string(data.type || "telnet", {
+          msg,
+          data,
+          scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
+        })
       ),
-      data,
+      data: {},
     });
     return this;
   }
 
-  force(ctx, command, data = {}) {
-    this.hooks.execute({ ...ctx, ...{ msg: command, data } });
+  force(ctx, command) {
+    this.hooks.execute({ ...ctx, ...{ msg: command } });
   }
 
   async entity(name, flgs, data = {}) {
@@ -154,6 +162,15 @@ class MU extends EventEmitter {
 
   configure(...plugins) {
     plugins.forEach((plugin) => plugin(this));
+  }
+
+  getSocket(id) {
+    let results;
+    this.connections.forEach((v, k) => {
+      if (v.player === id) results = v.socket;
+    });
+
+    return results;
   }
 }
 

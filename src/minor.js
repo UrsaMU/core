@@ -18,12 +18,14 @@ const server = telnetlib.createServer(
   (c) => {
     const s = new io("http://localhost:4200");
     const naws = c.getOption(NAWS);
-    c.on("negotiated", () => {
-      naws.on("resize", (data) => {
-        c.width = data.width;
-        c.height = data.height;
-      });
+
+    naws.sendResize();
+
+    naws.on("resize", (data) => {
+      c.width = data.width;
+      c.height = data.height;
     });
+
     let token;
     c.id = nanoid();
 

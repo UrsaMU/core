@@ -1,7 +1,3 @@
-Welcome to UrsaMU!  This is the default Message of the Day! If you need help,
-try %ch%cr+help%cn!  Be warned though!  This software is extrmely alpha.
-Bugs are inevitable.   You run into one?  It'd be super great if you'd lieave
-an issue on the repo for the project.
+Welcome to UrsaMU!  This is the default Message of the Day! If you need help try %ch%cr+help%cn!  Be warned though!  This software is extrmely alpha. Bugs are inevitable.   You run into one?  It'd be super great if you'd lieave an issue on the repo for the project.
 
-UrsaMU is a MUSH-Like text based RPG, written with Node.js. For more
-information on the project visit %chhttps://github.com/ursamu/core%cn. 
+UrsaMU is a MUSH-Like text based RPG, written with Node.js. For more information on the project visit %chhttps://github.com/ursamu/core%cn. 

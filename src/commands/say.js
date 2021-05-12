@@ -8,6 +8,10 @@ module.exports = {
     const regex = new RegExp(player.location, "i");
 
     if (player)
-      await ctx.mu.send(player.location, `${player.name} says "${args[1]}"`);
+      await ctx.mu.send(
+        player.location,
+        `${player.name} says "${args[1]}"`,
+        ctx.data
+      );
   },
 };

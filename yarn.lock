@@ -82,10 +82,10 @@
     "@types/node" "*"
     "@types/socket.io-parser" "*"
 
-"@ursamu/parser@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.0.1.tgz#a2e97c50347a254503ae18831528a7f30aca493f"
-  integrity sha512-oMK0oxhPYxyM5xJOeO0QjId7WMhmoIDe2AAo6U98hNMC1nfJeo/zYIflVYR/T8cLEZum3gfbHN2+nEWYve22Hw==
+"@ursamu/parser@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.0.4.tgz#3348d22c058f59b00768990b39975576a34ae912"
+  integrity sha512-bFYX0QGUcop1Z0o2XFeO9hPaDxf56iQT457w3lKCBO+2IDy+WQ3fr8NJ3KNwPYdowd1pFNC0UjWXsVQ3QInFVQ==
   dependencies:
     pegjs "^0.10.0"
 

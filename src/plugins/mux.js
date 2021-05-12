@@ -86,4 +86,5 @@ module.exports = (mu) => {
 
   mu.configure(require("../functions/math"));
   mu.configure(require("../functions/strings"));
+  mu.configure(require("../functions/misc"));
 };

@@ -1,4 +1,4 @@
-module.exports = async (ctx, next) => {
+module.exports = async (ctx) => {
   for (cmd of ctx.mu.cmds) {
     const match = ctx.msg.match(cmd.pattern);
     if (match) {
@@ -11,5 +11,4 @@ module.exports = async (ctx, next) => {
 
   if (!ctx.found && ctx.player)
     ctx.mu.send(ctx.id, "Huh? Type 'help' for help.");
-  next();
 };
