@@ -45,4 +45,30 @@ module.exports = (mu) => {
       left + remainder
     )}`;
   });
+
+  mu.fun("ljust", (args) => {
+    let str = args[0] || "";
+    let fill = args[1] || " ";
+    let len = parseInt(args[2]) || 0;
+    let wordlen = mu.parser.stripSubs("telnet", str).length;
+    let left = Math.floor(len / 2 - wordlen);
+
+    return `${str}${repeatString(fill, left)}`;
+  });
+
+  mu.fun("rjust", (args) => {
+    let str = args[0] || "";
+    let fill = args[1] || " ";
+    let len = parseInt(args[2]) || 0;
+    let wordlen = mu.parser.stripSubs("telnet", str).length;
+    let left = Math.floor(len / 2 - wordlen);
+
+    return `${repeatString(fill, left)}${str}`;
+  });
+
+  mu.fun("repeat", (args) => {
+    const str = args[0] || "";
+    const len = parseInt(args[1], 10) || 0;
+    return `${repeatString(str, len)}`;
+  });
 };
