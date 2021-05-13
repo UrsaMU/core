@@ -2,7 +2,7 @@ const player = require("../hooks/player");
 
 module.exports = {
   name: "look",
-  pattern: /l[ook]*?(?:\s+(.*))?/i,
+  pattern: /^l[ook]*?(?:\s+(.*))?/i,
   flags: "connected",
   render: async (args, ctx) => {
     const buildDesc = async (id) => {
@@ -16,23 +16,17 @@ module.exports = {
       const contents = await ctx.mu.db.find({ location: target._id });
 
       let output = "";
-      const name = (target) => {
-        if (ctx.mu.flags.check(ctx.player.flags, "staff+")) {
-          return `${target.name} (%ch%cx${target._id}-${ctx.mu.flags.codes(
-            target.flags.trim()
-          )}%cn)`;
-        } else {
-          return target.name;
-        }
-      };
 
-      output += name(target) + "\n";
+      output += (await ctx.mu.name(ctx.player, target)) + "\n";
       output += target.description + "\n\n";
       output += target.flags.split(" ").includes("player")
         ? "Carrying:"
         : "Contents:";
 
-      contents.forEach((item) => (output += "\n" + name(item)));
+      for (const item of contents) {
+        output += "\n" + (await ctx.mu.name(ctx.player, item));
+      }
+
       return output;
     };
 

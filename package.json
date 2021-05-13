@@ -7,6 +7,9 @@
   "author": "Lemuel Canady, Jr",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "npx nodemon src/index"
+  },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
     "@digibear/tags": "^0.2.11",

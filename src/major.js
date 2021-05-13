@@ -1,11 +1,13 @@
 const { app, server } = require("./app");
 const { MU } = require("./mu");
 const authRoutes = require("./routes/authRoutes");
+const gridRoutes = require("./routes/gridRoutes");
 const express = require("express");
 const commands = require("./hooks/commands");
 const player = require("./hooks/player");
 const auth = require("./hooks/auth");
 const mux = require("./plugins/mux");
+const webAuth = require("./middleware/webAuth");
 const mu = new MU(app, server);
 
 // Configure plugins
@@ -19,6 +21,7 @@ mu.app.use((req, res, next) => {
 
 mu.app.use(express.json());
 mu.app.use("/api/v1/auth", authRoutes);
+mu.app.use("/api/v1/grid", webAuth, gridRoutes);
 
 mu.hooks.use(player, auth, commands);
 mu.start(4200);

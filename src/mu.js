@@ -172,6 +172,16 @@ class MU extends EventEmitter {
 
     return results;
   }
+
+  async name(enactor, target) {
+    if (this.flags.check(enactor.flags, "staff+")) {
+      return `${target.name} (%ch%cx${target._id}-${this.flags.codes(
+        target.flags.trim()
+      )}%cn)`;
+    } else {
+      return target.name;
+    }
+  }
 }
 
 module.exports.MU = MU;
