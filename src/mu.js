@@ -8,8 +8,15 @@ const { readFileSync } = require("fs");
 const { join } = require("path");
 const { processDir, sign } = require("./utils/utils");
 const { compare } = require("bcrypt");
+const express = require("express");
+const { Server } = require("http");
 
 class MU extends EventEmitter {
+  /**
+   * Instantiate a new MU game object.
+   * @param {express.Application} app The express application
+   * @param {Server} server  The http Server.
+   */
   constructor(app, server) {
     super(app, server);
     this.cmds = [];
@@ -66,15 +73,46 @@ class MU extends EventEmitter {
     );
   }
 
+  /**
+   * Add a hook to the messaging middleware system.
+   * @param  {...any} middleware
+   */
   use(...middleware) {
     this.hooks.use(...middleware);
   }
 
+  /**
+   * @typedef {object} cmd
+   * @property {string} name - The name of the command to add.
+   * @property {RegExp} pattern - The pattern to match the command against.
+   * @property {string} [help] - The help entry for the command.
+   * @property { function(string[], object)} render - The function that controls
+   * what your copmmand does with te given inputs from the command call.  The
+   * body of the command.
+   */
+
+  /**
+   * Add a new in-game command to be matched against player input.
+   * @param  {...cmd} cmds The list of commands to add to the system.
+   * @returns
+   */
   cmd(...cmds) {
     this.cmds = [...this.cmds, ...cmds];
     return this;
   }
 
+  /**
+   * @typedef {function(atring[], object)} MuFunction
+   */
+
+  /**
+   * Ad a mushcode function to the in-game system
+   * @param {string} name The name of the function to add
+   * @param {MuFunction} fun The function body
+   * @example mu.fun("add", args => args.reduce((a,b) =>  a += parseInt(b), 0))
+   *
+   * @returns {void}
+   */
   fun(name, fun) {
     this.parser.add(name, fun);
     return this;
