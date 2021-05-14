@@ -51,7 +51,7 @@ module.exports = (mu) => {
     let fill = args[1] || " ";
     let len = parseInt(args[2]) || 0;
     let wordlen = mu.parser.stripSubs("telnet", str).length;
-    let left = Math.floor(len / 2 - wordlen);
+    let left = Math.floor(len - wordlen);
 
     return `${str}${repeatString(fill, left)}`;
   });
@@ -61,7 +61,7 @@ module.exports = (mu) => {
     let fill = args[1] || " ";
     let len = parseInt(args[2]) || 0;
     let wordlen = mu.parser.stripSubs("telnet", str).length;
-    let left = Math.floor(len / 2 - wordlen);
+    let left = Math.floor(len - wordlen);
 
     return `${repeatString(fill, left)}${str}`;
   });
@@ -70,5 +70,35 @@ module.exports = (mu) => {
     const str = args[0] || "";
     const len = parseInt(args[1], 10) || 0;
     return `${repeatString(str, len)}`;
+  });
+
+  mu.fun("columns", (args) => {
+    const truncate = (input, size, fill) => {
+      let length = mu.parser.stripSubs("telnet", item).length;
+      return length > size - 3
+        ? `${input.substring(0, size - 3)}...`
+        : input + fill.repeat(size - length);
+    };
+
+    let list = args[0];
+    let width = parseInt(args[1], 10) || ctx.data.width;
+    let cols = parseInt(args[2]) || 4;
+    let delim = args[3] || " ";
+    let fill = args[4] || " ";
+    let cell = Math.floor(width / cols);
+    list = list.split(delim);
+    let counter = 0;
+    let output = "%r";
+    for (item of list) {
+      if (counter < cols) {
+        output += truncate(item, cell, fill);
+      } else {
+        output += "%r" + truncate(item, cell, fill);
+        counter = 0;
+      }
+      counter++;
+    }
+
+    return output + "\n";
   });
 };

@@ -28,7 +28,7 @@ const server = telnetlib.createServer(
 
     let token;
     c.id = nanoid();
-
+    console.log(token);
     c.write(connect + "\r\n");
 
     s.on("message", (ctx) => {

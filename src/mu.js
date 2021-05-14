@@ -9,22 +9,22 @@ const { join } = require("path");
 const { processDir, sign } = require("./utils/utils");
 const { compare } = require("bcrypt");
 const express = require("express");
-const { Server } = require("http");
+const { createServer } = require("http");
+const { get, set } = require("lodash");
 
 class MU extends EventEmitter {
   /**
    * Instantiate a new MU game object.
    * @param {express.Application} app The express application
-   * @param {Server} server  The http Server.
    */
-  constructor(app, server) {
-    super(app, server);
+  constructor(app) {
+    super(app);
     this.cmds = [];
     this.parser = new Parser();
     this.app = app;
-    this.io = require("socket.io")(server);
     this.flags = new Tags();
-    this.server = server;
+    this.server = createServer(app);
+    this.io = require("socket.io")(this.server);
     this.hooks = pipeline();
     this.db = new DB();
     this.config = require("../config/default.json");
@@ -156,7 +156,7 @@ class MU extends EventEmitter {
           scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
         })
       ),
-      data: {},
+      data: data.transmit || {},
     });
     return this;
   }
@@ -171,7 +171,7 @@ class MU extends EventEmitter {
           scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
         })
       ),
-      data: {},
+      data: data.transmit || {},
     });
     return this;
   }
@@ -207,6 +207,7 @@ class MU extends EventEmitter {
         socket,
         player: player._id,
       });
+      await this.send(player.location, `${player.name} has connected.`);
       socket.join(player.location);
       return await sign(player._id);
     }
@@ -233,6 +234,15 @@ class MU extends EventEmitter {
     } else {
       return target.name;
     }
+  }
+
+  set(path, value) {
+    set(this.config, path, value);
+    return this;
+  }
+
+  get(path) {
+    return get(this.config, path);
   }
 }
 

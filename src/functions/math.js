@@ -3,6 +3,6 @@ module.exports = (mu) => {
 
   mu.fun(
     "sub",
-    (module.exports.sub = (args) => parseInt(args[1]) / parseInt(args[2]))
+    (module.exports.sub = (args) => parseInt(args[0]) - parseInt(args[1]))
   );
 };

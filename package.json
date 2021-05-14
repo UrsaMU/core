@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
     "socket.io": "^4.0.2",
