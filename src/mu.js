@@ -118,6 +118,20 @@ class MU extends EventEmitter {
     return this;
   }
 
+  /**
+   * @typedef {object} Flag
+   * @property {string} name - The name of the flag you want to add to the system.
+   * @property {string} code - The short code for quick display.
+   * @property {number} lvl - The number representing how elevated a flag is.  The higher the mubmer, the more permssions.
+   * @property {string} lock - A Flag expression that controls who can  set a flag.
+   */
+
+  /**
+   * Add new flags to the game
+   * @param  {...Flag} flags Add a list of one or more flags to the game.
+   * @returns
+   */
+
   flag(...flags) {
     this.flags.add(...flags);
     return this;
