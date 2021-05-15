@@ -3,6 +3,7 @@ const { MU } = require("./mu");
 const authRoutes = require("./routes/authRoutes");
 const gridRoutes = require("./routes/gridRoutes");
 const dbRoutes = require("./routes/dbRoutes");
+const wikiRoutes = require("./routes/wikiRoutes");
 const express = require("express");
 const commands = require("./hooks/commands");
 const player = require("./hooks/player");
@@ -23,6 +24,7 @@ mu.app.use(express.json());
 mu.app.use("/api/v1/auth", authRoutes);
 mu.app.use("/api/v1/grid", webAuth, gridRoutes);
 mu.app.use("/api/v1/db", webAuth, dbRoutes);
+mu.app.use("/api/v1/wiki/", wikiRoutes);
 
 mu.hooks.use(player, auth, commands);
 mu.start(4200);

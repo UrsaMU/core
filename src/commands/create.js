@@ -26,5 +26,7 @@ module.exports = {
     const token = await ctx.mu.login(ctx.data.socket, player.name, args[2]);
 
     await ctx.mu.send(ctx.id, "Character created!", { token });
+    ctx.mu.force(ctx, "motd");
+    ctx.mu.force(ctx, "look");
   },
 };
