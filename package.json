@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "npx pm2 start src/index.js",
+    "start": "npx pm2 start src/major.js src/minor.js",
     "shutdown": "npx pm2 delete all"
   },
   "dependencies": {

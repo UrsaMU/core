@@ -42,6 +42,8 @@ const server = telnetlib.createServer(
       }
     });
 
+    s.on("disconnect", () => c.exit());
+
     c.on("data", (data) =>
       s.send({
         data: { token, height: c.height, width: c.width },
