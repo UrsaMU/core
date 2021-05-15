@@ -20,13 +20,14 @@ class MU extends EventEmitter {
   constructor(app) {
     super(app);
     this.cmds = [];
-    this.parser = new Parser();
+    this.attrs = this.parser = new Parser();
     this.app = app;
     this.flags = new Tags();
     this.server = createServer(app);
     this.io = require("socket.io")(this.server);
     this.hooks = pipeline();
     this.db = new DB();
+    this.wiki = new DB(join(__dirname, "../../data/wiki.db"));
     this.config = require("../config/default.json");
     this.motd = readFileSync(join(__dirname, "../text/motd.txt"), {
       encoding: "utf8",
