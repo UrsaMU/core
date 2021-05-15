@@ -1,7 +1,7 @@
 module.exports = {
   name: "Say",
   flags: "connected",
-  pattern: /say\s+|"(.*)/,
+  pattern: /^say\s+|^"(.*)/,
   render: async (args, ctx) => {
     const conn = ctx.mu.connections.get(ctx.id);
     const player = await ctx.mu.db.get(conn.player);
