@@ -3,7 +3,7 @@ const e = require("cors");
 module.exports = {
   name: "Pose",
   flags: "connected",
-  pattern: /(pose\s+|:|;)(.*)/,
+  pattern: /^(pose\s+|:|;)(.*)/i,
   render: async (args, ctx) => {
     const conn = ctx.mu.connections.get(ctx.id);
     const player = await ctx.mu.db.get(conn.player);
