@@ -16,7 +16,6 @@ mu.app.use((req, res, next) => {
   req.mu = mu;
   next();
 });
-
 // Configure plugins
 mu.configure(mux);
 

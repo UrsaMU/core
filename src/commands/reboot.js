@@ -1,3 +1,5 @@
+const { spawn } = require("child_process");
+
 module.exports = {
   name: "@reboot",
   pattern: /@reboot/i,
@@ -6,6 +8,6 @@ module.exports = {
     await ctx.mu.broadcast(
       `@reboot initiated by ${ctx.player.name}!  Please hold!`
     );
-    process.kill(process.pid);
+    process.exit(1);
   },
 };

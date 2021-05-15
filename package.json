@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "npx nodemon src/index"
+    "start": "npx pm2 start src/index.js"
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
