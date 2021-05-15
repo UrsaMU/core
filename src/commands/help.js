@@ -2,7 +2,7 @@ const { trim } = require("lodash");
 
 module.exports = {
   name: "help",
-  pattern: /help(:?\s+(\w+))?/i,
+  pattern: /^help(:?\s+(\w+))?/i,
   flags: "connected",
   help: "This Command.",
   skip: true,
