@@ -2,7 +2,7 @@ const { trim } = require("lodash");
 
 module.exports = {
   name: "help",
-  pattern: /^help(:?\s+(\w+))?/i,
+  pattern: /^[@\+]?help(?:\s+([@\+\w]+))?/i,
   flags: "connected",
   help: "This Command.",
   skip: true,
@@ -26,8 +26,7 @@ module.exports = {
         header += cmd?.help + "%r" || "%rNo help available for this command.%r";
       } else {
         return ctx.mu.send(
-          ctx,
-          id,
+          ctx.id,
           "I can't find that topic. See '%chhelp%cn' for a list of topics."
         );
       }
