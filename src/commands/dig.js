@@ -1,76 +1,54 @@
 module.exports = {
-  name: "dig",
+  name: "@dig",
   pattern: /[@\+]?dig(?:\/(\w+)?)?\s(.*)/i,
   flags: "connected wizard+",
   render: async (args, ctx) => {
-    let room1, room2, exit1, exit2;
-
     const slash = args[1];
-    const [to, from] = args[2].split("=");
-    const [toRoom, toExit] = to.split(",");
+    const [nRoom, exits] = args[2]?.split("=");
+    const [tExit, fExit] = (exits || "").split(",");
 
-    const enactor = ctx.mu.connections.get(ctx.id);
-    const player = await ctx.mu.db.get(enactor.player);
-
-    // just incase there is no from...
-    const [fromRoom, fromExit] = from.split(",") || "";
-
-    room1 = await ctx.mu.entity(toRoom, "room", { exits: [] });
-
-    if (fromRoom) {
-      room2 = await ctx.mu.entity(fromRoom.trim(), "Room", { exits: [] });
-    }
-
-    // Save room1
-    await ctx.mu.send(
+    const room = await ctx.mu.entity(nRoom, "room", {
+      owner: ctx.player._id,
+    });
+    ctx.mu.send(
       ctx.id,
-      `%chDone.%cn Room ${room1.name.split(";")[0]} (%ch%cx${
-        room1._id
-      }%cn) dug.`
+      `%chDone%cn. Room %ch${await ctx.mu.name(ctx.player, room)}%cn dug.`
     );
-    if (toExit) {
-      exit1 = await ctx.mu.entity(toExit.trim(), "exit", {
-        to: room2._id || "",
+
+    if (tExit) {
+      const toExit = await ctx.mu.entity(tExit, "exit", {
+        owner: ctx.player._id,
+        location: ctx.player.location,
       });
-      room1.exits.push(exit1._id);
-      await ctx.mu.db.update({ _id: room1._id }, room1);
       ctx.mu.send(
         ctx.id,
-        `%chDone.%cn Exit ${exit1.name.split(";")[0]} (%ch%cx${
-          exit1._id
-        }%cn) opened.`
+        `%chDone%cn.%cn Exit %ch${await ctx.mu.name(
+          ctx.player,
+          toExit
+        )}%cn opened`
       );
     }
 
-    // Check to see if room2
-    if (room2) {
+    if (fExit) {
+      const fromExit = await ctx.mu.entity(fExit, "exit", {
+        owner: ctx.player._id,
+        location: room._id,
+      });
       ctx.mu.send(
         ctx.id,
-        `%chDone.%cn Room ${room2.name.split(";")[0]} (%ch%cx${
-          room2._id
-        }%cn) dug.`
+        `%chDone%cn.%cn Exit %ch${await ctx.mu.name(
+          ctx.player,
+          fromExit
+        )}%cn opened`
       );
-      if (fromExit) {
-        exit2 = await ctx.mu.entity(fromExit.trim(), "exit", {
-          to: room1._id || "",
-        });
-        room2.exits.push(exit2._id);
-        await ctx.mu.db.update({ _id: room2._id }, room2);
-        ctx.mu.send(
-          ctx.id,
-          `%chDone.%cn Exit ${exit2.name.split(";")[0]} (%ch%cx${
-            exit2._id
-          }%cn) opened.`
-        );
-      }
     }
 
-    if (slash && slash.match(/tel|teleport/i)) {
-      ctx.data.socket.leave(player.location);
-      player.location = room1._id;
-      await ctx.mu.db.update({ _id: player._id }, player);
+    if (slash && slash.match(/t[eleport]*?/i)) {
+      ctx.data.socket.leave(ctx.player.location);
+      ctx.player.location = room._id;
+      await ctx.mu.db.update({ _id: ctx.player._id }, ctx.player);
       await ctx.mu.send(ctx.id, "Teleporting!");
-      ctx, data.socket.join(player.location);
+      ctx.data.socket.join(ctx.player.location);
       ctx.mu.force(ctx, "look");
     }
   },

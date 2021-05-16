@@ -35,7 +35,7 @@ module.exports = {
     if (args[1].toLowerCase() === "here" || args[1].toLowerCase() === "") {
       await ctx.mu.send(ctx.id, await buildDesc(ctx.player.location), ctx.data);
     } else if (args[1].toLowerCase() === "me") {
-      await ctx.mu.send(ctx.id, await buildDesc(ctx.player._is));
+      await ctx.mu.send(ctx.id, await buildDesc(ctx.player._id));
     } else {
       await ctx.mu.send(ctx.id, await buildDesc(args[1]));
     }

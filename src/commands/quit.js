@@ -7,7 +7,9 @@ module.exports = {
       ctx.player.flags = tags;
       await ctx.mu.db.update(ctx.player._id, ctx.player);
     }
-    ctx.mu.send(ctx.id, "Thanks for visiting! See ya!");
+    ctx.mu.send(ctx.id, "Thanks for visiting! See ya!", {
+      transmit: { exit: 1 },
+    });
     ctx.data.socket.disconnect();
     if (ctx.player)
       await ctx.mu.send(

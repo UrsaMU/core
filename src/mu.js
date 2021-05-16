@@ -27,7 +27,8 @@ class MU extends EventEmitter {
     this.io = require("socket.io")(this.server);
     this.hooks = pipeline();
     this.db = new DB();
-    this.wiki = new DB(join(__dirname, "../../data/wiki.db"));
+    this.dbrefs = [];
+
     this.config = require("../config/default.json");
     this.motd = readFileSync(join(__dirname, "../text/motd.txt"), {
       encoding: "utf8",
@@ -36,11 +37,33 @@ class MU extends EventEmitter {
     this.connections = new Map();
   }
 
+  _id() {
+    const mia = this.dbrefs.reduce(function (acc, cur, ind, arr) {
+      var diff = cur - arr[ind - 1];
+      if (diff > 1) {
+        var i = 1;
+        while (i < diff) {
+          acc.push(arr[ind - 1] + i);
+          i++;
+        }
+      }
+      return acc;
+    }, []);
+
+    if (mia.length) {
+      return mia[0];
+    } else {
+      const id = this.dbrefs.length;
+      this.dbrefs.push(id);
+      return id;
+    }
+  }
+
   /**
    * Start Ursamu on the specified port.
    * @param {number} port
    */
-  start(port) {
+  async start(port) {
     const dirent = readdirSync(__dirname + "/commands/", {
       withFileTypes: true,
     });
@@ -49,6 +72,8 @@ class MU extends EventEmitter {
         file.name.endsWith(".js") &&
         this.cmds.push(require(__dirname + "/commands/" + file.name))
     );
+
+    this.dbrefs = await this.db.find({}, { dbref: 1 });
 
     const connect = readFileSync(join(__dirname, "../text/connect.txt"), {
       encoding: "utf8",
@@ -187,6 +212,7 @@ class MU extends EventEmitter {
     const entity = {
       name,
       flags,
+      dbref: this._id(),
       description: "You see nothing special.",
       location: "",
       contents: [],
@@ -229,9 +255,9 @@ class MU extends EventEmitter {
 
   async name(enactor, target) {
     if (this.flags.check(enactor.flags, "staff+")) {
-      return `${target.name} (%ch%cx${target._id}-${this.flags.codes(
+      return `${target.name.split(";")[0]} (#${target.dbref}${this.flags.codes(
         target.flags.trim()
-      )}%cn)`;
+      )})`;
     } else {
       return target.name;
     }

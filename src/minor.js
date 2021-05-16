@@ -32,17 +32,17 @@ const server = telnetlib.createServer(
     c.write(connect + "\r\n");
 
     s.on("message", (ctx) => {
-      const { token: tok, connected } = ctx.data;
+      const { token: tok, connected, exit } = ctx.data;
       token = tok ? tok : token;
 
       if (connected && token) {
-        c.write("...Reconnecting\r\n");
-      } else if (ctx.msg) {
+        c.write("...Reconnecting, and we're back!\r\n");
+      } else if (exit) {
+        c.end();
+      } else if (ctx.msg !== "") {
         c.write(ctx.msg + "\r\n");
       }
     });
-
-    s.on("disconnect", () => c.exit());
 
     c.on("data", (data) =>
       s.send({
