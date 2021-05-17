@@ -1,7 +1,3 @@
-const { add, sub } = require("../functions/math");
-const { header } = require("../functions/strings");
-const { MU } = require("../mu");
-
 module.exports = (mu) => {
   mu.flags.add(
     {
@@ -81,8 +77,6 @@ module.exports = (mu) => {
     { before: /%\[/g, after: "&lbrack;", strip: " " },
     { before: /%\]/g, after: "&rbrack;", strip: " " }
   );
-
-  mu.subs("post");
 
   mu.configure(require("../functions/math"));
   mu.configure(require("../functions/strings"));

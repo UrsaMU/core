@@ -49,12 +49,30 @@ class DB {
     );
   }
 
+  /**
+   * Get an object by it's _id or #dbref.
+   * @param {string | number} id Either the _id, or dbref of an object.
+   * @returns {DBObj}
+   */
   get(id) {
     return new Promise((resolve, reject) =>
-      this.db.findOne({ _id: id }, (err, doc) => {
-        if (err) reject(err);
-        resolve(doc);
-      })
+      this.db.findOne(
+        {
+          $where: function () {
+            if (
+              this._id === id ||
+              this.dbref === id ||
+              this.dbref == parseInt(id.slice(1), 10)
+            )
+              return true;
+            return false;
+          },
+        },
+        (err, doc) => {
+          if (err) reject(err);
+          resolve(doc);
+        }
+      )
     );
   }
 

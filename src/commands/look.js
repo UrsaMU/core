@@ -14,17 +14,36 @@ module.exports = {
       )[0];
       if (!target) return "I can't find that here.";
       const contents = await ctx.mu.db.find({ location: target._id });
-
+      const exits = contents.filter((item) => item.flags.includes("exit"));
       let output = "";
 
       output += (await ctx.mu.name(ctx.player, target)) + "\n";
-      output += target.description + "\n\n";
-      output += target.flags.split(" ").includes("player")
-        ? "Carrying:"
-        : "Contents:";
+      output += target.description;
+      if (contents.length) {
+        output += target.flags.split(" ").includes("player")
+          ? "\n\nCarrying:"
+          : "\n\nContents:";
 
-      for (const item of contents) {
-        output += "\n" + (await ctx.mu.name(ctx.player, item));
+        for (const item of contents.filter((item) => {
+          if (!item.flags.includes("exit")) {
+            if (
+              item.flags.includes("player") &&
+              !item.flags.includes("connected")
+            )
+              return false;
+            return true;
+          }
+        })) {
+          output += "\n" + (await ctx.mu.name(ctx.player, item));
+        }
+      }
+
+      if (exits.length) {
+        output += "\n\nExits:";
+
+        for (const item of exits) {
+          output += "\n" + (await ctx.mu.name(ctx.player, item));
+        }
       }
 
       return output;

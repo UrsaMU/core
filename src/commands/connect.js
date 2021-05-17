@@ -17,7 +17,7 @@ See also:  create
       token ? "%chWelcome%cn to the %chgame%cn!" : "permission denied.",
       { transmit: { token, login: true } }
     );
-    ctx.mu.force(ctx, "motd");
-    ctx.mu.force(ctx, "l");
+    await ctx.mu.force(ctx, "motd");
+    await ctx.mu.force(ctx, "l");
   },
 };

@@ -75,10 +75,6 @@ class MU extends EventEmitter {
 
     this.dbrefs = await this.db.find({}, { dbref: 1 });
 
-    const connect = readFileSync(join(__dirname, "../text/connect.txt"), {
-      encoding: "utf8",
-    });
-
     const rooms = await this.db.find({
       $where: function () {
         if (this.flags.includes("room")) return true;
@@ -214,9 +210,8 @@ class MU extends EventEmitter {
     return this;
   }
 
-  force(ctx, command) {
-    ctx.msg = command;
-    this.hooks.execute({ ...ctx, ...{ msg: command } });
+  async force(ctx, command) {
+    await this.hooks.execute({ ...ctx, ...{ msg: command } });
   }
 
   async entity(name, flgs, data = {}) {
