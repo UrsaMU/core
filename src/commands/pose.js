@@ -9,9 +9,9 @@ module.exports = {
     const player = await ctx.mu.db.get(conn.player);
     const regex = new RegExp(player.location, "i");
     if (player && args[1] != ";") {
-      await ctx.mu.send(player.location, `${player.name} ${args[2]}`);
+      await ctx.mu.send(player.location, `${player.name} ${args[2]}`, ctx.data);
     } else if (player) {
-      await ctx.mu.send(player.location, `${player.name}${args[2]}`);
+      await ctx.mu.send(player.location, `${player.name}${args[2]}`, ctx.data);
     }
   },
 };

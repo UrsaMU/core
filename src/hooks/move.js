@@ -15,8 +15,10 @@ module.exports = async (ctx, next) => {
 
       if (match && exit.to) {
         ctx.data.socket.leave(ctx.player.location);
+        ctx.mu.send(ctx.player.location, `${ctx.player.name} has left.`);
         ctx.player.location = exit.to;
         await ctx.mu.db.update({ _id: ctx.player._id }, ctx.player);
+        ctx.mu.send(ctx.player.location, `${ctx.player.name} has arrived.`);
         ctx.data.socket.join(ctx.player.location);
         ctx.mu.force(ctx, "look");
         ctx.found = true;

@@ -52,7 +52,7 @@ class DB {
   /**
    * Get an object by it's _id or #dbref.
    * @param {string | number} id Either the _id, or dbref of an object.
-   * @returns {DBObj}
+   * @returns {Promise<DBObj>}
    */
   get(id) {
     return new Promise((resolve, reject) =>

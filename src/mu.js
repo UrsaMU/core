@@ -187,7 +187,10 @@ class MU extends EventEmitter {
         await this.parser.string(data.type || "telnet", {
           msg,
           data,
-          scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
+          scope: {
+            ...{ "%#": this.connections.get(data?.socket?.id)?.player || "" },
+            ...data.scope,
+          },
         })
       ),
       data: data.transmit || {},
@@ -202,7 +205,10 @@ class MU extends EventEmitter {
         await this.parser.string(data.type || "telnet", {
           msg,
           data,
-          scope: { "%#": this.connections.get(data?.socket?.id)?.player || "" },
+          scope: {
+            ...{ "%#": this.connections.get(data?.socket?.id)?.player || "" },
+            ...data.scope,
+          },
         })
       ),
       data: data.transmit || {},
@@ -278,6 +284,31 @@ class MU extends EventEmitter {
 
   get(path) {
     return get(this.config, path);
+  }
+
+  /**
+   *
+   * @param {import("./database").DBObj} en The enactor
+   * @param {string | number} tar The dbref, id or name of the target we want.
+   * @returns {Promise<import("./database").DBObj>}
+   */
+  async target(en, tar) {
+    if (tar.toLowerCase() === "me") {
+      return en;
+    } else if (tar.toLowerCase() === "here") {
+      return await this.db.get(en.location);
+    } else {
+      const regex = new RegExp(tar, "i");
+      return (
+        await this.db.find({
+          $or: [
+            { name: regex },
+            { _id: tar },
+            { dbref: parseInt(tar.slice(1)) },
+          ],
+        })
+      )[0];
+    }
   }
 }
 
