@@ -25,10 +25,10 @@ module.exports = {
           : "\n\nContents:";
 
         for (const item of contents.filter((item) => {
-          if (!item.flags.includes("exit")) {
+          if (!item.flags.split(" ").includes("exit")) {
             if (
-              item.flags.includes("player") &&
-              !item.flags.includes("connected")
+              item.flags.split(" ").includes("player") &&
+              !item.flags.split(" ").includes("connected")
             )
               return false;
             return true;

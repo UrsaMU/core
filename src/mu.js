@@ -11,6 +11,7 @@ const { compare } = require("bcrypt");
 const express = require("express");
 const { createServer } = require("http");
 const { get, set } = require("lodash");
+const e = require("cors");
 
 class MU extends EventEmitter {
   /**
@@ -77,7 +78,7 @@ class MU extends EventEmitter {
 
     const rooms = await this.db.find({
       $where: function () {
-        if (this.flags.includes("room")) return true;
+        if (this.flags.split(" ").includes("room")) return true;
         return false;
       },
     });
@@ -85,6 +86,9 @@ class MU extends EventEmitter {
     if (!rooms.length) {
       const limbo = await this.entity("Limbo", "Room");
       this.set("startingRoom", limbo._id);
+    } else {
+      const limbo = (await this.db.find({ name: "Limbo" }))[0];
+      if (!this.config.startingRoom) this.set("startingRoom", limbo._id);
     }
 
     this.io.on("connect", (socket) => {

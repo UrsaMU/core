@@ -9,7 +9,12 @@ module.exports = {
 
     const regName = new RegExp(args[1], "i");
     const taken = await ctx.mu.db.find({ name: regName });
-    const players = await ctx.mu.db.find({ type: "player" });
+    const players = await ctx.mu.db.find({
+      $where: function () {
+        if (this.flags.split(" ").includes("player")) return true;
+        return false;
+      },
+    });
 
     if (taken.length)
       return await ctx.mu.send(ctx.id, "That name is unavailable.");
