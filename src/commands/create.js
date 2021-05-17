@@ -19,7 +19,7 @@ module.exports = {
       players.length ? "player" : "player immortal",
       {
         password: await hash(args[2]),
-        location: ctx.mu.config.players.startingRoom || "Limbo",
+        location: ctx.mu.config.startingRoom,
       }
     );
 

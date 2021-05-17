@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
     if (player) {
       const { tags } = ctx.mu.flags.set(player.flags, {}, "connected");
       player.flags = tags;
-      ctx.mu.db.update({ _id: id.id }, player);
+      await ctx.mu.db.update({ _id: id.id }, player);
       ctx.mu.connections.set(ctx.id, {
         socket: ctx.data.socket,
         player: player._id,

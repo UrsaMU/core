@@ -79,6 +79,18 @@ class MU extends EventEmitter {
       encoding: "utf8",
     });
 
+    const rooms = await this.db.find({
+      $where: function () {
+        if (this.flags.includes("room")) return true;
+        return false;
+      },
+    });
+
+    if (!rooms.length) {
+      const limbo = await this.entity("Limbo", "Room");
+      this.set("startingRoom", limbo._id);
+    }
+
     this.io.on("connect", (socket) => {
       // send a connect message!
       socket.join(socket.id);
@@ -203,6 +215,7 @@ class MU extends EventEmitter {
   }
 
   force(ctx, command) {
+    ctx.msg = command;
     this.hooks.execute({ ...ctx, ...{ msg: command } });
   }
 

@@ -35,7 +35,7 @@ module.exports = {
     const [tExit, fExit] = (exits || "").split(",");
     try {
       if (nRoom !== "") {
-        const room = await ctx.mu.entity(nRoom, "room", {
+        const room = await ctx.mu.entity(nRoom.trim(), "room", {
           owner: ctx.player._id,
         });
         ctx.mu.send(
@@ -44,9 +44,10 @@ module.exports = {
         );
 
         if (tExit) {
-          const toExit = await ctx.mu.entity(tExit, "exit", {
+          const toExit = await ctx.mu.entity(tExit.trim(), "exit", {
             owner: ctx.player._id,
             location: ctx.player.location,
+            to: room._id,
           });
           ctx.mu.send(
             ctx.id,
@@ -58,9 +59,10 @@ module.exports = {
         }
 
         if (fExit) {
-          const fromExit = await ctx.mu.entity(fExit, "exit", {
+          const fromExit = await ctx.mu.entity(fExit.trim(), "exit", {
             owner: ctx.player._id,
             location: room._id,
+            to: ctx.player.location,
           });
           ctx.mu.send(
             ctx.id,
