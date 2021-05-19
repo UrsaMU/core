@@ -25,7 +25,6 @@ mu.app.use(express.json());
 mu.app.use("/api/v1/auth", authRoutes);
 mu.app.use("/api/v1/grid", webAuth, gridRoutes);
 mu.app.use("/api/v1/db", webAuth, dbRoutes);
-H;
 mu.app.use("/api/v1/wiki/", wikiRoutes);
 
 mu.hooks.use(auth, player, move, commands);
