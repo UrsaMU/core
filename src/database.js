@@ -40,6 +40,11 @@ class DB {
     );
   }
 
+  /**
+   * Find a db object with a mongodb query.
+   * @param {object} query
+   * @returns {DBObj[]}
+   */
   find(query) {
     return new Promise((resolve, reject) =>
       this.db.find(query, {}, (err, docs) => {

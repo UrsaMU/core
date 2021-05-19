@@ -74,14 +74,16 @@ class MU extends EventEmitter {
         this.cmds.push(require(__dirname + "/commands/" + file.name))
     );
 
-    this.dbrefs = await this.db.find({}, { dbref: 1 });
+    const records = await this.db.find({});
 
-    const rooms = await this.db.find({
-      $where: function () {
-        if (this.flags.split(" ").includes("room")) return true;
-        return false;
-      },
-    });
+    this.dbrefs = records.map((record) => record.dbref);
+    const players = records.filter((record) =>
+      record.flags.split(" ").includes("connected") ? true : false
+    );
+
+    const rooms = records.filter((record) =>
+      record.flags.split(" ").includes("room")
+    );
 
     if (!rooms.length) {
       const limbo = await this.entity("Limbo", "Room");
@@ -89,6 +91,12 @@ class MU extends EventEmitter {
     } else {
       const limbo = (await this.db.find({ name: "Limbo" }))[0];
       if (!this.config.startingRoom) this.set("startingRoom", limbo._id);
+    }
+
+    for (const player of players) {
+      const { tags } = this.flags.set(player.flags, {}, "!connected");
+      player.flags = tags.trim();
+      await this.db.update({ _id: player._id }, player);
     }
 
     this.io.on("connect", (socket) => {
