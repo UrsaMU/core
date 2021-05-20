@@ -1,15 +1,9 @@
-const { readdir } = require("fs");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { db, DBObj } from "../api/database";
+import { flags } from "../api/flags";
 
-module.exports.processDir = (path, cb) => {
-  readdir(path, (err, files) => {
-    if (err) return console.log(err);
-    files.forEach((file) => cb(file, path));
-  });
-};
-
-module.exports.hash = (pass) =>
+export const hash = (pass: string): Promise<string> =>
   new Promise((resolve, reject) =>
     bcrypt.hash(pass, 10, (err, encr) => {
       if (err) reject(err);
@@ -17,7 +11,7 @@ module.exports.hash = (pass) =>
     })
   );
 
-module.exports.compare = (data, pass) =>
+export const compare = (data: string, pass: string): Promise<Boolean> =>
   new Promise((resolve, reject) =>
     bcrypt.compare(data, pass, (err, comp) => {
       if (err) reject(err);
@@ -25,7 +19,7 @@ module.exports.compare = (data, pass) =>
     })
   );
 
-module.exports.sign = (id) =>
+export const sign = (id: string): Promise<string | undefined> =>
   new Promise((resolve, reject) =>
     jwt.sign(
       { id },
@@ -38,7 +32,7 @@ module.exports.sign = (id) =>
     )
   );
 
-module.exports.verify = (token) =>
+export const verify = (token: string) =>
   new Promise((resolve, reject) =>
     jwt.verify(token, "holyshitchangethis", (err, res) => {
       if (err) reject(err);

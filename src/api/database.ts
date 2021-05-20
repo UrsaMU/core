@@ -1,39 +1,49 @@
-const Datastore = require("nedb");
-const { join } = require("path");
+import Datastore from "nedb";
+import { join } from "path";
 
-class DB {
+export interface DBObj {
+  _id?: string;
+  data: { [key: string]: any };
+  description: string;
+  attrs?: Attribute;
+  name: string;
+  dbref: number;
+  flags: string;
+  location: string;
+  owner: string;
+  password?: string;
+}
+
+export interface Attribute {
+  setby: string;
+  value: string;
+  flags?: string;
+  lock?: string;
+}
+
+type Query = { [key: string]: any };
+
+export class DB {
+  db: Datastore;
   /**
    *  Create a new database instance
    * @param {string} path  The absolute path to where the db file should be saved.
    */
-  constructor(path) {
-    this.db = new Datastore({
+  constructor(path?: string) {
+    this.db = new Datastore<DBObj>({
       autoload: true,
       filename: path || join(__dirname, "../data/data.db"),
     });
   }
 
   /**
-   * @typedef {object} DBObj
-   * @property {string} _id The identifier
-   * @property {object} data Any extra bits of data we want to temp save on
-   * the object.  Disposable/mutable.
-   * @property {object} attrs In-game attributes.
-   * @property {string} name The name of the entity
-   * @property {string} flags The flags that make up the entity.
-   * @property {string} location The entities current location
-   * @property {string} owner Who owns the entity?
-   * @returns
-   */
-
-  /**
    * Create a new game entity.
-   * @param {DBObj} data
+   * @param data
    * @returns
    */
-  create(data) {
+  create(data: DBObj): Promise<DBObj> {
     return new Promise((resolve, reject) =>
-      this.db.insert(data, (err, doc) => {
+      this.db.insert<DBObj>(data, (err, doc) => {
         if (err) reject(err);
         resolve(doc);
       })
@@ -42,12 +52,12 @@ class DB {
 
   /**
    * Find a db object with a mongodb query.
-   * @param {object} query
-   * @returns {DBObj[]}
+   * @param query
+   * @returns
    */
-  find(query) {
+  find(query: Query): Promise<DBObj[]> {
     return new Promise((resolve, reject) =>
-      this.db.find(query, {}, (err, docs) => {
+      this.db.find<DBObj>(query, {}, (err, docs) => {
         if (err) reject(err);
         resolve(docs);
       })
@@ -56,18 +66,19 @@ class DB {
 
   /**
    * Get an object by it's _id or #dbref.
-   * @param {string | number} id Either the _id, or dbref of an object.
-   * @returns {Promise<DBObj>}
+   * @param  id Either the _id, or dbref of an object.
+   * @returns
    */
-  get(id) {
+  get(id: string | number) {
     return new Promise((resolve, reject) =>
-      this.db.findOne(
+      this.db.findOne<DBObj>(
         {
           $where: function () {
             if (
               this._id === id ||
               this.dbref === id ||
-              this.dbref == parseInt(id.slice(1), 10)
+              (typeof id === "string" &&
+                this.dbref == parseInt(id.slice(1), 10))
             )
               return true;
             return false;
@@ -81,7 +92,7 @@ class DB {
     );
   }
 
-  update(query, update) {
+  update(query: Query, update: Partial<DBObj>): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.update(query, update, { returnUpdatedDocs: true }, (err, doc) => {
         if (err) reject(err);
@@ -90,7 +101,7 @@ class DB {
     );
   }
 
-  delete(id) {
+  delete(id: string | number): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.remove({ _id: id }, {}, (err, n) => {
         if (err) reject(err);
@@ -100,4 +111,5 @@ class DB {
   }
 }
 
-module.exports.DB = DB;
+export const wiki = new DB(join(__dirname, "../../wiki.db"));
+export const db = new DB();
