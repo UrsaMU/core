@@ -34,3 +34,5 @@ export class Refs {
     }
   }
 }
+
+export const dbrefs = new Refs();
