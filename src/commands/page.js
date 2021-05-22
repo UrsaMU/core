@@ -1,6 +1,6 @@
 module.exports = {
   name: "page",
-  pattern: /p[age]*\s+?(?:(.*)=)?(.*)/i,
+  pattern: /^p[age]*\s+?(?:(.*)=)?(.*)/i,
   flags: "connected",
   render: async (args, ctx) => {
     const list = args[1] || ctx.player.temp?.pagelist || "";
