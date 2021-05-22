@@ -15,6 +15,7 @@ module.exports = async (ctx, next) => {
         player: player._id,
       });
       ctx.player = player;
+      ctx.data.socket.join(player._id);
       ctx.data.socket.join(player.location);
     }
   }

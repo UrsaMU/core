@@ -28,6 +28,7 @@ class MU extends EventEmitter {
     this.io = require("socket.io")(this.server);
     this.hooks = pipeline();
     this.db = new DB();
+    this.wiki = new DB(join(__dirname, "../data/wiki.db"));
     this.dbrefs = [];
 
     this.config = require("../config/default.json");
@@ -96,6 +97,7 @@ class MU extends EventEmitter {
     for (const player of players) {
       const { tags } = this.flags.set(player.flags, {}, "!connected");
       player.flags = tags.trim();
+      player.temp = {};
       await this.db.update({ _id: player._id }, player);
     }
 
@@ -111,6 +113,20 @@ class MU extends EventEmitter {
         socket.width = ctx.data.width;
         ctx.data.socket = socket;
         await this.hooks.execute(ctx);
+      });
+
+      socket.on("error", async (err) => {
+        if (this.connections.has(socket.id)) {
+          const player = await this.db.get(
+            this.connections.get(socket.id).player
+          );
+          this.connections.delete(socket.id);
+          const { tags } = this.flags.set(player.flags, {}, "!connected");
+          player.flags = tags.trim();
+          this.db.update({ _id: player.id }, player);
+        }
+
+        console.log(err);
       });
     });
 
@@ -255,12 +271,14 @@ class MU extends EventEmitter {
     if (player && (await compare(password, player.password))) {
       const { tags } = this.flags.set(player.flags, {}, "connected");
       player.flags = tags;
+      player.temp = {};
       await this.db.update({ _id: player._id }, player);
       this.connections.set(socket.id, {
         socket,
         player: player._id,
       });
       await this.send(player.location, `${player.name} has connected.`);
+      socket.join(player._id);
       socket.join(player.location);
       return await sign(player._id);
     }

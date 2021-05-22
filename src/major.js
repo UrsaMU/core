@@ -29,3 +29,5 @@ mu.app.use("/api/v1/wiki/", wikiRoutes);
 
 mu.hooks.use(auth, player, move, commands);
 mu.start(4200);
+
+process.on("uncaughtException", (err) => console.log(err));

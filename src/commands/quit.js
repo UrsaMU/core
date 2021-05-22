@@ -1,10 +1,11 @@
 module.exports = {
   name: "quit",
-  pattern: /^quit/i,
+  pattern: /^quit.*/i,
   render: async (args, ctx) => {
     if (ctx.player) {
       const { tags } = ctx.mu.flags.set(ctx.player.flags, {}, "!connected");
       ctx.player.flags = tags.trim();
+      delete ctx.player.temp;
       await ctx.mu.db.update(ctx.player._id, ctx.player);
     }
     await ctx.mu.send(ctx.id, "Thanks for visiting! See ya!", {

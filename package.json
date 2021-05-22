@@ -8,13 +8,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "dev": "concurrently \"nodemon src/major\" \"node src/minor\"",
     "start": "npx pm2 start src/major.js src/minor.js",
     "shutdown": "npx pm2 delete all"
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
     "@digibear/tags": "^0.2.11",
-    "@ursamu/parser": "^1.1.0",
+    "@ursamu/parser": "^1.1.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/socket.io": "^2.1.13",
+    "concurrently": "^6.1.0",
     "eslint": "^7.26.0",
     "nodemon": "^2.0.7"
   }
