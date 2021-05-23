@@ -17,12 +17,21 @@ module.exports = {
       const exits = contents.filter((item) => item.flags.includes("exit"));
       let output = "";
 
-      output += (await ctx.mu.name(ctx.player, target)) + "\n";
-      output += target.description;
+      if (target.flags.split(" ").includes("room")) {
+        output += `[repeat(%cb=%ch-%cn,4)][ljust(%cy<%ch<%cn ${await ctx.name(
+          ctx.player,
+          target
+        )} %ch%cy>%cn%cy>%cn,%cb=%ch-%cn, sub(width(%#),4))]%r`;
+        output += target.description + "%r%r";
+      } else {
+        output += `${await ctx.name(ctx.player, target)}%r`;
+        output += target.description + "%r";
+      }
+
       if (contents.length) {
         output += target.flags.split(" ").includes("player")
           ? "\n\nCarrying:"
-          : "\n\nContents:";
+          : "[repeat(%cb=%ch-%cn,4)][ljust(%cy<%ch<%cn Characters %ch%cy>%cn%cy>%cn,%cb=%ch-%cn, sub(width(%#),4))]%r%r[ljust(Name, ,30)][ljust(Short Description, ,sub(width(%#),35))][rjust(Idle, ,5)]%r[repeat(%ch%cx-%cn,width(%#))]";
 
         for (const item of contents.filter((item) => {
           if (!item.flags.split(" ").includes("exit")) {
@@ -34,16 +43,30 @@ module.exports = {
             return true;
           }
         })) {
-          output += "\n" + (await ctx.mu.name(ctx.player, item));
+          output += `%r[ljust(${await ctx.mu.name(ctx.player, item)}, ,30)]`;
+          output += `[ljust(${
+            item.shortDesc
+              ? item.shortDesc
+              : "%ch%cxUse '%cn+shortdesc <shortdesc>%ch%cx' to set this."
+          }, ,sub(width(%#),35))]%cn`;
         }
       }
 
       if (exits.length) {
-        output += "\n\nExits:";
+        output +=
+          "%r%r[repeat(%cb=%ch-%cn,4)][ljust(%cy<%ch<%cn Exits %ch%cy>%cn%cy>%cn,%cb=%ch-%cn, sub(width(%#),4))]%r";
 
+        const exitList = [];
         for (const item of exits) {
-          output += "\n" + (await ctx.mu.name(ctx.player, item));
+          exitList.push(
+            `${await ctx.mu.name(ctx.player, item)}${
+              item.name.split(";")[1]
+                ? "<%ch" + item.name.split(";")[1].toUpperCase() + "%cn>"
+                : ""
+            }`
+          );
         }
+        output += `[columns(${exitList.join("|")},width(%#),3,|)]`;
       }
 
       return output;
@@ -54,9 +77,9 @@ module.exports = {
     if (args[1].toLowerCase() === "here" || args[1].toLowerCase() === "") {
       await ctx.mu.send(ctx.id, await buildDesc(ctx.player.location), ctx.data);
     } else if (args[1].toLowerCase() === "me") {
-      await ctx.mu.send(ctx.id, await buildDesc(ctx.player._id));
+      await ctx.mu.send(ctx.id, await buildDesc(ctx.player._id), ctx.data);
     } else {
-      await ctx.mu.send(ctx.id, await buildDesc(args[1]));
+      await ctx.mu.send(ctx.id, await buildDesc(args[1]), ctx.data);
     }
   },
 };

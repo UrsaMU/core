@@ -99,6 +99,6 @@ module.exports = (mu) => {
       counter++;
     }
 
-    return output + "\n";
+    return output;
   });
 };

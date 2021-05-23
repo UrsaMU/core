@@ -68,14 +68,18 @@ module.exports = (mu) => {
     { before: /%r/g, after: "\n", strip: " " },
     { before: /%t/g, after: "\t", strip: "    " },
     { before: /%b/g, after: " ", strip: " " },
-    { before: "&lbrack;", after: "[", strip: " " },
-    { before: "&rbrack;", after: "]", strip: " " }
+    { before: /&lbrack;/g, after: "[", strip: " " },
+    { before: /&rbrack;/g, after: "]", strip: " " },
+    { before: /&#40;/g, after: "(", strip: " " },
+    { before: /&#41;/g, after: ")", strip: " " }
   );
 
   mu.subs(
     "pre",
     { before: /%\[/g, after: "&lbrack;", strip: " " },
-    { before: /%\]/g, after: "&rbrack;", strip: " " }
+    { before: /%\]/g, after: "&rbrack;", strip: " " },
+    { before: /%\(/g, after: "&#40;", strip: " " },
+    { before: /%\)/g, after: "&#41;", strip: " " }
   );
 
   mu.configure(require("../functions/math"));

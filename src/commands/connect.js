@@ -15,7 +15,7 @@ See also:  create
     await ctx.mu.send(
       ctx.id,
       token ? "%chWelcome%cn to the %chgame%cn!" : "permission denied.",
-      { transmit: { token, login: true } }
+      { ...ctx.data, ...{ transmit: { token, login: true } } }
     );
     await ctx.mu.force(ctx, "motd");
     await ctx.mu.force(ctx, "l");

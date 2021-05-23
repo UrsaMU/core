@@ -24,6 +24,7 @@ const server = telnetlib.createServer(
     naws.on("resize", (data) => {
       c.width = data.width;
       c.height = data.height;
+      s.send({ msg: "", data: { width: data.width, height: data.height } });
     });
 
     let token;

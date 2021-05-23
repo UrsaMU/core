@@ -107,10 +107,24 @@ class MU extends EventEmitter {
 
       socket.send({ data: { connected: true }, msg: "" });
 
+      /**
+       * @typedef {object} Context
+       * @property {MU} mu The long way.  There are better shortcuts now, this object will probably be
+       * removed in a future patch.
+       * @property {string} id The id of the underlying socket connected to this context.
+       */
+
       socket.on("message", async (ctx) => {
         ctx.mu = this;
         ctx.id = socket.id;
+        ctx.send = this.send.bind(this);
+        ctx.broadcast = this.broadcast.bind(this);
+        ctx.name = this.name.bind(this);
+        ctx.target = this.target.bind(this);
+        ctx.db = this.db;
+
         socket.width = ctx.data.width;
+        ctx.socket = socket;
         ctx.data.socket = socket;
         await this.hooks.execute(ctx);
       });
@@ -245,7 +259,10 @@ class MU extends EventEmitter {
   }
 
   async force(ctx, command) {
-    await this.hooks.execute({ ...ctx, ...{ msg: command } });
+    await this.hooks.execute({
+      ...ctx,
+      ...{ msg: command },
+    });
   }
 
   async entity(name, flgs, data = {}) {
@@ -299,9 +316,9 @@ class MU extends EventEmitter {
 
   async name(enactor, target) {
     if (this.flags.check(enactor.flags, "staff+")) {
-      return `${target.name.split(";")[0]} (#${target.dbref}${this.flags.codes(
+      return `${target.name.split(";")[0]} %(#${target.dbref}${this.flags.codes(
         target.flags.trim()
-      )})`;
+      )}%)`;
     } else {
       return target.name;
     }
