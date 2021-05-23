@@ -4,9 +4,9 @@ module.exports = {
   flags: "connected",
   render: async (_, ctx) => {
     const msg =
-      `[repeat(%ch-%cn=, ${ctx.socket.width})]%r%r` +
+      `[center(%ch<<  Message of the Day  >>%cn,%ch-%cn=, width(%#))]%r%r` +
       ctx.mu.motd +
-      `%r%r[repeat(%ch-%cn=, ${ctx.socket.width})]%r`;
+      `%r%r[repeat(%ch-%cn=, width(%#))]%r`;
     await ctx.mu.send(ctx.id, msg, ctx.data);
   },
 };

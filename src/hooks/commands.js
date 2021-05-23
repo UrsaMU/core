@@ -13,7 +13,7 @@ module.exports = async (ctx) => {
       }
     }
 
-    if (!ctx.found && ctx.player)
+    if (!ctx.found && ctx.player && ctx.msg !== "")
       ctx.mu.send(ctx.id, "Huh? Type 'help' for help.");
   }
 };
