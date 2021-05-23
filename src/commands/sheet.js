@@ -1,6 +1,6 @@
 module.exports = {
   name: "sheet",
-  pattern: /^[@\+]?sheet(?:\s+(\w+))/i,
+  pattern: /^[@\+]?sheet(?:\s+(\w+))?/i,
   flags: "connected",
   render: (args, ctx) => {
     let output = `[ljust(%cy<%ch<%cn ${ctx.name(
