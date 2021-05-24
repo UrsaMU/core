@@ -1,15 +1,14 @@
 {
-  "name": "@ursamu/engine",
+  "name": "@ursamu/core",
   "version": "0.1.0",
   "description": "A Modern MUSH Server",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/lcanady/ursamu",
   "author": "Lemuel Canady, Jr",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "npx pm2 start src/major.js src/minor.js",
-    "shutdown": "npx pm2 delete all"
+    "build": "rm -rf dist && tsc -p tsconfig.json"
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",

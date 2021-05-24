@@ -1,6 +1,7 @@
 import { sign } from "jsonwebtoken";
 import { compare } from "../utils/utils";
-import { MUSocket, send } from "./broadcast";
+import { MUSocket } from "./app";
+import { send } from "./broadcast";
 import { db } from "./database";
 import { flags } from "./flags";
 

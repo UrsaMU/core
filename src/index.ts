@@ -8,3 +8,4 @@ export * from "./api/entitiies";
 export * from "./api/flags";
 export * from "./api/hooks";
 export * from "./api/parser";
+export * from "./api/cmds";

@@ -26,6 +26,8 @@ export const createEntity = async (
     description: "You see nothing special.",
     location: "",
     data: {},
+    temp: {},
+    attrs: {},
     owner: id,
     ...data,
   };
