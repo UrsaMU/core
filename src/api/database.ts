@@ -4,8 +4,9 @@ import { join } from "path";
 export interface DBObj {
   _id?: string;
   data: { [key: string]: any };
+  temp: { [key: string]: any };
   description: string;
-  attrs?: Attribute;
+  attrs: { [key: string]: Attribute };
   name: string;
   dbref: number;
   flags: string;
@@ -92,6 +93,12 @@ export class DB {
     );
   }
 
+  /**
+   * Update a db entity
+   * @param query The dbobjs you want to search for and update
+   * @param update The update to push.  Note:  Update producs a new object.
+   * @returns
+   */
   update(query: Query, update: Partial<DBObj>): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.update(query, update, { returnUpdatedDocs: true }, (err, doc) => {
