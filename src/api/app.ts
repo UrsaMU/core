@@ -1,9 +1,8 @@
-import { Server as IoServer } from "socket.io";
+import { Server as IoServer, Socket } from "socket.io";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { Server } from "http";
-import { Socket } from "socket.io";
 import { DBObj } from "./database";
 import { Expression } from "@ursamu/parser";
 import { hooks } from "./hooks";
