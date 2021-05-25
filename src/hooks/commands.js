@@ -24,7 +24,7 @@ module.exports = async (ctx) => {
       if (!ctx.found && ctx.player && ctx.msg !== "")
         mu.send(ctx.id, "Huh? Type 'help' for help.");
     } catch (error) {
-      mu.send(ctx.id, `Oops! You've found a bug! ${error.message}`);
+      mu.send(ctx.id, `Oops! You've found a bug!:  ${error.stack}`);
     }
   }
 };
