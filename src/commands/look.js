@@ -1,4 +1,5 @@
 const player = require("../hooks/player");
+const moment = require("moment");
 
 module.exports = {
   name: "look",
@@ -31,7 +32,7 @@ module.exports = {
       if (contents.length) {
         output += target.flags.split(" ").includes("player")
           ? "\n\nCarrying:"
-          : "[repeat(%cb=%ch-%cn,4)][ljust(%cy<%ch<%cn Characters %ch%cy>%cn%cy>%cn,%cb=%ch-%cn, sub(width(%#),4))]%r%r[ljust(Name, ,30)][ljust(Short Description, ,sub(width(%#),35))][rjust(Idle, ,5)]%r[repeat(%ch%cx-%cn,width(%#))]";
+          : "[repeat(%cb=%ch-%cn,4)][ljust(%cy<%ch<%cn Characters %ch%cy>%cn%cy>%cn,%cb=%ch-%cn, sub(width(%#),4))]%r%r[ljust(Name,,25)][ljust(Short Description,,sub(width(%#),35))][rjust(Idle, ,10)]%r[repeat(%ch%cx-%cn,width(%#))]";
 
         for (const item of contents.filter((item) => {
           if (!item.flags.split(" ").includes("exit")) {
@@ -43,12 +44,16 @@ module.exports = {
             return true;
           }
         })) {
-          output += `%r[ljust(${await ctx.mu.name(ctx.player, item)}, ,30)]`;
+          output += `%r[ljust(${await ctx.mu.name(ctx.player, item)},,25)]`;
           output += `[ljust(${
             item.shortDesc
               ? item.shortDesc
               : "%ch%cxUse '%cn+shortdesc <shortdesc>%ch%cx' to set this."
-          }, ,sub(width(%#),35))]%cn`;
+          }%cn,,sub(width(%#),40))][rjust( ${moment(
+            ctx.player._id === item._id
+              ? Date.now()
+              : item.lastCommand || Date.now()
+          ).fromNow(true)},,15)]`;
         }
       }
 

@@ -1,5 +1,4 @@
-const { app } = require("./app");
-const { MU } = require("./mu");
+const mu = require("./mu");
 const authRoutes = require("./routes/authRoutes");
 const gridRoutes = require("./routes/gridRoutes");
 const dbRoutes = require("./routes/dbRoutes");
@@ -11,7 +10,6 @@ const auth = require("./hooks/auth");
 const move = require("./hooks/move");
 const mux = require("./plugins/mux");
 const webAuth = require("./middleware/webAuth");
-const mu = new MU(app);
 
 // Add the mu instance to any incoming requests.
 mu.app.use((req, res, next) => {

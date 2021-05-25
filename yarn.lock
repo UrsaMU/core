@@ -130,10 +130,10 @@
     "@types/node" "*"
     "@types/socket.io-parser" "*"
 
-"@ursamu/parser@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.1.2.tgz#1f2539101fa3913b13e47f14ab309dc6ce09972e"
-  integrity sha512-zrk3JpRKmc20oiRPi2/Skr7LCwD+Hxl7MkVhAqKZus71YSKOCyUVupVu27DUXfxsbK6A+W1MZt3OSedWD0vsKA==
+"@ursamu/parser@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.0.tgz#0e322b640cb0c8ba102a3b5b766a2fc4bcf5c3b3"
+  integrity sha512-8C4SKaRALYWLzZ8IESpy6e4DkGnzC46J6eZwYCJEu3pOP55FrLG6Yu2Og6bX8Dwec5sxPrPt3rkC1wnNMEnaog==
   dependencies:
     pegjs "^0.10.0"
 
@@ -1633,6 +1633,11 @@ mkdirp@~0.5.1:
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
 ms@2.0.0:
   version "2.0.0"

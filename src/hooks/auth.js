@@ -1,3 +1,4 @@
+const moment = require("moment");
 const { verify } = require("../utils/utils");
 
 module.exports = async (ctx, next) => {
@@ -15,6 +16,8 @@ module.exports = async (ctx, next) => {
         player: player._id,
       });
       ctx.player = player;
+      ctx.player.lastCommand = moment().unix();
+      await mu.db.update({ _id: ctx.player._id }, ctx.player);
       ctx.data.socket.join(player._id);
       ctx.data.socket.join(player.location);
     }

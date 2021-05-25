@@ -48,7 +48,7 @@ module.exports = (mu) => {
 
   mu.fun("ljust", (args) => {
     let str = args[0].trim() || "";
-    let fill = args[1].trim() || " ";
+    let fill = args[1] || " ";
     let len = parseInt(args[2]) || 0;
     let wordlen = mu.parser.stripSubs("telnet", str).length;
     let left = Math.floor(len - wordlen);

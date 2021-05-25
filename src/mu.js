@@ -7,19 +7,18 @@ const { DB } = require("./database");
 const { readFileSync } = require("fs");
 const { join } = require("path");
 const { processDir, sign } = require("./utils/utils");
+const { app } = require("./app");
 const { compare } = require("bcrypt");
 const express = require("express");
 const { createServer } = require("http");
 const { get, set } = require("lodash");
-const e = require("cors");
 
-class MU extends EventEmitter {
+class MU {
   /**
    * Instantiate a new MU game object.
    * @param {express.Application} app The express application
    */
-  constructor(app) {
-    super(app);
+  constructor() {
     this.cmds = [];
     this.attrs = this.parser = new Parser();
     this.app = app;
@@ -253,7 +252,7 @@ class MU extends EventEmitter {
           },
         })
       ),
-      data: data.transmit || {},
+      data: data || {},
     });
     return this;
   }
@@ -289,6 +288,7 @@ class MU extends EventEmitter {
       const { tags } = this.flags.set(player.flags, {}, "connected");
       player.flags = tags;
       player.temp = {};
+      delete player.lastCommand;
       await this.db.update({ _id: player._id }, player);
       this.connections.set(socket.id, {
         socket,
@@ -316,7 +316,7 @@ class MU extends EventEmitter {
 
   async name(enactor, target) {
     if (this.flags.check(enactor.flags, "staff+")) {
-      return `${target.name.split(";")[0]} %(#${target.dbref}${this.flags.codes(
+      return `${target.name.split(";")[0]}%(#${target.dbref}${this.flags.codes(
         target.flags.trim()
       )}%)`;
     } else {
@@ -358,5 +358,6 @@ class MU extends EventEmitter {
     }
   }
 }
+const mu = new MU();
 
-module.exports.MU = MU;
+module.exports = mu;
