@@ -1,18 +1,18 @@
-import { db } from "./database";
+import { DB } from "./database";
 
 export class Refs {
   dbrefs: number[];
 
   constructor() {
     this.dbrefs = [];
+  }
 
-    // Populate the dbrefs set.
-    (async () =>
-      (this.dbrefs = (await db.find({})).map((record) => record.dbref)))();
+  async init() {
+    this.dbrefs = (await DB.dbs.db.find({})).map((record) => record.dbref);
   }
 
   async id() {
-    await db.find({});
+    await DB.dbs.db.find({});
     const mia = this.dbrefs.reduce<number[]>(function (acc, cur, ind, arr) {
       var diff = cur - arr[ind - 1];
       if (diff > 1) {

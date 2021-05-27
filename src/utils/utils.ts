@@ -1,7 +1,5 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { db, DBObj } from "../api/database";
-import { flags } from "../api/flags";
 
 export const hash = (pass: string): Promise<string> =>
   new Promise((resolve, reject) =>

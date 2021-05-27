@@ -12,6 +12,7 @@ const server = new Server(app);
 
 app.use(cors());
 app.use(helmet());
+app.use(express.json());
 
 export interface MUSocket extends Socket {
   width?: number;

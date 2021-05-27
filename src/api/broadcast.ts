@@ -1,8 +1,5 @@
-import { Server, Socket } from "socket.io";
-import { DBObj } from "./database";
-import { Data, server } from "./app";
-import { Expression } from "@ursamu/parser";
-import { hooks } from "./hooks";
+import { Data } from "./app";
+
 import { parser } from "./parser";
 import { getSocket } from "./connections";
 import { io } from "./app";
@@ -20,7 +17,7 @@ export const send = async (id: string, msg: string, data: Data = {}) => {
         },
       })
     ),
-    data: data.transmit || {},
+    data,
   });
   return this;
 };
@@ -38,7 +35,7 @@ export const broadcast = async (msg: string, data: Data = {}) => {
         },
       })
     ),
-    data: data.transmit || {},
+    data,
   });
   return this;
 };

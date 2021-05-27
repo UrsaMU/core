@@ -1,4 +1,4 @@
-import { db, DBObj } from "./database";
+import { DB, DBObj } from "./database";
 import { flags } from "./flags";
 import { Refs } from "./dbrefs";
 
@@ -32,7 +32,7 @@ export const createEntity = async (
     ...data,
   };
 
-  return await db.create(entity);
+  return await DB.dbs.db.create(entity);
 };
 
 /**
@@ -61,11 +61,11 @@ export const target = async (en: DBObj, tar: string) => {
   if (tar.toLowerCase() === "me") {
     return en;
   } else if (tar.toLowerCase() === "here") {
-    return await db.get(en.location);
+    return await DB.dbs.db.get(en.location);
   } else {
     const regex = new RegExp(tar, "i");
     return (
-      await db.find({
+      await DB.dbs.db.find({
         $or: [{ name: regex }, { _id: tar }, { dbref: parseInt(tar.slice(1)) }],
       })
     )[0];
