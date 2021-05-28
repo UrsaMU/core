@@ -5,6 +5,7 @@ export interface DBObj {
   data: { [key: string]: any };
   temp: { [key: string]: any };
   description: string;
+  alias?: string;
   attrs: { [key: string]: Attribute };
   name: string;
   dbref: number;
@@ -31,6 +32,9 @@ export interface Article {
   created_at?: number;
   last_update?: number;
   edit_by?: string;
+  hidden?: boolean;
+  locked?: string;
+  flags?: string;
 }
 
 type Query = { [key: string]: any };
@@ -83,7 +87,7 @@ export class DB<T> {
    * @param  id Either the _id, or dbref of an object.
    * @returns
    */
-  get(id: string | number) {
+  get(id: string | number): Promise<T> {
     return new Promise((resolve, reject) =>
       this.db.findOne<T>(
         {
@@ -134,6 +138,11 @@ export class DB<T> {
     DB.dbs[label] = db;
   }
 
+  /**
+   * Delete a database record.
+   * @param id The ID of the record to delete
+   * @returns
+   */
   delete(id: string | number): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.remove({ _id: id }, {}, (err, n) => {

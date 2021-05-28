@@ -1,5 +1,5 @@
 import { Server as IoServer, Socket } from "socket.io";
-import express from "express";
+import express, { Request } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { Server } from "http";

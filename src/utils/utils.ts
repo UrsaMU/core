@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { readdir } from "fs/promises";
 import jwt from "jsonwebtoken";
 
 export const hash = (pass: string): Promise<string> =>
@@ -17,23 +18,30 @@ export const compare = (data: string, pass: string): Promise<Boolean> =>
     })
   );
 
-export const sign = (id: string): Promise<string | undefined> =>
+export const sign = (id: string, secret: string): Promise<string | undefined> =>
   new Promise((resolve, reject) =>
-    jwt.sign(
-      { id },
-      "holyshitchangethis",
-      { expiresIn: "1d" },
-      (err, token) => {
-        if (err) reject(err);
-        resolve(token);
-      }
-    )
+    jwt.sign({ id }, secret, { expiresIn: "1d" }, (err, token) => {
+      if (err) reject(err);
+      resolve(token);
+    })
   );
 
-export const verify = (token: string) =>
+export const verify = (token: string, secret: string): Promise<any> =>
   new Promise((resolve, reject) =>
-    jwt.verify(token, "holyshitchangethis", (err, res) => {
+    jwt.verify(token, secret, (err, res) => {
       if (err) reject(err);
       resolve(res);
     })
   );
+
+export const loaddir = async (path: string) => {
+  const dirent = await readdir(path, {
+    withFileTypes: true,
+  });
+  for (const file of dirent) {
+    if (file.name.endsWith(".ts")) {
+      const module = await import(path + file.name);
+      if (module.default) await module.default();
+    }
+  }
+};
