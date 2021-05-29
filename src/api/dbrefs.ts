@@ -7,12 +7,19 @@ export class Refs {
     this.dbrefs = [];
   }
 
+  /**
+   * Initiate the dbref system.
+   */
   async init() {
     this.dbrefs = (await DB.dbs.db.find<DBObj>({})).map(
       (record) => record.dbref
     );
   }
 
+  /**
+   * Get the next available ID.
+   * @returns
+   */
   async id() {
     await DB.dbs.db.find({});
     const mia = this.dbrefs.reduce<number[]>(function (acc, cur, ind, arr) {

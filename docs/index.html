@@ -63,6 +63,24 @@
 					<p>Ursamu is a modern implementation of a MUSH server, a text based, intertnet roleplaying game. This work is definitely done on the shoulders of giants. This Repo is also in a very alpha state and the api is surely destinied to change as I move towards a stable 1.0.</p>
 				</blockquote>
 				<p>This repo represents the core or the ursamu engine. It has the bare essentials to start an URSAMU server.</p>
+				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+					<h2>Basic Usage</h2>
+				</a>
+				<p>At it&#39;s root, an instance of ursamu can be spun up with two lines of code:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">server</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@ursamu/core&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #001080">server</span><span style="color: #000000">.</span><span style="color: #795E26">listen</span><span style="color: #000000">(</span><span style="color: #098658">4201</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>And you have a listening server! Of course, you&#39;re going to need a bit more before your game is functional!</p>
+				<a href="#hooks" id="hooks" style="color: inherit; text-decoration: none;">
+					<h2>Hooks</h2>
+				</a>
+				<p>Hooks are a middleware system that messages sent to the sever is sent too, to handle various in-game actions like movement, commands, etc. It works just like an ExpressJS middleware. Instead of manipulating the reqest and response objects, we&#39;re modifying the context object.</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> (</span><span style="color: #001080">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">Context</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">: </span><span style="color: #267F99">Next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">temp</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
+<span style="color: #000000">};</span>
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -71,103 +89,10 @@
 					<li class=" ">
 						<a href="modules.html">Exports</a>
 					</li>
-					<li class="label tsd-is-external">
-						<span>Externals</span>
-					</li>
-					<li class=" tsd-kind-namespace tsd-is-external">
-						<a href="modules/express.html">express</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/config.html" class="tsd-kind-icon">Config</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/db.html" class="tsd-kind-icon">DB</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/refs.html" class="tsd-kind-icon">Refs</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/attribute.html" class="tsd-kind-icon">Attribute</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/cmd.html" class="tsd-kind-icon">Cmd</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/context.html" class="tsd-kind-icon">Context</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/dbobj.html" class="tsd-kind-icon">DBObj</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/musocket.html" class="tsd-kind-icon">MUSocket</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#data" class="tsd-kind-icon">Data</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#app" class="tsd-kind-icon">app</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#cmds" class="tsd-kind-icon">cmds</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#conns" class="tsd-kind-icon">conns</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#db" class="tsd-kind-icon">db</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#dbrefs" class="tsd-kind-icon">dbrefs</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#flags" class="tsd-kind-icon">flags</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#hooks" class="tsd-kind-icon">hooks</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#io" class="tsd-kind-icon">io</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#parser" class="tsd-kind-icon">parser</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#server" class="tsd-kind-icon">server</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#wiki" class="tsd-kind-icon">wiki</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#addcmd" class="tsd-kind-icon">add<wbr>Cmd</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#broadcast" class="tsd-kind-icon">broadcast</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createentity" class="tsd-kind-icon">create<wbr>Entity</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="modules.html#express" class="tsd-kind-icon">express</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getsocket" class="tsd-kind-icon">get<wbr>Socket</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#login" class="tsd-kind-icon">login</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#name" class="tsd-kind-icon">name</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#send" class="tsd-kind-icon">send</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#target" class="tsd-kind-icon">target</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -177,14 +102,6 @@
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
 		</div>
 	</div>
 </footer>

@@ -4,7 +4,7 @@ import { Refs } from "./dbrefs";
 
 const ids = new Refs();
 /**
- *
+ * Create a mew DBPObj
  * @param id The id of the enactor creating the object
  * @param name The name of the object to be created
  * @param flgs Any flags to set on the object.
