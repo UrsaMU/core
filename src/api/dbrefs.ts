@@ -1,4 +1,4 @@
-import { DB } from "./database";
+import { DB, DBObj } from "./database";
 
 export class Refs {
   dbrefs: number[];
@@ -8,7 +8,9 @@ export class Refs {
   }
 
   async init() {
-    this.dbrefs = (await DB.dbs.db.find({})).map((record) => record.dbref);
+    this.dbrefs = (await DB.dbs.db.find<DBObj>({})).map(
+      (record) => record.dbref
+    );
   }
 
   async id() {

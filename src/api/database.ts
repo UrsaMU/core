@@ -32,23 +32,20 @@ export interface Article {
   created_at?: number;
   last_update?: number;
   edit_by?: string;
-  hidden?: boolean;
-  locked?: string;
   flags?: string;
 }
 
 type Query = { [key: string]: any };
-type DBs = { [key: string]: DB<any> };
 
-export class DB<T> {
+export class DB {
   db: Datastore;
-  static dbs: DBs;
+  static dbs: { [key: string]: DB };
   /**
    *  Create a new database instance
    * @param {string} path  The absolute path to where the db file should be saved.
    */
   constructor(path: string) {
-    this.db = new Datastore<T>({
+    this.db = new Datastore({
       autoload: true,
       filename: path,
     });
@@ -59,7 +56,7 @@ export class DB<T> {
    * @param data
    * @returns
    */
-  create(data: T): Promise<T> {
+  create<T>(data: any): Promise<T> {
     return new Promise((resolve, reject) =>
       this.db.insert<T>(data, (err, doc) => {
         if (err) reject(err);
@@ -73,7 +70,7 @@ export class DB<T> {
    * @param query
    * @returns
    */
-  find(query: Query): Promise<T[]> {
+  find<T>(query: Query): Promise<T[]> {
     return new Promise((resolve, reject) =>
       this.db.find<T>(query, {}, (err, docs) => {
         if (err) reject(err);
@@ -87,7 +84,7 @@ export class DB<T> {
    * @param  id Either the _id, or dbref of an object.
    * @returns
    */
-  get(id: string | number): Promise<T> {
+  get<T>(id: string | number): Promise<T> {
     return new Promise((resolve, reject) =>
       this.db.findOne<T>(
         {
@@ -116,7 +113,7 @@ export class DB<T> {
    * @param update The update to push.  Note:  Update producs a new object.
    * @returns
    */
-  update(query: Query, update: Partial<T>): Promise<number> {
+  update<T>(query: Query, update: Partial<T>): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.update(query, update, { returnUpdatedDocs: true }, (err, doc) => {
         if (err) reject(err);
@@ -130,7 +127,7 @@ export class DB<T> {
    * @param label The label the db will be referred to by the system.
    * @param db The DB object to save.
    */
-  static attach<T>(label: string, db: DB<T>) {
+  static attach(label: string, db: DB) {
     if (!DB.dbs) {
       DB.dbs = {};
     }

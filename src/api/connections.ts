@@ -2,7 +2,7 @@ import { sign } from "jsonwebtoken";
 import { compare } from "../utils/utils";
 import { MUSocket } from "./app";
 import { send } from "./broadcast";
-import { DB } from "./database";
+import { DB, DBObj } from "./database";
 import { flags } from "./flags";
 
 export const conns: MUSocket[] = [];
@@ -21,7 +21,7 @@ export const login = async (
   password: string
 ) => {
   const regex = new RegExp(name, "i");
-  const player = (await DB.dbs.db.find({ name: regex }))[0];
+  const player = (await DB.dbs.db.find<DBObj>({ name: regex }))[0];
 
   if (player) {
     if (player && (await compare(password, player.password || ""))) {

@@ -65,7 +65,7 @@ export const target = async (en: DBObj, tar: string) => {
   } else {
     const regex = new RegExp(tar, "i");
     return (
-      await DB.dbs.db.find({
+      await DB.dbs.db.find<DBObj>({
         $or: [{ name: regex }, { _id: tar }, { dbref: parseInt(tar.slice(1)) }],
       })
     )[0];

@@ -24,7 +24,7 @@ export interface MUSocket extends Socket {
 export interface Context {
   id: string;
   socket: MUSocket;
-  data?: { [key: string]: any };
+  data: { [key: string]: any };
   player?: DBObj;
   expr?: Expression;
   msg?: string;
