@@ -28,6 +28,7 @@ export const login = async (
       const { tags } = flags.set(player.flags, {}, "connected");
       player.flags = tags;
       await DB.dbs.db.update({ _id: player._id }, player);
+      socket.cid = player._id;
       conns.push(socket);
       await send(player.location, `${player.name} has connected.`);
       socket.join(player.location);

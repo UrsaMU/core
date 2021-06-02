@@ -8,11 +8,13 @@ export interface Cmd {
   help?: string;
 }
 
-export const cmds: Cmd[] = [];
+const cmds: Cmd[] = [];
 
 /**
  * Add one or more commands to the server.
- * @param cmds The coma seperated list of commands to add to the system.
+ * @param commands The coma seperated list of commands to add to the system.
  * @returns
  */
-export const addCmd = (...cmds: Cmd[]) => cmds.forEach((cmd) => cmds.push(cmd));
+export const addCmd = (...commands: Cmd[]) =>
+  commands.forEach((cmd) => cmds.push(cmd));
+export { cmds };

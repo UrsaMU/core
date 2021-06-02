@@ -23,7 +23,7 @@
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
     "shortid": "^2.2.16",
-    "socket.io": "^4.0.2",
+    "socket.io": "^4.1.2",
     "socket.io-client": "^4.0.2",
     "telnetlib": "^0.1.0"
   },
