@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { readdir } from "fs/promises";
+import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
 
 export const hash = (pass: string): Promise<string> =>
@@ -34,6 +34,10 @@ export const verify = (token: string, secret: string): Promise<any> =>
     })
   );
 
+/**
+ * Load all js files from a directory.
+ * @param path The path to the files to handle.
+ */
 export const loaddir = async (path: string) => {
   const dirent = await readdir(path, {
     withFileTypes: true,
@@ -44,4 +48,13 @@ export const loaddir = async (path: string) => {
       if (module.default) await module.default();
     }
   }
+};
+
+/**
+ * Load a file from a given path.
+ * @param path Tge path to the file.
+ * @returns
+ */
+export const loadText = async (path: string) => {
+  return await readFile(path, { encoding: "utf-8" });
 };

@@ -7,6 +7,11 @@ import { flags } from "./flags";
 
 export const conns: MUSocket[] = [];
 
+/**
+ *  Return the socket of an in-game object if a socket is available.
+ * @param id The _id or dbref of the target who's socket we want to retreive.
+ * @returns
+ */
 export const getSocket = (id: string) =>
   conns.find(
     (conn) =>
@@ -15,11 +20,18 @@ export const getSocket = (id: string) =>
       conn.dbref === parseInt(id.slice(1), 10)
   );
 
+/**
+ *Log a player entiity into the game.
+ * @param socket The socket that initiated the login process
+ * @param name The name of the character to log in
+ * @param password The password
+ * @returns
+ */
 export const login = async (
   socket: MUSocket,
   name: string,
   password: string
-) => {
+): Promise<string | undefined> => {
   const regex = new RegExp(name, "i");
   const player = (await DB.dbs.db.find<DBObj>({ name: regex }))[0];
 

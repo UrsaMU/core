@@ -3,6 +3,10 @@ import { set as loSet, get as loGet } from "lodash";
 
 export class Config {
   _config: { [key: string]: any };
+  /**
+   * Create a new database
+   * @param path The path to the Database you want to start.
+   */
   constructor(path: string) {
     this._config = {};
     const dirent = readdirSync(path, {

@@ -39,11 +39,16 @@ export const createEntity = async (
  * Get a name for a tagrget depending on ownership and flag status
  * @param enactor The enactor looking
  * @param target The target being looked at
+ * @param check The flag expression to check against.
  * @returns
  */
-export const name = async (enactor: DBObj, target: DBObj): Promise<string> => {
-  if (flags.check(enactor.flags, "staff+")) {
-    return `${target.name.split(";")[0]} (#${target.dbref}${flags.codes(
+export const name = async (
+  enactor: DBObj,
+  target: DBObj,
+  check: string
+): Promise<string> => {
+  if (flags.check(enactor.flags, check)) {
+    return `${target.name.split(";")[0]}(#${target.dbref}${flags.codes(
       target.flags.trim()
     )})`;
   } else {
@@ -57,7 +62,10 @@ export const name = async (enactor: DBObj, target: DBObj): Promise<string> => {
  * @param tar the target
  * @returns
  */
-export const target = async (en: DBObj, tar: string) => {
+export const target = async (
+  en: DBObj,
+  tar: string
+): Promise<DBObj | undefined> => {
   if (tar.toLowerCase() === "me") {
     return en;
   } else if (tar.toLowerCase() === "here") {
