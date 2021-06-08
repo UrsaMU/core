@@ -8,14 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-<<<<<<< HEAD
-    "dev": "concurrently \"nodemon src/major\" \"node src/minor\"",
-    "start": "npx pm2 start src/major.js src/minor.js",
-    "shutdown": "npx pm2 delete all"
-=======
     "build": "rm -rf dist && tsc -p tsconfig.json && yarn docs",
     "docs": "rm -rf docs && npx typedoc src/index.ts --media ./media --readme ./index.md"
->>>>>>> typescript
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
@@ -36,10 +30,6 @@
     "telnetlib": "^0.1.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@types/socket.io": "^2.1.13",
-    "concurrently": "^6.1.0",
-=======
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
@@ -49,7 +39,6 @@
     "@types/nedb": "^1.8.11",
     "@types/node": "^15.3.0",
     "@types/socket.io": "^3.0.2",
->>>>>>> typescript
     "eslint": "^7.26.0",
     "nodemon": "^2.0.7",
     "typescript": "^4.2.4"
