@@ -116,7 +116,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#socket" class="tsd-kind-icon">socket</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#statuscode" class="tsd-kind-icon">status<wbr>Code</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#statusmessage" class="tsd-kind-icon">status<wbr>Message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#upgrading" class="tsd-kind-icon">upgrading</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#usechunkedencodingbydefault" class="tsd-kind-icon">use<wbr>Chunked<wbr>Encoding<wbr>ByDefault</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#writable" class="tsd-kind-icon">writable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="express.response.html#writablecorked" class="tsd-kind-icon">writable<wbr>Corked</a></li>
@@ -205,7 +204,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.app</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:947</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:1005</li>
 						</ul>
 					</aside>
 				</section>
@@ -216,7 +215,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.charset</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:936</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:994</li>
 						</ul>
 					</aside>
 				</section>
@@ -227,23 +226,23 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.chunkedEncoding</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:160</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:161</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="connection" class="tsd-anchor"></a>
-					<h3>connection</h3>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> connection</h3>
 					<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Socket</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.connection</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:172</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:173</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<dl class="tsd-comment-tags">
-							<dt>deprecate</dt>
+							<dt>deprecated</dt>
 							<dd><p>Use <code>socket</code> instead.</p>
 							</dd>
 						</dl>
@@ -256,7 +255,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.destroyed</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:152</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:150</li>
 						</ul>
 					</aside>
 				</section>
@@ -267,7 +266,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.finished</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:167</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:168</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -285,7 +284,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.headersSent</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:844</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:902</li>
 						</ul>
 					</aside>
 				</section>
@@ -296,7 +295,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.json</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:647</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:705</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -318,7 +317,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.jsonp</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:659</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:717</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -340,18 +339,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.locals</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:934</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:992</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="req" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> req</h3>
+					<h3>req</h3>
 					<div class="tsd-signature tsd-kind-icon">req<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Request</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ParamsDictionary</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ParsedQs</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.req</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:964</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:1022</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -368,7 +367,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.send</p>
 						<ul>
-							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:635</li>
+							<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:693</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -390,7 +389,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.sendDate</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:163</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:164</li>
 						</ul>
 					</aside>
 				</section>
@@ -401,18 +400,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.shouldKeepAlive</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:161</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:162</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="socket" class="tsd-anchor"></a>
-					<h3>socket</h3>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> socket</h3>
 					<div class="tsd-signature tsd-kind-icon">socket<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Socket</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.socket</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:173</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:174</li>
 						</ul>
 					</aside>
 				</section>
@@ -423,7 +422,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.statusCode</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:190</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:191</li>
 						</ul>
 					</aside>
 				</section>
@@ -434,18 +433,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.statusMessage</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:191</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="upgrading" class="tsd-anchor"></a>
-					<h3>upgrading</h3>
-					<div class="tsd-signature tsd-kind-icon">upgrading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from core.Response.upgrading</p>
-						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:159</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:192</li>
 						</ul>
 					</aside>
 				</section>
@@ -456,7 +444,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.useChunkedEncodingByDefault</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:162</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:163</li>
 						</ul>
 					</aside>
 				</section>
@@ -467,7 +455,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writable</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:145</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:143</li>
 						</ul>
 					</aside>
 				</section>
@@ -478,7 +466,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableCorked</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:151</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:149</li>
 						</ul>
 					</aside>
 				</section>
@@ -489,7 +477,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableEnded</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:146</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:144</li>
 						</ul>
 					</aside>
 				</section>
@@ -500,7 +488,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableFinished</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:147</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:145</li>
 						</ul>
 					</aside>
 				</section>
@@ -511,7 +499,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableHighWaterMark</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:148</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:146</li>
 						</ul>
 					</aside>
 				</section>
@@ -522,7 +510,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableLength</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:149</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:147</li>
 						</ul>
 					</aside>
 				</section>
@@ -533,7 +521,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from core.Response.writableObjectMode</p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:150</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:148</li>
 						</ul>
 					</aside>
 				</section>
@@ -551,7 +539,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response._construct</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:156</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:154</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -593,7 +581,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response._destroy</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:157</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:155</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -638,7 +626,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response._final</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:158</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:156</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -680,7 +668,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response._write</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:154</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:152</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -728,7 +716,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response._writev</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:155</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:153</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -779,7 +767,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:179</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:177</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -823,7 +811,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:180</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:178</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -853,7 +841,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:181</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:179</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -889,7 +877,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:182</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:180</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -919,7 +907,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:183</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:181</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -955,7 +943,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:184</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:182</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -991,7 +979,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:185</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:183</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1036,7 +1024,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.addTrailers</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:184</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:185</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1060,7 +1048,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.append</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:958</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:1016</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1100,7 +1088,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.assignSocket</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:195</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:196</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1124,7 +1112,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.attachment</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:823</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:881</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1153,7 +1141,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.clearCookie</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:850</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:908</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1185,7 +1173,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.contentType</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:750</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:808</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1224,7 +1212,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.cookie</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:869</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:927</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1261,7 +1249,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.cookie</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:870</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:928</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1282,7 +1270,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.cookie</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:871</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:929</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1309,7 +1297,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.cork</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:165</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:163</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1327,7 +1315,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.destroy</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:167</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:165</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1351,7 +1339,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.detachSocket</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:196</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:197</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1377,7 +1365,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.download</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:734</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:792</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1407,7 +1395,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.download</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:735</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:793</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1428,7 +1416,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.download</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:736</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:794</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1467,7 +1455,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:187</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:185</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1482,7 +1470,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:188</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:186</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1497,7 +1485,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:189</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:187</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1515,7 +1503,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:190</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:188</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1530,7 +1518,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:191</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:189</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1548,7 +1536,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:192</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:190</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1566,7 +1554,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:193</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:191</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1595,7 +1583,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.end</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:162</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:160</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1622,7 +1610,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.end</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:163</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:161</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1652,7 +1640,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.end</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:164</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:162</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1694,7 +1682,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.eventNames</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:80</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:87</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -1712,7 +1700,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.flushHeaders</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:185</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:186</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1730,7 +1718,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.format</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:818</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:876</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1802,7 +1790,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.get</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:847</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:905</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1831,7 +1819,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.getHeader</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:179</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:180</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1855,7 +1843,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.getHeaderNames</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:181</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:182</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -1873,7 +1861,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.getHeaders</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:180</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:181</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">OutgoingHttpHeaders</span></h4>
@@ -1891,7 +1879,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.getMaxListeners</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:72</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:79</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -1909,7 +1897,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.hasHeader</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:182</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:183</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1934,7 +1922,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.header</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:840</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:898</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1949,7 +1937,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.header</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:841</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:899</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1976,7 +1964,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.links</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:623</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:681</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2010,7 +1998,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.listenerCount</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:76</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:83</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2034,7 +2022,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.listeners</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:73</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:80</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2058,7 +2046,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.location</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:899</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:957</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2104,7 +2092,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.off</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:69</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:76</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2155,7 +2143,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:195</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:193</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2185,7 +2173,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:196</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:194</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2215,7 +2203,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:197</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:195</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2251,7 +2239,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:198</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:196</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2281,7 +2269,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:199</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:197</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2317,7 +2305,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:200</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:198</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2353,7 +2341,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:201</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:199</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2404,7 +2392,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:203</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:201</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2434,7 +2422,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:204</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:202</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2464,7 +2452,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:205</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:203</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2500,7 +2488,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:206</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:204</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2530,7 +2518,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:207</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:205</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2566,7 +2554,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:208</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:206</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2602,7 +2590,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:209</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:207</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2691,7 +2679,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:211</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:209</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2721,7 +2709,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:212</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:210</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2751,7 +2739,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:213</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:211</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2787,7 +2775,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:214</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:212</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2817,7 +2805,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:215</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:213</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2853,7 +2841,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:216</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:214</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2889,7 +2877,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:217</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:215</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2940,7 +2928,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:219</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:217</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2970,7 +2958,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:220</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:218</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3000,7 +2988,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:221</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:219</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3036,7 +3024,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:222</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:220</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3066,7 +3054,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:223</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:221</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3102,7 +3090,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:224</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:222</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3138,7 +3126,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:225</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:223</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3183,7 +3171,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.rawListeners</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:74</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:81</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3209,7 +3197,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.redirect</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:917</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:975</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3239,7 +3227,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.redirect</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:918</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:976</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3257,7 +3245,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.redirect</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:919</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:977</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3284,7 +3272,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeAllListeners</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:70</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:77</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3308,7 +3296,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeHeader</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:183</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:184</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3338,7 +3326,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:227</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:225</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3368,7 +3356,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:228</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:226</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3398,7 +3386,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:229</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:227</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3434,7 +3422,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:230</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:228</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3464,7 +3452,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:231</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:229</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3500,7 +3488,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:232</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:230</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3536,7 +3524,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:233</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:231</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3582,7 +3570,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.render</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:931</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:989</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3636,7 +3624,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.render</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:932</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:990</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3685,7 +3673,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendFile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:701</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:759</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3744,7 +3732,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendFile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:702</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:760</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3774,7 +3762,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendStatus</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:611</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:669</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3816,7 +3804,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendfile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:707</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:765</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3838,7 +3826,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendfile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:711</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:769</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3863,7 +3851,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendfile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:715</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:773</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3888,7 +3876,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.sendfile</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:719</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:777</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3926,7 +3914,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.set</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:837</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:895</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3952,7 +3940,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.set</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:838</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:896</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3979,7 +3967,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.setDefaultEncoding</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:161</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:159</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3996,14 +3984,14 @@
 					<a name="setheader" class="tsd-anchor"></a>
 					<h3>set<wbr>Header</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Header<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Header<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="express.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Locals</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.setHeader</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:178</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:179</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4015,7 +4003,7 @@
 									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="express.response.html" class="tsd-signature-type" data-tsd-kind="Interface">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Locals</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -4030,7 +4018,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.setMaxListeners</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:71</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:78</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4054,7 +4042,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.setTimeout</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:177</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:178</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4093,7 +4081,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.status</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:598</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:656</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4122,7 +4110,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.type</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:764</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:822</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4159,7 +4147,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.uncork</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:166</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:164</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4177,7 +4165,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.vary</p>
 								<ul>
-									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:945</li>
+									<li>Defined in node_modules/@types/express-serve-static-core/index.d.ts:1003</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4210,7 +4198,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.write</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:159</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:157</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4246,7 +4234,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.write</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:160</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:158</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4294,7 +4282,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.writeContinue</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:199</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:200</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4331,7 +4319,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.writeHead</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:200</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:201</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4352,7 +4340,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.writeHead</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:201</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:202</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4379,7 +4367,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from core.Response.writeProcessing</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:202</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:203</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -4504,9 +4492,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="express.response.html#statusmessage" class="tsd-kind-icon">status<wbr>Message</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="express.response.html#upgrading" class="tsd-kind-icon">upgrading</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="express.response.html#usechunkedencodingbydefault" class="tsd-kind-icon">use<wbr>Chunked<wbr>Encoding<wbr>ByDefault</a>

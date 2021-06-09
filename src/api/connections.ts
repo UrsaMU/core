@@ -10,6 +10,8 @@ export const conns: MUSocket[] = [];
 /**
  *  Return the socket of an in-game object if a socket is available.
  * @param id The _id or dbref of the target who's socket we want to retreive.
+ * @example
+ * const socket = getSocket('wErwwSFfgdfu');
  * @returns
  */
 export const getSocket = (id: string) =>
@@ -25,6 +27,7 @@ export const getSocket = (id: string) =>
  * @param socket The socket that initiated the login process
  * @param name The name of the character to log in
  * @param password The password
+ * @example const token = await login(ctx.socket, args[1], args[2]);
  * @returns
  */
 export const login = async (

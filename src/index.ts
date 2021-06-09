@@ -12,12 +12,3 @@ export * from "./api/hooks";
 export * from "./api/parser";
 export * from "./api/cmds";
 export * from "./utils/utils";
-
-
-declare global {
-    namespace Express {
-      interface Request {
-        player: DBObj
-      }
-    }
-  }
