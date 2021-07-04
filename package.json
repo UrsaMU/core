@@ -6,6 +6,9 @@
   "repository": "https://github.com/lcanady/ursamu",
   "author": "Lemuel Canady, Jr",
   "license": "MIT",
+  "files": [
+    "/dist/**/*"
+  ],
   "private": false,
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json && yarn docs",

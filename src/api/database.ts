@@ -1,4 +1,5 @@
 import Datastore from "nedb";
+import { Data } from "./app";
 
 export interface DBObj {
   _id?: string;
@@ -8,7 +9,6 @@ export interface DBObj {
   alias?: string;
   attrs: { [key: string]: Attribute };
   name: string;
-  dbref: number;
   flags: string;
   location: string;
   owner: string;
@@ -37,15 +37,23 @@ export interface Article {
 
 type Query = { [key: string]: any };
 
-export class DB {
-  db: Datastore;
-  static dbs: { [key: string]: DB };
+export interface Database<T> {
+  create: (data: T) => Promise<T>;
+  find: (query: Query, params?: Data) => Promise<T[]>;
+  get: (id: string, params?: Data) => Promise<T>;
+  update: (query: Partial<T>, data: T) => Promise<T>;
+  delete: (id: string) => Promise<any>;
+}
+
+export class DB<T> {
+  db: Datastore<T>;
   /**
    *  Create a new database instance
    * @param {string} path  The absolute path to where the db file should be saved.
    */
+
   constructor(path: string) {
-    this.db = new Datastore({
+    this.db = new Datastore<T>({
       autoload: true,
       filename: path,
     });
@@ -56,9 +64,9 @@ export class DB {
    * @param data
    * @returns
    */
-  create<T>(data: any): Promise<T> {
+  create(data: T): Promise<T> {
     return new Promise((resolve, reject) =>
-      this.db.insert<T>(data, (err, doc) => {
+      this.db.insert(data, (err, doc) => {
         if (err) reject(err);
         resolve(doc);
       })
@@ -70,11 +78,11 @@ export class DB {
    * @param query
    * @returns
    */
-  find<T>(query: Query): Promise<T[]> {
+  find(query: any, pred: Partial<T> = {}): Promise<T[] | []> {
     return new Promise((resolve, reject) =>
-      this.db.find<T>(query, {}, (err, docs) => {
+      this.db.find(query, pred, (err, docs) => {
         if (err) reject(err);
-        resolve(docs);
+        resolve(docs || []);
       })
     );
   }
@@ -84,9 +92,9 @@ export class DB {
    * @param  id Either the _id, or dbref of an object.
    * @returns
    */
-  get<T>(id: string | number): Promise<T> {
+  get(id: string | number): Promise<T | void> {
     return new Promise((resolve, reject) =>
-      this.db.findOne<T>(
+      this.db.findOne(
         {
           $where: function () {
             if (
@@ -113,26 +121,13 @@ export class DB {
    * @param update The update to push.  Note:  Update producs a new object.
    * @returns
    */
-  update<T>(query: Query, update: Partial<T>): Promise<number> {
+  update(query: any, update: Partial<T>): Promise<number> {
     return new Promise((resolve, reject) =>
       this.db.update(query, update, { returnUpdatedDocs: true }, (err, doc) => {
         if (err) reject(err);
         resolve(doc);
       })
     );
-  }
-
-  /**
-   * Attach a new daatabase to the database system.
-   * @param label The label the db will be referred to by the system.
-   * @param db The DB object to save.
-   */
-  static attach(label: string, db: DB) {
-    if (!DB.dbs) {
-      DB.dbs = {};
-    }
-
-    DB.dbs[label] = db;
   }
 
   /**

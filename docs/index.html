@@ -60,8 +60,9 @@
 			<div class="tsd-panel tsd-typography">
 				<p><img src="media/ursamu_github_banner.png" alt="Ursamu"></p>
 				<blockquote>
-					<p>This repo represents the core functionality of the UrsamMU game engine. With this repository you can quickly build your own bare-bones UrsaMU installation!</p>
+					<p>This repo is in it&#39;s very early stages of testing. While everything is here that you need to start an <strong>UrsamMU</strong> installation of your own, the documentation is still a wrok in progress. And, as we reach a 1.0 stable release of the API, breaking changes are sure to happen! Be warned</p>
 				</blockquote>
+				<p>This repo represents the core functionality of the UrsamMU game engine. With this repository you can quickly build your own bare-bones UrsaMU installation! It handles the connections, characters and basic functionality of an <strong>UrsaMU</strong> Server.</p>
 				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">app</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@ursamu/core&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">listen</span><span style="color: #000000">(</span><span style="color: #098658">4201</span><span style="color: #000000">);</span>
@@ -90,11 +91,8 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/config.html" class="tsd-kind-icon">Config</a>
 					</li>
-					<li class=" tsd-kind-class">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/db.html" class="tsd-kind-icon">DB</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/refs.html" class="tsd-kind-icon">Refs</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/article.html" class="tsd-kind-icon">Article</a>
@@ -111,8 +109,14 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/dbobj.html" class="tsd-kind-icon">DBObj</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/database.html" class="tsd-kind-icon">Database</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/musocket.html" class="tsd-kind-icon">MUSocket</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/murequest.html" class="tsd-kind-icon">Mu<wbr>Request</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#data" class="tsd-kind-icon">Data</a>
@@ -128,9 +132,6 @@
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#conns" class="tsd-kind-icon">conns</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#dbrefs" class="tsd-kind-icon">dbrefs</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#flags" class="tsd-kind-icon">flags</a>
@@ -156,9 +157,6 @@
 					<li class=" tsd-kind-function">
 						<a href="modules.html#compare" class="tsd-kind-icon">compare</a>
 					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#createentity" class="tsd-kind-icon">create<wbr>Entity</a>
-					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="modules.html#express" class="tsd-kind-icon">express</a>
 					</li>
@@ -178,19 +176,10 @@
 						<a href="modules.html#loaddir" class="tsd-kind-icon">loaddir</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#login" class="tsd-kind-icon">login</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#name" class="tsd-kind-icon">name</a>
-					</li>
-					<li class=" tsd-kind-function">
 						<a href="modules.html#send" class="tsd-kind-icon">send</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#sign" class="tsd-kind-icon">sign</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#target" class="tsd-kind-icon">target</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#verify" class="tsd-kind-icon">verify</a>
@@ -208,10 +197,6 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>

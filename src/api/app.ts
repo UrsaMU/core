@@ -1,5 +1,5 @@
 import { Server as IoServer, Socket } from "socket.io";
-import express from "express";
+import express, { Request } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { Server } from "http";
@@ -28,6 +28,10 @@ export interface Context {
   player?: DBObj;
   expr?: Expression;
   msg?: string;
+}
+
+export interface MuRequest extends Request {
+  player?: DBObj;
 }
 
 const io = new IoServer(server);
