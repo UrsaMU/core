@@ -11,5 +11,9 @@ export const addCategory = (cat: string) => {
 };
 
 export const addText = (cat: string, entry: TextEntry) => {
-  if (textDB.has(cat)) textDB.get(cat)!.push(entry);
+  if (textDB.has(cat)) {
+    textDB.get(cat)!.push(entry);
+  } else {
+    throw new Error("Category doesn't exist.");
+  }
 };
