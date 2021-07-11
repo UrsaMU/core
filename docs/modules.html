@@ -85,6 +85,7 @@
 								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/database.html" class="tsd-kind-icon">Database</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/musocket.html" class="tsd-kind-icon">MUSocket</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/murequest.html" class="tsd-kind-icon">Mu<wbr>Request</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/textentry.html" class="tsd-kind-icon">Text<wbr>Entry</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -105,12 +106,15 @@
 								<li class="tsd-kind-variable"><a href="modules.html#io" class="tsd-kind-icon">io</a></li>
 								<li class="tsd-kind-variable"><a href="modules.html#parser" class="tsd-kind-icon">parser</a></li>
 								<li class="tsd-kind-variable"><a href="modules.html#server" class="tsd-kind-icon">server</a></li>
+								<li class="tsd-kind-variable"><a href="modules.html#textdb" class="tsd-kind-icon">textDB</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="modules.html#addcategory" class="tsd-kind-icon">add<wbr>Category</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#addcmd" class="tsd-kind-icon">add<wbr>Cmd</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#addtext" class="tsd-kind-icon">add<wbr>Text</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#broadcast" class="tsd-kind-icon">broadcast</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#compare" class="tsd-kind-icon">compare</a></li>
 								<li class="tsd-kind-function tsd-is-external"><a href="modules.html#express" class="tsd-kind-icon">express</a></li>
@@ -135,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/app.ts#L52">src/api/app.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/app.ts#L48">src/api/app.ts:48</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -181,7 +185,7 @@
 					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Express</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/app.ts#L10">src/api/app.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/app.ts#L10">src/api/app.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -191,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">cmds<span class="tsd-signature-symbol">:</span> <a href="interfaces/cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/cmds.ts#L11">src/api/cmds.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/cmds.ts#L11">src/api/cmds.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +205,7 @@
 					<div class="tsd-signature tsd-kind-icon">conns<span class="tsd-signature-symbol">:</span> <a href="interfaces/musocket.html" class="tsd-signature-type" data-tsd-kind="Interface">MUSocket</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/connections.ts#L3">src/api/connections.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/connections.ts#L3">src/api/connections.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -211,7 +215,7 @@
 					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Tags</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/flags.ts#L3">src/api/flags.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/flags.ts#L3">src/api/flags.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -221,7 +225,7 @@
 					<div class="tsd-signature tsd-kind-icon">hooks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/hooks.ts#L4">src/api/hooks.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/hooks.ts#L4">src/api/hooks.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -231,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">io<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/app.ts#L37">src/api/app.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/app.ts#L35">src/api/app.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -241,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">parser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Parser</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/parser.ts#L3">src/api/parser.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/parser.ts#L3">src/api/parser.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -251,13 +255,46 @@
 					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/app.ts#L11">src/api/app.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/app.ts#L11">src/api/app.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="textdb" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> textDB</h3>
+					<div class="tsd-signature tsd-kind-icon">textDB<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="interfaces/textentry.html" class="tsd-signature-type" data-tsd-kind="Interface">TextEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/text.ts#L7">src/api/text.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="addcategory" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> add<wbr>Category</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Category<span class="tsd-signature-symbol">(</span>cat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/text.ts#L9">src/api/text.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cat: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="addcmd" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> add<wbr>Cmd</h3>
@@ -268,7 +305,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/cmds.ts#L18">src/api/cmds.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/cmds.ts#L18">src/api/cmds.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,6 +327,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="addtext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> add<wbr>Text</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Text<span class="tsd-signature-symbol">(</span>cat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entry<span class="tsd-signature-symbol">: </span><a href="interfaces/textentry.html" class="tsd-signature-type" data-tsd-kind="Interface">TextEntry</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/text.ts#L13">src/api/text.ts:13</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cat: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>entry: <a href="interfaces/textentry.html" class="tsd-signature-type" data-tsd-kind="Interface">TextEntry</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="broadcast" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> broadcast</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -299,7 +362,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/broadcast.ts#L39">src/api/broadcast.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/broadcast.ts#L39">src/api/broadcast.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -336,7 +399,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L13">src/utils/utils.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L13">src/utils/utils.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -384,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/hooks.ts#L7">src/api/hooks.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/hooks.ts#L7">src/api/hooks.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -410,7 +473,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/connections.ts#L12">src/api/connections.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/connections.ts#L12">src/api/connections.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -446,7 +509,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L5">src/utils/utils.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L5">src/utils/utils.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -469,7 +532,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L58">src/utils/utils.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L58">src/utils/utils.ts:58</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -500,7 +563,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L41">src/utils/utils.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L41">src/utils/utils.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -531,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/api/broadcast.ts#L15">src/api/broadcast.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/api/broadcast.ts#L15">src/api/broadcast.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -576,7 +639,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L21">src/utils/utils.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L21">src/utils/utils.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -602,7 +665,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/1c4b9e4/src/utils/utils.ts#L29">src/utils/utils.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/2d66d9c/src/utils/utils.ts#L29">src/utils/utils.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -666,6 +729,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/murequest.html" class="tsd-kind-icon">Mu<wbr>Request</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textentry.html" class="tsd-kind-icon">Text<wbr>Entry</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#data" class="tsd-kind-icon">Data</a>
 					</li>
@@ -696,8 +762,17 @@
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#server" class="tsd-kind-icon">server</a>
 					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#textdb" class="tsd-kind-icon">textDB</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#addcategory" class="tsd-kind-icon">add<wbr>Category</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#addcmd" class="tsd-kind-icon">add<wbr>Cmd</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#addtext" class="tsd-kind-icon">add<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#broadcast" class="tsd-kind-icon">broadcast</a>

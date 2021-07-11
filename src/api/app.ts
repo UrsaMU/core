@@ -15,8 +15,6 @@ app.use(helmet());
 app.use(express.json());
 
 export interface MUSocket extends Socket {
-  width?: number;
-  height?: number;
   cid?: string;
   dbref?: number;
 }
@@ -39,12 +37,10 @@ const io = new IoServer(server);
 io.on("connect", (socket: MUSocket) => {
   // send a connect message!
   socket.join(socket.id);
-  socket.send({ data: { connected: true }, msg: "" });
 
   socket.on("message", async (ctx: Context) => {
     ctx.socket = socket;
     ctx.id = socket.id;
-    socket.width = ctx.data?.width;
     await hooks.execute(ctx);
   });
 });
