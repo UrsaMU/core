@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { Dirent, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
 
@@ -37,15 +38,23 @@ export const verify = (token: string, secret: string): Promise<any> =>
 /**
  * Load all js files from a directory.
  * @param path The path to the files to handle.
+ * @param cb optional callback function.
  */
-export const loaddir = async (path: string) => {
+export const loaddir = async (
+  path: string,
+  cb?: (file: Dirent, path: PathLike) => Promise<void> | void
+) => {
   const dirent = await readdir(path, {
     withFileTypes: true,
   });
   for (const file of dirent) {
-    if (file.name.endsWith(".ts")) {
-      const module = await import(path + file.name);
-      if (module.default) await module.default();
+    if (cb) {
+      await cb(file, path);
+    } else {
+      if (file.name.endsWith(".ts")) {
+        const module = await import(path + file.name);
+        if (module.default) await module.default();
+      }
     }
   }
 };

@@ -6,6 +6,7 @@ export interface Cmd {
   render: (args: string[], ctx: Context) => Promise<void>;
   flags?: string;
   help?: string;
+  update?: boolean;
 }
 
 const cmds: Cmd[] = [];

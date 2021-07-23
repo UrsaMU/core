@@ -1,6 +1,6 @@
 import { MUSocket } from "./app";
 
-export const conns: MUSocket[] = [];
+export let conns: MUSocket[] = [];
 
 /**
  *  Return the socket of an in-game object if a socket is available.
@@ -16,3 +16,11 @@ export const getSocket = (id: string) =>
       conn.cid === id ||
       conn.dbref === parseInt(id.slice(1), 10)
   );
+
+/**
+ * Remove a connection from the connecitons list
+ * @param id The Socket.id to be removed from the conn list.
+ */
+export const remConn = (id: string) => {
+  conns = conns.filter((con) => con.id == id);
+};

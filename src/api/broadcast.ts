@@ -30,6 +30,28 @@ export const send = async (id: string, msg: string, data: Data = {}) => {
   return this;
 };
 
+export const broadcastTo = async (
+  location: string,
+  msg: string,
+  data: Data = {}
+) => {
+  io.to(location).emit("message", {
+    msg: parser.substitute(
+      data.type || "telnet",
+      await parser.string(data.type || "telnet", {
+        msg,
+        data,
+        scope: {
+          ...{ "%#": "" },
+          ...data.scope,
+        },
+      })
+    ),
+    data,
+  });
+  return this;
+};
+
 /**
  * Broadcast a message to all connected sockets.
  * @param msg The message to broadcast
