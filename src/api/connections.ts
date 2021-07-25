@@ -1,6 +1,6 @@
 import { MUSocket } from "./app";
 
-export let conns: MUSocket[] = [];
+let conns: MUSocket[] = [];
 
 /**
  *  Return the socket of an in-game object if a socket is available.
@@ -24,3 +24,5 @@ export const getSocket = (id: string) =>
 export const remConn = (id: string) => {
   conns = conns.filter((con) => con.id == id);
 };
+
+export { conns };
