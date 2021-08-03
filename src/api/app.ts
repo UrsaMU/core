@@ -13,6 +13,14 @@ const server = new Server(app);
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      imgSrc: ["self", "data:", "*"],
+    },
+  })
+);
 
 export interface MUSocket extends Socket {
   cid?: string;

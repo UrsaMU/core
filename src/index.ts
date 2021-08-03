@@ -9,3 +9,4 @@ export * from "./api/parser";
 export * from "./api/cmds";
 export * from "./utils/utils";
 export * from "./api/text";
+export * from "./api/tick";
