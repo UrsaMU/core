@@ -1,6 +1,6 @@
 export interface TickAction {
   name: string;
-  action: () => Promise<boolean>;
+  action: () => Promise<void>;
 }
 
 export class Tick {
