@@ -9,12 +9,22 @@ export class Tick {
   interval: number;
 
   constructor(...list: TickAction[]) {
-    this.actions = list;
+    this.actions = [];
     this.interval = 10000;
+
+    list.forEach((item) => {
+      if (typeof item === "function") this.actions.push(item);
+      if (typeof item === "number") this.interval = item;
+    });
+
+    this.start();
   }
 
   add(...list: TickAction[]) {
-    list.forEach((item) => this.actions.push(item));
+    list.forEach((item) => {
+      if (typeof item === "function") this.actions.push(item);
+      if (typeof item === "number") this.interval = item;
+    });
     return this;
   }
 
