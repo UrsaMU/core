@@ -10,3 +10,4 @@ export * from "./api/cmds";
 export * from "./utils/utils";
 export * from "./api/text";
 export * from "./api/tick";
+export * from "./api/Emitter";

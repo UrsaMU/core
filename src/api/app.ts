@@ -5,7 +5,6 @@ import helmet from "helmet";
 import { Server } from "http";
 import { DBObj } from "./database";
 import { Expression } from "@ursamu/parser";
-import { hooks } from "./hooks";
 
 const app = express();
 const server = new Server(app);
@@ -36,22 +35,19 @@ export interface Context {
   msg?: string;
 }
 
+export interface Channel {
+  name: string;
+  header?: string;
+  read?: string;
+  write?: string;
+  modify?: string;
+}
+
 export interface MuRequest extends Request {
   player?: DBObj;
 }
 
 const io = new IoServer(server);
-
-io.on("connect", (socket: MUSocket) => {
-  // send a connect message!
-  socket.join(socket.id);
-
-  socket.on("message", async (ctx: Context) => {
-    ctx.socket = socket;
-    ctx.id = socket.id;
-    await hooks.execute(ctx);
-  });
-});
 
 export type Data = { [key: string]: any };
 

@@ -8,5 +8,6 @@ export const force = async (ctx: Context, command: string) => {
   await hooks.execute({
     ...ctx,
     ...{ msg: command },
+    ...{ ...ctx.data, ...{ found: false } },
   });
 };

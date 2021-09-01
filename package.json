@@ -17,7 +17,7 @@
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
     "@digibear/tags": "^0.2.11",
-    "@ursamu/parser": "^1.2.0",
+    "@ursamu/parser": "^1.2.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",

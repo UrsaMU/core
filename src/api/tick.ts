@@ -8,7 +8,7 @@ export class Tick {
   counter: NodeJS.Timeout | undefined;
   interval: number;
 
-  constructor(...list: TickAction[]) {
+  constructor(...list: (TickAction | number)[]) {
     this.actions = [];
     this.interval = 10000;
 
@@ -16,11 +16,9 @@ export class Tick {
       if (typeof item === "function") this.actions.push(item);
       if (typeof item === "number") this.interval = item;
     });
-
-    this.start();
   }
 
-  add(...list: TickAction[]) {
+  add(...list: (TickAction | number)[]) {
     list.forEach((item) => {
       if (typeof item === "function") this.actions.push(item);
       if (typeof item === "number") this.interval = item;
