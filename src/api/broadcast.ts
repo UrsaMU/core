@@ -14,17 +14,14 @@ import { io } from "./app";
  */
 export const send = async (id: string, msg: string, data: Data = {}) => {
   io.to(id).emit("message", {
-    msg: parser.substitute(
-      data.type || "telnet",
-      await parser.string(data.type || "telnet", {
-        msg,
-        data,
-        scope: {
-          ...{ "%#": getSocket(id)?.cid || "" },
-          ...data.scope,
-        },
-      })
-    ),
+    msg: await parser.string("telnet", {
+      msg,
+      data,
+      scope: {
+        ...{ "%#": "" },
+        ...data.scope,
+      },
+    }),
     data,
   });
   return this;
@@ -36,17 +33,14 @@ export const broadcastTo = async (
   data: Data = {}
 ) => {
   io.to(location).emit("message", {
-    msg: parser.substitute(
-      data.type || "telnet",
-      await parser.string(data.type || "telnet", {
-        msg,
-        data,
-        scope: {
-          ...{ "%#": "" },
-          ...data.scope,
-        },
-      })
-    ),
+    msg: await parser.string("telnet", {
+      msg,
+      data,
+      scope: {
+        ...{ "%#": "" },
+        ...data.scope,
+      },
+    }),
     data,
   });
   return this;

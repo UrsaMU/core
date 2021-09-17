@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TextEntry | @ursamu/core</title>
+	<title>ChannelEntry | @ursamu/core</title>
 	<meta name="description" content="Documentation for @ursamu/core">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@ursamu/core</a>
 				</li>
 				<li>
-					<a href="TextEntry.html">TextEntry</a>
+					<a href="ChannelEntry.html">ChannelEntry</a>
 				</li>
 			</ul>
-			<h1>Interface TextEntry</h1>
+			<h1>Interface ChannelEntry</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">TextEntry</span>
+						<span class="target">ChannelEntry</span>
 					</li>
 				</ul>
 			</section>
@@ -80,12 +80,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#body" class="tsd-kind-icon">body</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#category" class="tsd-kind-icon">category</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#desc" class="tsd-kind-icon">desc</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#lock" class="tsd-kind-icon">lock</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TextEntry.html#visible" class="tsd-kind-icon">visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ChannelEntry.html#_id" class="tsd-kind-icon">_id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ChannelEntry.html#alias" class="tsd-kind-icon">alias</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ChannelEntry.html#mask" class="tsd-kind-icon">mask</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ChannelEntry.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ChannelEntry.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,42 +93,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="body" class="tsd-anchor"></a>
-					<h3>body</h3>
-					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="_id" class="tsd-anchor"></a>
+					<h3>_id</h3>
+					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L4">src/api/text.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/app.ts#L41">src/api/app.ts:41</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="category" class="tsd-anchor"></a>
-					<h3>category</h3>
-					<div class="tsd-signature tsd-kind-icon">category<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="alias" class="tsd-anchor"></a>
+					<h3>alias</h3>
+					<div class="tsd-signature tsd-kind-icon">alias<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L3">src/api/text.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/app.ts#L45">src/api/app.ts:45</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="desc" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> desc</h3>
-					<div class="tsd-signature tsd-kind-icon">desc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="mask" class="tsd-anchor"></a>
+					<h3>mask</h3>
+					<div class="tsd-signature tsd-kind-icon">mask<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L7">src/api/text.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lock" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> lock</h3>
-					<div class="tsd-signature tsd-kind-icon">lock<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L6">src/api/text.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/app.ts#L44">src/api/app.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,17 +128,17 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L2">src/api/text.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/app.ts#L42">src/api/app.ts:42</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="visible" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> visible</h3>
-					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="title" class="tsd-anchor"></a>
+					<h3>title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/text.ts#L5">src/api/text.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/3aed8b3/src/api/app.ts#L43">src/api/app.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -168,25 +157,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="TextEntry.html" class="tsd-kind-icon">Text<wbr>Entry</a>
+						<a href="ChannelEntry.html" class="tsd-kind-icon">Channel<wbr>Entry</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#body" class="tsd-kind-icon">body</a>
+								<a href="ChannelEntry.html#_id" class="tsd-kind-icon">_id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#category" class="tsd-kind-icon">category</a>
+								<a href="ChannelEntry.html#alias" class="tsd-kind-icon">alias</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#desc" class="tsd-kind-icon">desc</a>
+								<a href="ChannelEntry.html#mask" class="tsd-kind-icon">mask</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#lock" class="tsd-kind-icon">lock</a>
+								<a href="ChannelEntry.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TextEntry.html#visible" class="tsd-kind-icon">visible</a>
+								<a href="ChannelEntry.html#title" class="tsd-kind-icon">title</a>
 							</li>
 						</ul>
 					</li>

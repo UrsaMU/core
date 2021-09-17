@@ -2,6 +2,9 @@ export interface TextEntry {
   name: string;
   category: string;
   body: string;
+  visible?: boolean;
+  lock?: string;
+  desc?: string;
 }
 
 export const textDB = new Map<string, TextEntry[]>();

@@ -192,10 +192,10 @@
   dependencies:
     socket.io "*"
 
-"@ursamu/parser@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.2.tgz#43ca18d3eb9b1fd97b90515d9f0ef7d8a154805d"
-  integrity sha512-AwrXNxYd9WcG9JXbNExqE1k1V7LZ138RQwN8YcwVBawLbGJK4mhy7ITT2Brsg2dLGR2CdTEdYK/yJJoN/0A5UA==
+"@ursamu/parser@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.3.tgz#27693fec0df87197bff3e5ce1fcaa27dcc45c0a1"
+  integrity sha512-a7WPKq7yA2KM8L8R3czp94osTOj4UqbrAspUGwABAiS4D1cgXtoLTQhHj40OkX5GO/TyHf1JpdShgSH5glhfwQ==
   dependencies:
     pegjs "^0.10.0"
 

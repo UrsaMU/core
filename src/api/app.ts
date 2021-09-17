@@ -24,6 +24,7 @@ app.use(
 export interface MUSocket extends Socket {
   cid?: string;
   dbref?: number;
+  width?: number;
 }
 
 export interface Context {
@@ -33,16 +34,34 @@ export interface Context {
   player?: DBObj;
   expr?: Expression;
   msg?: string;
+  width?: number;
+}
+
+export interface ChannelEntry {
+  _id: string;
+  name: string;
+  title: string;
+  mask: string;
+  alias: string;
 }
 
 export interface Channel {
+  [key: string]: any;
+  _id?: string;
   name: string;
   header?: string;
+  display?: string;
+  access?: string;
   read?: string;
   write?: string;
   modify?: string;
-}
+  private?: boolean;
+  loud?: boolean;
+  mask?: boolean;
+  alias?: string;
 
+  description?: string;
+}
 export interface MuRequest extends Request {
   player?: DBObj;
 }

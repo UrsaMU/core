@@ -1,9 +1,11 @@
 import Datastore from "nedb";
-import { Data } from "./app";
+import { ChannelEntry, Data } from "./app";
 
 export interface DBObj {
   _id?: string;
-  data: { [key: string]: any };
+  dbref?: number;
+
+  data: { [key: string]: any; channels?: ChannelEntry[] };
   temp: { [key: string]: any };
   description: string;
   alias?: string;
