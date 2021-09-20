@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Dirent, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
+import { resolve } from "path";
 
 /**
  * Hash a string.
@@ -76,6 +77,14 @@ export const loaddir = async (
     } else {
       if (file.name.endsWith(".ts") || file.name.endsWith(".js")) {
         const module = await import(path + file.name);
+        if (module.default) await module.default();
+      } else if (file.isDirectory()) {
+        const pack = await readFile(
+          resolve(path, file.name, "package.json"),
+          "utf-8"
+        );
+        const data = JSON.parse(pack);
+        const module = await import(path + data.main);
         if (module.default) await module.default();
       }
     }

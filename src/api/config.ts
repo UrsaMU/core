@@ -1,5 +1,7 @@
 import { readdirSync, readFileSync } from "fs";
 import { set as loSet, get as loGet } from "lodash";
+import { resolve } from "path";
+import { loaddir } from "..";
 
 export class Config {
   _config: { [key: string]: any };
@@ -7,19 +9,18 @@ export class Config {
    * Create a new database
    * @param path The path to the Database you want to start.
    */
-  constructor(path: string) {
+  constructor(path: string = "") {
     this._config = {};
-    const dirent = readdirSync(path, {
-      encoding: "utf-8",
-      withFileTypes: true,
-    });
-    for (const dir of dirent) {
-      if (dir.isFile() && dir.name.endsWith(".json")) {
-        this._config = this._config[dir.name.split(".")[0]] = JSON.parse(
-          readFileSync(path + `/${dir.name}`, { encoding: "utf-8" })
-        );
+    if (path) this.load(path);
+  }
+
+  load(path: string) {
+    loaddir(path, (file, path) => {
+      if (file.name.endsWith(".JSON")) {
+        const fd = readFileSync(resolve(path.toString(), file.name), "utf-8");
+        this._config[file.name.split(".")[0]] = JSON.parse(fd);
       }
-    }
+    });
   }
 
   /**
@@ -42,3 +43,5 @@ export class Config {
     return loGet(this._config, path);
   }
 }
+
+export const config = new Config();

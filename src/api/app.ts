@@ -43,6 +43,7 @@ export interface ChannelEntry {
   title: string;
   mask: string;
   alias: string;
+  joined?: boolean;
 }
 
 export interface Channel {
