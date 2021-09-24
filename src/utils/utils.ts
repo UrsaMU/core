@@ -3,6 +3,10 @@ import { Dirent, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
 import { resolve } from "path";
+import { DbObj, IDbObj } from "../models/dbobj";
+import { glob } from "glob";
+import { Model } from "mongoose";
+import { flags } from "../api/flags";
 
 /**
  * Hash a string.
@@ -98,4 +102,28 @@ export const loaddir = async (
  */
 export const loadText = async (path: string) => {
   return await readFile(path, { encoding: "utf-8" });
+};
+
+export const id = async () => {
+  const dbrefs = (await DbObj.find({}).populate("dbref").exec()) as number[];
+
+  var mia = dbrefs.sort().reduce(function (acc: number[], cur, ind, arr) {
+    var diff = cur - arr[ind - 1];
+    if (diff > 1) {
+      var i = 1;
+      while (i < diff) {
+        acc.push(arr[ind - 1] + i);
+        i++;
+      }
+    }
+    return acc;
+  }, []);
+  return mia.length > 0 ? mia[0] : dbrefs.length;
+};
+
+export const setflags = async (obj: any, flgs: string) => {
+  const { tags, data } = flags.set(obj.flags, obj.data, flgs);
+  obj.flags = tags;
+  obj.data = data;
+  await obj.save();
 };

@@ -9,10 +9,10 @@
   "files": [
     "/dist/**/*"
   ],
-  "private": false,
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json && yarn docs",
-    "docs": "rm -rf docs && npx typedoc src/index.ts --media ./media --readme ./index.md"
+    "docs": "rm -rf docs && npx typedoc src/index.ts --media ./media --readme ./index.md",
+    "start": "ts-node-dev src/index"
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
@@ -21,30 +21,32 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "global": "^4.4.0",
+    "express-ws": "^5.0.2",
+    "glob": "^7.2.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
+    "mongoose": "^6.0.7",
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
-    "shortid": "^2.2.16",
     "socket.io": "^4.1.2",
-    "socket.io-client": "^4.0.2",
-    "telnetlib": "^0.1.0"
+    "socket.io-client": "^4.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/express-ws": "^3.0.1",
     "@types/helmet": "^4.0.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/lodash": "^4.14.169",
+    "@types/mongoose": "^5.11.97",
     "@types/nedb": "^1.8.11",
     "@types/node": "^15.3.0",
     "@types/socket.io": "^3.0.2",
     "eslint": "^7.26.0",
     "nodemon": "^2.0.7",
+    "ts-node-dev": "^1.1.8",
     "typedoc": "^0.21.3",
     "typescript": "^4.3.2"
   }

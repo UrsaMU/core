@@ -1,9 +1,9 @@
-import { DBObj } from "../../src";
+import { DbObj } from "./models/dbobj";
 
 declare global {
   namespace Express {
     interface Request {
-      currentUser: DBObj;
+      currentUser: any;
     }
   }
 }

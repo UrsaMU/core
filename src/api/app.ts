@@ -1,13 +1,18 @@
-import { Server as IoServer, Socket } from "socket.io";
 import express, { Request } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { Server } from "http";
-import { DBObj } from "./database";
-import { Expression } from "@ursamu/parser";
 
-const app = express();
-const server = new Server(app);
+import { IDbObj } from "../models/dbobj";
+import { Expression } from "@ursamu/parser";
+import expressWs from "express-ws";
+import WebSocket from "ws";
+import { nanoid } from "nanoid";
+import { hooks } from "./hooks";
+
+const ExpressApp = express();
+
+const wsExpress = expressWs(ExpressApp);
+const app = wsExpress.app;
 
 app.use(cors());
 app.use(helmet());
@@ -21,7 +26,22 @@ app.use(
   })
 );
 
-export interface MUSocket extends Socket {
+wsExpress.app.ws("/", (ws: MUSocket, req) => {
+  ws.id = nanoid();
+
+  ws.on("message", (data) => {
+    // Only continue of there is an id associated with the socket.
+    let ctx: Context = JSON.parse(data.toString());
+    if (ws.id) {
+      ctx.id = ws.id;
+      ctx.socket = ws;
+      hooks.execute(ctx);
+    }
+  });
+});
+
+export interface MUSocket extends WebSocket {
+  id?: string;
   cid?: string;
   dbref?: number;
   width?: number;
@@ -31,44 +51,16 @@ export interface Context {
   id: string;
   socket: MUSocket;
   data: { [key: string]: any };
-  player?: DBObj;
+  player?: IDbObj;
   expr?: Expression;
   msg?: string;
   width?: number;
 }
 
-export interface ChannelEntry {
-  _id: string;
-  name: string;
-  title: string;
-  mask: string;
-  alias: string;
-  joined?: boolean;
-}
-
-export interface Channel {
-  [key: string]: any;
-  _id?: string;
-  name: string;
-  header?: string;
-  display?: string;
-  access?: string;
-  read?: string;
-  write?: string;
-  modify?: string;
-  private?: boolean;
-  loud?: boolean;
-  mask?: boolean;
-  alias?: string;
-
-  description?: string;
-}
 export interface MuRequest extends Request {
-  player?: DBObj;
+  player?: IDbObj;
 }
-
-const io = new IoServer(server);
 
 export type Data = { [key: string]: any };
 
-export { app, server, io, express };
+export { app, wsExpress, express };

@@ -1,21 +1,6 @@
+import { Document } from "mongoose";
 import Datastore from "nedb";
 import { ChannelEntry, Data } from "./app";
-
-export interface DBObj {
-  _id?: string;
-  dbref?: number;
-
-  data: { [key: string]: any; channels?: ChannelEntry[] };
-  temp: { [key: string]: any };
-  description: string;
-  alias?: string;
-  attrs: { [key: string]: Attribute };
-  name: string;
-  flags: string;
-  location: string;
-  owner: string;
-  password?: string;
-}
 
 export interface Attribute {
   setby: string;
