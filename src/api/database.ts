@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 import Datastore from "nedb";
-import { ChannelEntry, Data } from "./app";
+import { Data } from "./app";
 
 export interface Attribute {
   setby: string;
