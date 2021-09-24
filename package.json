@@ -12,7 +12,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "docs": "rm -rf docs && npx typedoc src/index.ts --media ./media --readme ./index.md",
-    "start": "ts-node-dev src/index"
+    "dev": "ts-node-dev src/index",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@digibear/middleware": "^0.2.3",
@@ -48,6 +49,6 @@
     "nodemon": "^2.0.7",
     "ts-node-dev": "^1.1.8",
     "typedoc": "^0.21.3",
-    "typescript": "^4.3.2"
+    "typescript": "^4.4.3"
   }
 }

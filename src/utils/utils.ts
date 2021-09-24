@@ -79,7 +79,10 @@ export const loaddir = async (
     if (cb) {
       await cb(file, path);
     } else {
-      if (file.name.endsWith(".ts") || file.name.endsWith(".js")) {
+      if (
+        (file.name.endsWith(".ts") || file.name.endsWith(".js")) &&
+        !file.name.endsWith(".d.ts")
+      ) {
         const module = await import(path + file.name);
         if (module.default) await module.default();
       } else if (file.isDirectory()) {
