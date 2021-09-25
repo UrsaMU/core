@@ -1,4 +1,6 @@
+import { DbObj } from "../models/dbobj";
 import { Context } from "./app";
+import { flags } from "./flags";
 
 export interface Cmd {
   name: string;
@@ -24,9 +26,19 @@ export const addCmd = (...commands: Cmd[]) =>
  * @param input The input string to match.
  * @returns
  */
-export const matchCmd = (input: string) => {
-  const command = cmds.find((cmd: Cmd) => input.match(cmd.pattern));
-  const match = input.match(command?.pattern || "");
+export const matchCmd = async (ctx: Context) => {
+  const player = await DbObj.findOne({ dbref: ctx.socket.cid || -1 });
+  ctx.player = player;
+  const command = cmds.find((cmd: Cmd) => {
+    if (
+      ctx.msg?.match(cmd.pattern) &&
+      flags.check(ctx.player?.flags || "", cmd.flags || "")
+    ) {
+      return true;
+    }
+    return false;
+  });
+  const match = ctx.msg?.match(command?.pattern || "");
   return { args: Array.from(match || []), cmd: command };
 };
 export { cmds };

@@ -42,7 +42,7 @@ wsExpress.app.ws("/", (ws: MUSocket, req) => {
 
 export interface MUSocket extends WebSocket {
   id?: string;
-  cid?: string;
+  cid?: number;
   dbref?: number;
   width?: number;
 }

@@ -3,9 +3,7 @@ import { Dirent, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
 import { resolve } from "path";
-import { DbObj, IDbObj } from "../models/dbobj";
-import { glob } from "glob";
-import { Model } from "mongoose";
+import { DbObj } from "../models/dbobj";
 import { flags } from "../api/flags";
 
 /**
@@ -129,4 +127,5 @@ export const setflags = async (obj: any, flgs: string) => {
   obj.flags = tags;
   obj.data = data;
   await obj.save();
+  return obj;
 };
