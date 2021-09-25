@@ -5,9 +5,9 @@ import defaultHook from "./hooks/defaultHook";
 import mongoose from "mongoose";
 import { id, loaddir, setflags } from "./utils/utils";
 import { join } from "path";
-import { existsSync } from "fs";
 import dotenv from "dotenv";
 import { DbObj } from "./models/dbobj";
+import { plugins } from "./api/plugins";
 
 dotenv.config();
 
@@ -32,11 +32,20 @@ app.listen(3000, async () => {
     // load resources
     await loaddir(join(__dirname, "./commands/"));
     await loaddir(join(__dirname, "./scripts/"));
-    if (existsSync(join(__dirname, "./plugins"))) {
-      await loaddir(join(__dirname, "./plugins/"), (file, path) => {});
-    }
+    await plugins();
+
     console.log("Game loaded");
   } catch (error) {
     console.error(error);
   }
+});
+
+// If the process is terminated remove everyone's commect flag.
+process.on("SIGTERM", async () => {
+  const players = await DbObj.find({ flags: /connected/i });
+  for (const player of players) {
+    await setflags(player, "!connected");
+  }
+
+  setTimeout(() => process.exit(0), 300);
 });

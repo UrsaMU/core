@@ -1,7 +1,7 @@
 import { Data, MUSocket } from "./app";
-import { DbObj } from "../models/dbobj";
+import { DbObj, IDbObj } from "../models/dbobj";
 import { parser } from "./parser";
-import { getSocket } from "./connections";
+import { conns, getSocket } from "./connections";
 
 /**
  *
@@ -25,4 +25,17 @@ export const send = async (socket: MUSocket, msg: string, data: Data = {}) => {
   });
 
   socket.send(message);
+};
+
+export const broadcast = async (msg: string) => {
+  for (const conn of conns) {
+    await send(conn, msg);
+  }
+};
+
+export const broadcastTo = async (players: IDbObj[], msg: string) => {
+  for (const player of players) {
+    const socket = getSocket(player.dbref);
+    if (socket) await send(socket, msg);
+  }
 };

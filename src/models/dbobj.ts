@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { ChannelEntry } from "../api/channels";
 
 export interface IDbObj extends Document {
-  dbref?: number;
+  dbref: number;
   data: { [key: string]: any; channels?: ChannelEntry[] };
   temp: { [key: string]: any };
   description: string;

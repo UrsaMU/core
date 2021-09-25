@@ -9,13 +9,8 @@ let conns: MUSocket[] = [];
  * const socket = getSocket('wErwwSFfgdfu');
  * @returns
  */
-export const getSocket = (id: string) =>
-  conns.find(
-    (conn) =>
-      conn.id === id ||
-      conn.cid === parseInt(id.slice(1), 10) ||
-      conn.dbref === parseInt(id.slice(1), 10)
-  );
+export const getSocket = (id: string | number) =>
+  conns.find((conn) => conn.id === id || conn.cid === id || conn.dbref === id);
 
 /**
  * Remove a connection from the connecitons list
