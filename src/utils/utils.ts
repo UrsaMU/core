@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
-import { Dirent, PathLike } from "fs";
+import { Dirent, existsSync, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
-import { resolve } from "path";
-import { DbObj } from "../models/dbobj";
+import { join, resolve } from "path";
+import { DbObj, IDbObj } from "../models/dbobj";
 import { flags } from "../api/flags";
 
 /**
@@ -70,27 +70,24 @@ export const loaddir = async (
   path: string,
   cb?: (file: Dirent, path: PathLike) => Promise<void> | void
 ) => {
-  const dirent = await readdir(path, {
-    withFileTypes: true,
-  });
-  for (const file of dirent) {
-    if (cb) {
-      await cb(file, path);
-    } else {
-      if (
-        (file.name.endsWith(".ts") || file.name.endsWith(".js")) &&
-        !file.name.endsWith(".d.ts")
-      ) {
-        const module = await import(path + file.name);
-        if (module.default) await module.default();
-      } else if (file.isDirectory()) {
-        const pack = await readFile(
-          resolve(path, file.name, "package.json"),
-          "utf-8"
-        );
-        const data = JSON.parse(pack);
-        const module = await import(path + data.main);
-        if (module.default) await module.default();
+  if (existsSync(path)) {
+    const dirent = await readdir(path, {
+      withFileTypes: true,
+    });
+    for (const file of dirent) {
+      if (cb) {
+        await cb(file, path);
+      } else {
+        if (
+          (file.name.endsWith(".ts") || file.name.endsWith(".js")) &&
+          !file.name.endsWith(".d.ts")
+        ) {
+          const module = await import(path + file.name);
+          if (module.default) await module.default();
+        } else if (file.isDirectory()) {
+          const module = await import(join(path, file.name, "index"));
+          if (module.default) await module.default();
+        }
       }
     }
   }
@@ -105,6 +102,10 @@ export const loadText = async (path: string) => {
   return await readFile(path, { encoding: "utf-8" });
 };
 
+/**
+ * Return the next available DBref number.
+ * @returns
+ */
 export const id = async () => {
   const dbrefs = (await DbObj.find({}).populate("dbref").exec()) as number[];
 
@@ -122,10 +123,51 @@ export const id = async () => {
   return mia.length > 0 ? mia[0] : dbrefs.length;
 };
 
+/**
+ * Set or undset flags on an object.
+ * @param obj The DbObj to modify
+ * @param flgs The flag expression to set.
+ * @returns
+ */
 export const setflags = async (obj: any, flgs: string) => {
   const { tags, data } = flags.set(obj.flags, obj.data, flgs);
   obj.flags = tags;
   obj.data = data;
   await obj.save();
   return obj;
+};
+
+interface LoginOptions {
+  name?: string;
+  password?: string;
+  token?: string;
+}
+export const login = async ({
+  name,
+  password,
+  token,
+}: LoginOptions): Promise<IDbObj | undefined> => {
+  let player;
+
+  if (name && password) {
+    const tempPlayer = await DbObj.findOne({
+      name: new RegExp("^" + name, "i"),
+    });
+
+    // If the password checks, the player is verified.
+    if (tempPlayer && (await compare(password, tempPlayer.password))) {
+      player = await setflags(tempPlayer, "connected");
+      player.temp = { lastCommand: Date.now() };
+      player.save();
+    }
+  } else if (token) {
+    const data = await verify(token, process.env.SECRET || "");
+    // If the token checks out, the player is verified.
+    const tempPlayer = await DbObj.findOne({ dbref: data.id });
+    if (tempPlayer) {
+      player = await setflags(tempPlayer, "conencted");
+    }
+  }
+
+  return player;
 };

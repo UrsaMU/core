@@ -27,10 +27,13 @@
     "glob": "^7.2.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "libtelnet-ts": "^0.0.3",
     "lodash": "^4.17.21",
     "mongoose": "^6.0.7",
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
+    "node-async-exec": "^1.2.0",
+    "pm2": "^5.1.2",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.0.2"
   },

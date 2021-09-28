@@ -8,7 +8,7 @@ import expressWs from "express-ws";
 import WebSocket from "ws";
 import { nanoid } from "nanoid";
 import { hooks } from "./hooks";
-
+export { Next } from "@digibear/middleware";
 const ExpressApp = express();
 
 const wsExpress = expressWs(ExpressApp);
@@ -35,7 +35,7 @@ wsExpress.app.ws("/", (ws: MUSocket, req) => {
     if (ws.id) {
       ctx.id = ws.id;
       ctx.socket = ws;
-      hooks.execute(ctx);
+      hooks.input.execute(ctx);
     }
   });
 });
@@ -63,4 +63,4 @@ export interface MuRequest extends Request {
 
 export type Data = { [key: string]: any };
 
-export { app, wsExpress, express };
+export { app, wsExpress };
