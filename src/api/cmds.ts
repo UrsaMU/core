@@ -27,12 +27,12 @@ export const addCmd = (...commands: Cmd[]) =>
  * @returns
  */
 export const matchCmd = async (ctx: Context) => {
-  const player = await DbObj.findOne({ dbref: ctx.socket.cid || -1 });
-  ctx.player = player;
+  const player = await DbObj.findOne({ dbref: ctx.socket.cid || "" });
+
   const command = cmds.find((cmd: Cmd) => {
     if (
       ctx.msg?.match(cmd.pattern) &&
-      flags.check(ctx.player?.flags || "", cmd.flags || "")
+      flags.check(player?.flags || "", cmd.flags || "")
     ) {
       return true;
     }

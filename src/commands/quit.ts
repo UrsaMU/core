@@ -8,7 +8,7 @@ export default () => {
     pattern: /^quit/i,
     render: async (args, ctx) => {
       if (ctx.player) await setflags(ctx.player, "!connected");
-      await send(ctx.socket, "See you space cowboy...");
+      await send(ctx.socket, "See you space cowboy...", { command: "quit" });
       setTimeout(() => ctx.socket.close(), 10);
     },
   });

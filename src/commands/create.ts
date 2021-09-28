@@ -1,7 +1,7 @@
 import { addCmd } from "../api/cmds";
 import { DbObj } from "../models/dbobj";
 import { send } from "../api/broadcast";
-import { hash, id } from "../utils/utils";
+import { hash, id, sign } from "../utils/utils";
 import { emitter } from "../api/Emitter";
 import { conns } from "../api/connections";
 
@@ -24,8 +24,13 @@ export default () => {
             ? "connected player newbie"
             : "connected player newbie immortal",
       });
+
+      player.owner = player.dbref;
+      await player.save();
+      const token = await sign(player.dbref, process.env.SECRET || "");
       ctx.socket.cid = player.dbref;
       conns.push(ctx.socket);
+      await send(ctx.socket, "Connected!", { token });
       emitter.emit("connected", player);
     },
   });

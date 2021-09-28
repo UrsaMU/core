@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { Dirent, existsSync, PathLike } from "fs";
 import { readdir, readFile } from "fs/promises";
 import jwt from "jsonwebtoken";
-import { join, resolve } from "path";
+import { join } from "path";
 import { DbObj, IDbObj } from "../models/dbobj";
 import { flags } from "../api/flags";
 
@@ -35,17 +35,20 @@ export const compare = (data: string, pass: string): Promise<Boolean> =>
 
 /**
  * Create a new JWT
- * @param id The ID of the object to send in the token.
+ * @param dbref The dbref of the object to send in the token.
  * @param secret The game secret for signing JWTs
  * @returns
  */
-export const sign = (id: string, secret: string): Promise<string | undefined> =>
-  new Promise((resolve, reject) =>
-    jwt.sign({ id }, secret, { expiresIn: "1d" }, (err, token) => {
+export const sign = (
+  dbref: string,
+  secret: string
+): Promise<string | undefined> =>
+  new Promise((resolve, reject) => {
+    jwt.sign(dbref, secret, (err, token) => {
       if (err) reject(err);
       resolve(token);
-    })
-  );
+    });
+  });
 
 /**
  * Validate a JWT
@@ -120,7 +123,7 @@ export const id = async () => {
     }
     return acc;
   }, []);
-  return mia.length > 0 ? mia[0] : dbrefs.length;
+  return mia.length > 0 ? `#${mia[0]}` : `#${dbrefs.length}`;
 };
 
 /**
@@ -170,4 +173,21 @@ export const login = async ({
   }
 
   return player;
+};
+
+export const target = async (enactor: IDbObj, tar: string) => {
+  switch (tar.toLowerCase().trim()) {
+    case "me":
+      return enactor;
+    case "here" || "":
+      return await DbObj.findOne({ dbref: enactor.loc });
+    default:
+      return await DbObj.findOne({
+        $or: [
+          { name: new RegExp(tar, "i") },
+          { dbref: new RegExp(tar, "i") },
+          { alias: new RegExp(tar, "i") },
+        ],
+      });
+  }
 };

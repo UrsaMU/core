@@ -1,4 +1,4 @@
-import { parser } from "../../api/parser";
+import { parser } from "../api/parser";
 
 export default () => {
   parser.addSubs(

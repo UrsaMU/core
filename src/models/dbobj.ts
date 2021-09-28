@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { ChannelEntry } from "../api/channels";
 
 export interface IDbObj extends Document {
-  dbref: number;
+  dbref: string;
   data: { [key: string]: any; channels?: ChannelEntry[] };
   temp: { [key: string]: any };
   description: string;
@@ -15,13 +15,13 @@ export interface IDbObj extends Document {
 }
 
 export const DbObjSchema = new Schema<IDbObj>({
-  dbref: { type: Number, required: true, unique: true },
+  dbref: { type: String, required: true, unique: true },
   name: { type: String, required: true, unique: true },
   password: { type: String, default: "" },
 
   data: {
     type: Schema.Types.Mixed,
-    default: { channels: { type: Array, default: [] } },
+    default: { channels: { type: Array } },
   },
   temp: {
     type: Schema.Types.Mixed,
@@ -30,7 +30,7 @@ export const DbObjSchema = new Schema<IDbObj>({
   description: { type: String, default: "You see nothing special." },
   flags: { type: String, default: "" },
   alias: { type: String, default: "" },
-  loc: { type: String, default: "" },
+  loc: { type: String },
   owner: { type: String, default: "" },
 });
 

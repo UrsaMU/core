@@ -7,17 +7,32 @@ import dotenv from "dotenv";
 import { DbObj } from "./models/dbobj";
 import dbHooks from "./hooks/dbHooks";
 import resourceHook from "./hooks/resourceHook";
+import authHook from "./hooks/authHook";
+import { emitter } from "./api/Emitter";
+import { broadcastToLoc } from "./api/broadcast";
 
 dotenv.config();
 
 // Install hooks
 hooks.start.use(dbHooks, resourceHook);
-hooks.input.use(cmdHooks, defaultHook);
+hooks.input.use(authHook, cmdHooks, defaultHook);
 
 // Start the server!
 app.listen(3000, async () => {
   await hooks.start.execute({});
   console.log("Game loaded");
+});
+
+emitter.on("connected", (player) => {
+  if (!player.flags.includes("dark")) {
+    broadcastToLoc(player.loc, `${player.name} has connected.`);
+  }
+});
+
+emitter.on("disconnected", (player) => {
+  if (!player.flags.includes("dark")) {
+    broadcastToLoc(player.loc, `${player.name} has disconnected.`);
+  }
 });
 
 // If the process is terminated remove everyone's commect flag.

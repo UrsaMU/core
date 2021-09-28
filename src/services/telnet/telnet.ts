@@ -12,20 +12,31 @@ let table: CompatibilityTable;
 let flags: TelnetFlag;
 
 server.on("connection", (c) => {
+  let tkn = "";
   const connect = () => {
     const telnet = new Telnet(table, flags);
-    let tkn = "";
     const ws = new WebSocket("ws://localhost:3000");
     const t = new TextEncoder();
     const d = new TextDecoder();
-    ws.on("close", () => setTimeout(() => connect(), 1000));
+    ws.on("close", () =>
+      setTimeout(() => {
+        connect();
+        ws.send(
+          JSON.stringify({
+            msg: "",
+            data: { token: tkn },
+          })
+        );
+      }, 1000)
+    );
 
     ws.on("message", (data) => {
       const ctx = JSON.parse(data.toString());
-      const { token } = ctx.data;
+      const { token, command } = ctx.data;
       tkn = token ? token : tkn;
 
-      telnet.send(t.encode(ctx.msg + "\r\n"));
+      if (ctx.msg) telnet.send(t.encode(ctx.msg + "\r\n"));
+      if (command === "quit") c.end();
     });
 
     c.on("data", (bytes) => telnet.receive(bytes));
