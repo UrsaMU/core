@@ -15,17 +15,10 @@ export default async () => {
   } catch {
     console.log("Starting new Telnet Instance!");
 
-    if (existsSync(join(__dirname, "telnet.ts"))) {
-      child = spawn("npx", ["ts-node", `${join(__dirname, "telnet.ts")}`], {
-        detached: true,
-      });
-      pid = child.pid!;
-    } else {
-      child = spawn("node", [`${join(__dirname, "telnet.js")}`], {
-        detached: true,
-      });
-      pid = child.pid!;
-    }
+    child = spawn("node", [`${join(__dirname, "telnet.js")}`], {
+      detached: true,
+    });
+    pid = child.pid!;
 
     writeFile(join(__dirname, "pid"), child.pid?.toString() || "", {
       encoding: "utf-8",

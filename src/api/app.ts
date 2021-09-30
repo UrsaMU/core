@@ -32,9 +32,13 @@ wsExpress.app.ws("/", (ws: MUSocket, req) => {
   ws.on("message", (data) => {
     // Only continue of there is an id associated with the socket.
     let ctx: Context = JSON.parse(data.toString());
+
     if (ws.id) {
       ctx.id = ws.id;
+      ws.width = ctx.data.width || 78;
+
       ctx.socket = ws;
+
       hooks.input.execute(ctx);
     }
   });

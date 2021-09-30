@@ -16,8 +16,9 @@ export const getSocket = (id: string | number) =>
  * Remove a connection from the connecitons list
  * @param id The Socket.id to be removed from the conn list.
  */
-export const remConn = (id: string) => {
-  conns = conns.filter((con) => con.id == id);
-};
+export const remConn = (id: string) =>
+  (conns = conns.filter(
+    (con) => con.id == id || con.cid === id || con.dbref === id
+  ));
 
 export { conns };

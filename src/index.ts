@@ -10,6 +10,7 @@ import resourceHook from "./hooks/resourceHook";
 import authHook from "./hooks/authHook";
 import { emitter } from "./api/Emitter";
 import { broadcastToLoc } from "./api/broadcast";
+import { remConn } from "./api/connections";
 
 dotenv.config();
 
@@ -29,9 +30,10 @@ emitter.on("connected", (player) => {
   }
 });
 
-emitter.on("disconnected", (player) => {
+emitter.on("disconnected", async (player) => {
   if (!player.flags.includes("dark")) {
-    broadcastToLoc(player.loc, `${player.name} has disconnected.`);
+    await broadcastToLoc(player.loc, `${player.name} has disconnected.`);
+    remConn(player.dbref);
   }
 });
 

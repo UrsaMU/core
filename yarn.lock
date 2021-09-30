@@ -345,10 +345,10 @@
   dependencies:
     "@types/node" "*"
 
-"@ursamu/parser@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.3.tgz#27693fec0df87197bff3e5ce1fcaa27dcc45c0a1"
-  integrity sha512-a7WPKq7yA2KM8L8R3czp94osTOj4UqbrAspUGwABAiS4D1cgXtoLTQhHj40OkX5GO/TyHf1JpdShgSH5glhfwQ==
+"@ursamu/parser@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.4.tgz#1da59f4aff27a0833e2ddd4bb9a9055baaf4f030"
+  integrity sha512-DFAdy/9Dz+LMh5EPspOLQZR0ysqncpt3c8tAAXHUg7mzmzJwK0UMmTkQt4LyZlUR2YRREmxtwt74kazdiJDbuA==
   dependencies:
     pegjs "^0.10.0"
 
@@ -3382,6 +3382,11 @@ tar@^6.1.0:
     minizlib "^2.1.1"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
+
+telnetlib@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/telnetlib/-/telnetlib-1.0.1.tgz#49c035351c1f411de4a28cb933d69a1caf2c35f4"
+  integrity sha512-xTjdk2xk7Vo2uQR9e40Zn7ELD68rhyRw7S3wmtPrc2bXTSbKFnYEN6k9mevt/i5ItQxm5reuRncl7gZogl7XIw==
 
 term-size@^2.1.0:
   version "2.2.1"

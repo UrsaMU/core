@@ -4,7 +4,7 @@ import { flags } from "./flags";
 
 export interface Cmd {
   name: string;
-  pattern: RegExp;
+  pattern: RegExp | string;
   render: (args: string[], ctx: Context) => Promise<void>;
   flags?: string;
   help?: string;
@@ -19,7 +19,18 @@ const cmds: Cmd[] = [];
  * @returns
  */
 export const addCmd = (...commands: Cmd[]) =>
-  commands.forEach((cmd) => cmds.push(cmd));
+  commands.forEach((cmd) => {
+    if (typeof cmd.pattern === "string") {
+      const tempPattern = cmd.pattern
+        .replace(/([\/\+\(\))])/g, "\\$1")
+        .replace(/\*/g, "(.*)")
+        .replace(/\s+/, "\\s+")
+        .replace(/^\./, "[\\+@]");
+      cmd.pattern = new RegExp("^" + tempPattern, "i");
+    }
+
+    cmds.push(cmd);
+  });
 
 /**
  * Match an input string with a registered command.
