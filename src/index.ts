@@ -40,7 +40,7 @@ emitter.on("disconnected", async (player) => {
 });
 
 // If the process is terminated remove everyone's commect flag.
-process.on("SIGINT", async () => {
+process.on("SIGTERM", async () => {
   const players = await DbObj.find({ flags: /connected/i });
 
   for (const player of players) {

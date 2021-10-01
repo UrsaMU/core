@@ -6,7 +6,7 @@ export default () => {
     name: "test",
     pattern: ".test bar/*",
     render: async (args, ctx) => {
-      send(ctx.socket, "Test Passed! " + args[1], {
+      send(ctx.socket, "Test failed! " + args[1], {
         foo: "bar",
       });
     },

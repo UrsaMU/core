@@ -1,4 +1,5 @@
 import { Context, Next } from "../api/app";
+import { send } from "../api/broadcast";
 import { conns, getSocket } from "../api/connections";
 import { verify } from "../utils/utils";
 
@@ -10,7 +11,9 @@ export default async (ctx: Context, next: Next) => {
     if (dbref) {
       const socket = getSocket(dbref);
       ctx.socket.cid = dbref;
-      if (!socket) conns.push(ctx.socket);
+      if (!socket) {
+        conns.push(ctx.socket);
+      }
     }
   }
   next();

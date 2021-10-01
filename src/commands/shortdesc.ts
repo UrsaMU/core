@@ -20,7 +20,7 @@ export default () => {
           delete tar.data.shortdesc;
         }
 
-        tar.markModified("data.shortdesc");
+        tar.markModified("data.shortDesc");
         await tar.save();
 
         await send(ctx.socket, `Done. Shortdesc set for %ch${tar.name}%cn`);
