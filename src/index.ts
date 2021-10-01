@@ -31,7 +31,7 @@ emitter.on("connected", (player) => {
 });
 
 emitter.on("disconnected", async (player) => {
-  if (!player?.flags?.includes("dark")) {
+  if (player && player.flags.includes("dark")) {
     await broadcastToLoc(player.loc, `${player.name} has disconnected.`);
     remConn(player.dbref);
   }
