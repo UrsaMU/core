@@ -2,12 +2,14 @@ import express, { Request } from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-import { IDbObj } from "../models/dbobj";
+import { DbObj, IDbObj } from "../models/dbobj";
 import { Expression } from "@ursamu/parser";
 import expressWs from "express-ws";
 import WebSocket from "ws";
 import { nanoid } from "nanoid";
 import { hooks } from "./hooks";
+import { remConn } from "./connections";
+import { emitter } from "./Emitter";
 export { Next } from "@digibear/middleware";
 const ExpressApp = express();
 
@@ -41,6 +43,12 @@ wsExpress.app.ws("/", (ws: MUSocket, req) => {
 
       hooks.input.execute(ctx);
     }
+  });
+
+  ws.on("close", async () => {
+    if (ws.cid) remConn(ws.cid);
+    const player = await DbObj.findOne({ dbref: ws.cid });
+    emitter.emit("disconnected", player);
   });
 });
 

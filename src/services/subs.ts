@@ -143,4 +143,30 @@ export default () => {
       after: "\u001b[38;5;$1m",
     }
   );
+
+  parser.addSubs(
+    "pre",
+    {
+      before: /%\(/g,
+      after: "&lpar",
+      strip: " ",
+    },
+    {
+      before: /%\)/g,
+      after: "&rpar",
+      strip: " ",
+    }
+  );
+
+  parser.addSubs(
+    "post",
+    {
+      before: "&lpar",
+      after: "(",
+    },
+    {
+      before: "&rpar",
+      after: ")",
+    }
+  );
 };

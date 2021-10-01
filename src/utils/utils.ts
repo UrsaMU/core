@@ -191,3 +191,15 @@ export const target = async (enactor: IDbObj, tar: string) => {
       });
   }
 };
+
+export const idle = (secs: number) => {
+  const curr = Date.now();
+  const past = secs;
+  secs = Math.floor((curr - secs) / 1000);
+  const mins = Math.floor((curr - past) / (1000 * 60));
+  const hrs = Math.floor((curr - past) / (1000 * 60 * 60));
+
+  if (hrs) return hrs + "h";
+  if (mins) return mins + "m";
+  return secs + "s";
+};

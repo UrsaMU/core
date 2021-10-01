@@ -31,6 +31,18 @@ export default () => {
       code: "p",
       lvl: 0,
       lock: "immortal+",
+    },
+    {
+      name: "room",
+      code: "r",
+      lvl: 0,
+      lock: "wizard+",
+    },
+    {
+      name: "newbie",
+      code: "n",
+      lvl: 0,
+      lock: "staff+",
     }
   );
 };

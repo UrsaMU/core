@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 import { ChannelEntry } from "../api/channels";
 
 export interface IDbObj extends Document {

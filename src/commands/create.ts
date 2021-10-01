@@ -4,6 +4,7 @@ import { send } from "../api/broadcast";
 import { hash, id, sign } from "../utils/utils";
 import { emitter } from "../api/Emitter";
 import { conns } from "../api/connections";
+import { force } from "../api/hooks";
 
 export default () => {
   addCmd({
@@ -32,6 +33,7 @@ export default () => {
       conns.push(ctx.socket);
       await send(ctx.socket, "Connected!", { token });
       emitter.emit("connected", player);
+      await force(ctx, "look");
     },
   });
 };

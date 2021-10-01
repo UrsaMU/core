@@ -2,6 +2,7 @@ import { send } from "../api/broadcast";
 import { addCmd } from "../api/cmds";
 import { conns } from "../api/connections";
 import { emitter } from "../api/Emitter";
+import { force } from "../api/hooks";
 import { login, sign } from "../utils/utils";
 
 export default () => {
@@ -19,6 +20,7 @@ export default () => {
         const token = await sign(player.dbref, process.env.SECRET || "");
         await send(ctx.socket, "Connected!!", { token });
         emitter.emit("connected", player);
+        await force(ctx, "look");
       } else {
         await send(ctx.socket, "Permission denied.");
       }

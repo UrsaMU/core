@@ -27,10 +27,11 @@ const server = telnetlib.createServer(
 
       s.on("message", (data) => {
         const ctx = JSON.parse(data);
-        const { token: tkn } = ctx.data;
+        const { token: tkn, command } = ctx.data;
 
         if (tkn) token = tkn;
         if (ctx.msg) c.write(ctx.msg + "\r\n");
+        if (command === "quit") c.end();
       });
 
       s.on("close", () =>
@@ -46,7 +47,6 @@ const server = telnetlib.createServer(
       );
 
       c.on("end", () => s.close());
-      s.on("quit", () => c.end());
 
       c.on("data", (data) => {
         s.send(
