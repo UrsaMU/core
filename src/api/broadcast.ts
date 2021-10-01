@@ -13,17 +13,7 @@ import { conns, getSocket } from "./connections";
  */
 export const send = async (socket: MUSocket, msg: string, data: Data = {}) => {
   const message = JSON.stringify({
-    msg: await parser.string("telnet", {
-      msg,
-      data: {
-        ...data,
-        ...{ width: socket.width || 78 },
-      },
-      scope: {
-        ...{ "%#": "" },
-        ...data.scope,
-      },
-    }),
+    msg: parser.substitute("telnet", msg),
     data,
   });
 
