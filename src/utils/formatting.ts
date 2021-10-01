@@ -128,7 +128,7 @@ export const center = (str = "", width = 78, filler = " ", type = "telnet") => {
  * @returns
  */
 export const header = (str: string, width: number, color: string = "%cb") =>
-  center(`%cy<%ch<%cn%ch ${str} %cy>%cn%cy>%cn`, width, `%${color}=%ch-%cn`);
+  center(`%cy<%ch<%cn%ch ${str} %cy>%cn%cy>%cn`, width, `${color}=%ch-%cn`);
 
 /**
  *

@@ -47,6 +47,7 @@ wsExpress.app.ws("/", (ws: MUSocket, req) => {
 
   ws.on("close", async () => {
     if (ws.cid) remConn(ws.cid);
+    console.log(ws.cid);
     const player = await DbObj.findOne({ dbref: ws.cid });
     emitter.emit("disconnected", player);
   });

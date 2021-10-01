@@ -175,7 +175,7 @@ export const login = async ({
   return player;
 };
 
-export const target = async (enactor: IDbObj, tar: string) => {
+export const target = async (enactor: IDbObj, tar: string): Promise<IDbObj> => {
   switch (tar.toLowerCase().trim()) {
     case "me":
       return enactor;
@@ -203,3 +203,14 @@ export const idle = (secs: number) => {
   if (mins) return mins + "m";
   return secs + "s";
 };
+
+/**
+ * Return a boolean value if a player can see something.
+ * @param en The action enactor
+ * @param tar The action target
+ * @returns
+ */
+export const canSee = (en: IDbObj, tar: IDbObj) =>
+  (tar.flags.includes("dark") && flags.lvl(en.flags) >= flags.lvl(tar.flags)) ||
+  (flags.check(en.flags, "staff+") && tar.flags.includes("dark")) ||
+  flags.check(tar.flags, "!dark");

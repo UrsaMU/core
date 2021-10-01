@@ -13,12 +13,10 @@ export default async (ctx: Context, next: Next) => {
     if (cmd) {
       if (player) {
         player.temp.lastCommand = Date.now();
-
         player.markModified("temp.lastCommand");
         await player.save();
-        const p2: IDbObj = await DbObj.findOne({ dbref: ctx.socket.cid });
-        console.log(idleColor(p2.temp.lastCommand));
       }
+
       return await cmd.render(args, ctx);
     }
   } catch (error: any) {
