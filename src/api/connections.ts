@@ -17,8 +17,6 @@ export const getSocket = (id: string | number) =>
  * @param id The Socket.id to be removed from the conn list.
  */
 export const remConn = (id: string) =>
-  (conns = conns.filter(
-    (con) => con.id == id || con.cid === id || con.dbref === id
-  ));
+  (conns = conns.filter((con) => con.id == id || con.cid === id));
 
 export { conns };
