@@ -1,4 +1,4 @@
-import { send } from "../api/broadcast";
+import { broadcastTo, broadcastToLoc, send } from "../api/broadcast";
 import { addCmd } from "../api/cmds";
 import { DbObj, IDbObj } from "../models/dbobj";
 
@@ -23,11 +23,7 @@ export default () => {
           break;
       }
 
-      send(ctx.socket || "", msg, {
-        type: "pose",
-        name: en.name,
-        avatar: en.data.avatar,
-      });
+      broadcastToLoc(en.loc, msg);
     },
   });
 };
