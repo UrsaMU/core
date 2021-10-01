@@ -1,40 +1,25 @@
-import { ChildProcessWithoutNullStreams, spawn } from "child_process";
-import e from "express";
-import { existsSync } from "fs";
-import { readFile, unlink, writeFile } from "fs/promises";
+import { execSync } from "child_process";
 import { join } from "path";
 import { hooks } from "../../api/hooks";
 
-let pid: number;
-let child: ChildProcessWithoutNullStreams;
-
 export default async () => {
   try {
-    const fd = await readFile(join(__dirname, "pid"), "utf8");
-    pid = parseInt(fd, 10);
-  } catch {
-    console.log("Starting new Telnet Instance!");
-
-    child = spawn("node", [`${join(__dirname, "telnet.js")}`], {
-      detached: true,
-    });
-    pid = child.pid!;
-
-    writeFile(join(__dirname, "pid"), child.pid?.toString() || "", {
-      encoding: "utf-8",
-    });
-
-    child.stdout.on("error", (err) => console.log(err));
-  }
-
-  hooks.shutdown.use(async (_, next) => {
-    try {
-      process.kill(pid);
-      await unlink(join(__dirname, "pid"));
-      next();
-    } catch {
-      await unlink(join(__dirname, "pid"));
-      next();
+    const output = execSync("which pm2");
+    if (!output) {
+      return console.error(
+        "You must install pm2 'npm -g pm2' in order to use the telnet service."
+      );
     }
-  });
+    execSync(`pm2 start ${join(__dirname, "telnet.js")} --name telnet`);
+    console.log("Telnet Module lodaded.");
+    hooks.shutdown.use(async (_, next) => {
+      execSync("pm2 delete telnet");
+      next();
+    });
+  } catch {
+    hooks.shutdown.use(async (_, next) => {
+      execSync("pm2 delete telnet");
+      next();
+    });
+  }
 };

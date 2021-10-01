@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 import { join } from "path";
 import { DbObj, IDbObj } from "../models/dbobj";
 import { flags } from "../api/flags";
+import { Data } from "../api/app";
+import pm2 from "pm2";
+import { promisify } from "util";
 
 /**
  * Hash a string.
@@ -140,6 +143,14 @@ export const setflags = async (obj: any, flgs: string) => {
   return obj;
 };
 
+export const set = async (obj: IDbObj, f: string, d: Data = {}) => {
+  const { tags, data } = flags.set(obj.flags, obj.data, f);
+  obj.flags = tags;
+  obj.data = { ...obj.data, ...data, ...d };
+  await obj.save();
+  return obj;
+};
+
 interface LoginOptions {
   name?: string;
   password?: string;
@@ -214,3 +225,26 @@ export const canSee = (en: IDbObj, tar: IDbObj) =>
   (tar.flags.includes("dark") && flags.lvl(en.flags) >= flags.lvl(tar.flags)) ||
   (flags.check(en.flags, "staff+") && tar.flags.includes("dark")) ||
   flags.check(tar.flags, "!dark");
+
+type pm2ProcCallBack = (list: pm2.ProcessDescription[]) => void | Promise<void>;
+
+export const pm2Proc = (cb: pm2ProcCallBack) =>
+  pm2.connect(async (err) => {
+    if (err) {
+      console.log(err);
+      pm2.disconnect();
+      process.exit(2);
+    }
+
+    pm2.list((err, list) => {
+      if (err) {
+        console.log(err);
+        pm2.disconnect();
+        process.exit(2);
+      }
+
+      cb(list);
+
+      pm2.disconnect();
+    });
+  });
