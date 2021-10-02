@@ -14,7 +14,7 @@ export default () => {
       await send(ctx.socket, "See you space cowboy...", { command: "quit" });
 
       emitter.emit("disconnected", player);
-      setTimeout(() => ctx.socket.close(), 10);
+      setTimeout(() => ctx.socket.close(0), 10);
     },
   });
 };

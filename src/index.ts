@@ -11,6 +11,7 @@ import authHook from "./hooks/authHook";
 import { emitter } from "./api/Emitter";
 import { broadcastToLoc } from "./api/broadcast";
 import { remConn } from "./api/connections";
+import { execSync } from "child_process";
 
 dotenv.config();
 
@@ -31,7 +32,7 @@ emitter.on("connected", (player) => {
 });
 
 emitter.on("disconnected", async (player) => {
-  if (player && !player.flags.includes("dark")) {
+  if (player) {
     await broadcastToLoc(player.loc, `${player.name} has disconnected.`);
     remConn(player.dbref);
   }
@@ -39,8 +40,10 @@ emitter.on("disconnected", async (player) => {
   await set(player, "!connected", { temp: {} });
 });
 
+emitter.on("shutdown", () => {});
+
 // If the process is terminated remove everyone's commect flag.
-process.on("SIGTERM", async () => {
+process.on("", async () => {
   const players = await DbObj.find({ flags: /connected/i });
 
   for (const player of players) {
@@ -48,5 +51,6 @@ process.on("SIGTERM", async () => {
   }
 
   await hooks.shutdown.execute({});
+  emitter.emit("shutdown");
   process.exit(0);
 });

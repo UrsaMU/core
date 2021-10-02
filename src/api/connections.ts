@@ -10,7 +10,7 @@ let conns: MUSocket[] = [];
  * @returns
  */
 export const getSocket = (id: string | number) =>
-  conns.find((conn) => conn.id === id || conn.cid === id || conn.dbref === id);
+  conns.find((conn) => conn.id === id || conn.cid === id);
 
 /**
  * Remove a connection from the connecitons list

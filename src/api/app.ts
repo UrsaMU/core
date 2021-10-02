@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-wsExpress.app.ws("/", (ws: MUSocket, req) => {
+wsExpress.app.ws("/", (ws: MUSocket) => {
   ws.id = nanoid();
 
   ws.on("message", (data) => {

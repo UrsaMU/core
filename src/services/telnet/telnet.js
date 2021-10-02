@@ -34,9 +34,26 @@ const server = telnetlib.createServer(
         if (command === "quit") c.end();
       });
 
-      s.on("close", () => setTimeout(() => connect(), 1000));
+      s.on("close", () =>
+        setTimeout(() => {
+          connect();
+          s.send(
+            JSON.stringify({
+              msg: "",
+              data: {
+                token,
+                height: c.height,
+                width: c.width,
+                reboot: true,
+              },
+            })
+          );
+        }, 1000)
+      );
 
       c.on("end", () => s.close());
+
+      c.on("error", (err) => console.error(err));
 
       c.on("data", (data) => {
         s.send(
@@ -46,18 +63,6 @@ const server = telnetlib.createServer(
           })
         );
       });
-
-      s.send(
-        JSON.stringify({
-          msg: "",
-          data: {
-            token,
-            height: c.height,
-            width: c.width,
-            reboot: true,
-          },
-        })
-      );
     };
 
     connect();
