@@ -26,7 +26,7 @@ const server = telnetlib.createServer(
       const s = new WebSocket("ws://localhost:3000");
       let retry = true;
 
-      s.onopen(() => {
+      s.onopen = () => {
         if (reboot) {
           s.send(
             JSON.stringify({
@@ -35,7 +35,7 @@ const server = telnetlib.createServer(
             })
           );
         }
-      });
+      };
 
       s.on("message", (data) => {
         const ctx = JSON.parse(data);
