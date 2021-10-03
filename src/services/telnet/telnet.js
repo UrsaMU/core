@@ -54,17 +54,20 @@ const server = telnetlib.createServer(
       });
 
       s.on("close", () => {
-        if (retry) connect(true);
+        setTimeout(() => {
+          if (retry) connect(true);
+        }, 5000);
       });
 
       c.on("end", () => {
         retry = false;
         s.close();
-        c.remove;
       });
 
       c.on("error", (err) => {
-        if (retry) connect(true);
+        setTimeout(() => {
+          if (retry) connect(true);
+        }, 5000);
       });
 
       c.on("data", (data) => {
