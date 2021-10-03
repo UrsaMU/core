@@ -15,9 +15,4 @@ export default async () => {
   } catch (err) {
     console.log("Telnet module already running");
   }
-
-  hooks.shutdown.use((ctx, next) => {
-    execSync("pm2 delete telnet");
-    next();
-  });
 };
