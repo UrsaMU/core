@@ -13,7 +13,7 @@ export default () => {
       await hooks.disconnect.execute(player);
       await send(ctx.socket, "See you space cowboy...", { command: "quit" });
 
-      setTimeout(() => ctx.socket.close(0), 10);
+      setTimeout(() => ctx.socket.close(), 10);
     },
   });
 };
