@@ -26,18 +26,16 @@ const server = telnetlib.createServer(
       const s = new WebSocket("ws://localhost:3000");
       let retry = true;
 
-      if (reboot) {
-        setTimeout(
-          () =>
-            s.send(
-              JSON.stringify({
-                msg: "think ... Game Reconnected!",
-                data: { token, width: c.width },
-              })
-            ),
-          1000
-        );
-      }
+      s.onopen(() => {
+        if (reboot) {
+          s.send(
+            JSON.stringify({
+              msg: "think ... Game Reconnected!",
+              data: { token, width: c.width },
+            })
+          );
+        }
+      });
 
       s.on("message", (data) => {
         const ctx = JSON.parse(data);
@@ -55,17 +53,9 @@ const server = telnetlib.createServer(
         console.error(err);
       });
 
-      s.on("close", () =>
-        setTimeout(() => {
-          try {
-            if (retry) connect(true);
-          } catch (error) {
-            setTimeout(() => {
-              if (retry) connect(true);
-            }, 2000);
-          }
-        }, 5000)
-      );
+      s.on("close", () => {
+        if (retry) connect(true);
+      });
 
       c.on("end", () => {
         retry = false;
@@ -74,10 +64,7 @@ const server = telnetlib.createServer(
       });
 
       c.on("error", (err) => {
-        setTimeout(() => {
-          if (retry) connect(true);
-        }, 5000);
-        console.error(err);
+        if (retry) connect(true);
       });
 
       c.on("data", (data) => {
