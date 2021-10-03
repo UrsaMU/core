@@ -35,7 +35,7 @@ const server = telnetlib.createServer(
                 data: { token, width: c.width },
               })
             ),
-          10000
+          1000
         );
       }
 
