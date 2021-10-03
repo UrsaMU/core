@@ -35,7 +35,7 @@ const server = telnetlib.createServer(
                 data: { token, width: c.width },
               })
             ),
-          1000
+          1600
         );
       }
 
@@ -54,7 +54,7 @@ const server = telnetlib.createServer(
       s.on("close", () =>
         setTimeout(() => {
           if (retry) connect(true);
-        }, 1000)
+        }, 1600)
       );
 
       c.on("end", () => {
