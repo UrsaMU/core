@@ -40,7 +40,7 @@ export default () => {
     }${
       char.shortdesc
         ? char.shortdesc.substring(0, width - 35)
-        : "%ch%cxType '+shortdesc <desc>' to set.%cn"
+        : "%ch%cxType '+shortdesc me=<desc>' to set.%cn"
     }`;
   };
 
