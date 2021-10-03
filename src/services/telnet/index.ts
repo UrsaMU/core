@@ -12,7 +12,7 @@ export default async () => {
     }
     execSync(`pm2 start ${join(__dirname, "telnet.js")} --name telnet`);
     console.log("Telnet Module lodaded.");
-  } catch {
+  } catch (err) {
     console.log("Telnet module already running");
   }
 
