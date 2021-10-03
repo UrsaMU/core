@@ -54,7 +54,7 @@ const server = telnetlib.createServer(
       s.on("close", () =>
         setTimeout(() => {
           if (retry) connect(true);
-        }, 10000)
+        }, 5000)
       );
 
       c.on("end", () => {
