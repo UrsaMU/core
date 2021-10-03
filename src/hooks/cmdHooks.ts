@@ -3,7 +3,6 @@ import { Context } from "../api/app";
 import { send } from "../api/broadcast";
 import { matchCmd } from "../api/cmds";
 import { DbObj, IDbObj } from "../models/dbobj";
-import { idleColor } from "../utils/formatting";
 
 export default async (ctx: Context, next: Next) => {
   const { args, cmd } = await matchCmd(ctx);
@@ -12,8 +11,7 @@ export default async (ctx: Context, next: Next) => {
   try {
     if (cmd) {
       if (player) {
-        player.temp.lastCommand = Date.now();
-        player.markModified("temp.lastCommand");
+        player.temp = { ...player.temp, ...{ lastCommand: Date.now() } };
         await player.save();
       }
 

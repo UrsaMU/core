@@ -5,9 +5,10 @@ import jwt from "jsonwebtoken";
 import { join } from "path";
 import { DbObj, IDbObj } from "../models/dbobj";
 import { flags } from "../api/flags";
-import { Data } from "../api/app";
-import pm2 from "pm2";
-import { promisify } from "util";
+import { Context, Data } from "../api/app";
+import { conns } from "../api/conns";
+import { force, hooks } from "../api/hooks";
+import { send } from "../api/broadcast";
 
 /**
  * Hash a string.
@@ -139,51 +140,65 @@ export const setflags = async (obj: any, flgs: string) => {
   const { tags, data } = flags.set(obj.flags, obj.data, flgs);
   obj.flags = tags;
   obj.data = data;
-  await obj.save();
   return obj;
 };
 
+/**
+ * change settings on a dbogj
+ * @param obj The object to modify
+ * @param f flags to add to the object
+ * @param d data to add to the object
+ * @returns
+ */
 export const set = async (obj: IDbObj, f: string, d: Data = {}) => {
   const { tags, data } = flags.set(obj.flags, obj.data, f);
   obj.flags = tags;
   obj.data = { ...obj.data, ...data, ...d };
-  await obj.save();
+  obj.markModified("flags");
+  obj.save();
   return obj;
 };
 
-interface LoginOptions {
-  name?: string;
-  password?: string;
-  token?: string;
-}
-export const login = async ({
-  name,
-  password,
-  token,
-}: LoginOptions): Promise<IDbObj | undefined> => {
-  let player;
-
+/**
+ * Log a character in
+ * @param ctx The request contrext object.
+ * @returns
+ */
+export const login = async (ctx: Context): Promise<IDbObj | undefined> => {
+  const { name, password, token } = ctx.data;
   if (name && password) {
-    const tempPlayer = await DbObj.findOne({
+    let player: IDbObj = await DbObj.findOne({
       name: new RegExp("^" + name, "i"),
     });
 
     // If the password checks, the player is verified.
-    if (tempPlayer && (await compare(password, tempPlayer.password))) {
-      player = await setflags(tempPlayer, "connected");
-      player.temp = { lastCommand: Date.now() };
-      player.save();
+    if (player && (await compare(password, player.password || ""))) {
+      player.temp = { ...{}, ...{ lastCommand: Date.now() } };
+      player = await set(player, "connected");
+      ctx.socket.cid = player.dbref;
+      const socket = conns.has(player.dbref);
+      if (!socket) conns.add(ctx.socket);
+
+      const token = await sign(player.dbref, process.env.SECRET || "");
+
+      await hooks.connect.execute(player);
+      await send(ctx.socket, "Connected!!", { token });
+      await force(ctx, "look");
+      return player;
     }
   } else if (token) {
-    const data = await verify(token, process.env.SECRET || "");
-    // If the token checks out, the player is verified.
-    const tempPlayer = await DbObj.findOne({ dbref: data.id });
-    if (tempPlayer) {
-      player = await setflags(tempPlayer, "conencted");
+    const dbref = await verify(token, process.env.SECRET || "");
+
+    if (dbref) {
+      const player: IDbObj = await DbObj.findOne({ dbref });
+      const socket = conns.has(dbref);
+      await set(player, "connected");
+      if (!socket) conns.add(ctx.socket);
+
+      ctx.socket.cid = dbref;
+      return player;
     }
   }
-
-  return player;
 };
 
 export const target = async (enactor: IDbObj, tar: string): Promise<IDbObj> => {
@@ -225,26 +240,3 @@ export const canSee = (en: IDbObj, tar: IDbObj) =>
   (tar.flags.includes("dark") && flags.lvl(en.flags) >= flags.lvl(tar.flags)) ||
   (flags.check(en.flags, "staff+") && tar.flags.includes("dark")) ||
   flags.check(tar.flags, "!dark");
-
-type pm2ProcCallBack = (list: pm2.ProcessDescription[]) => void | Promise<void>;
-
-export const pm2Proc = (cb: pm2ProcCallBack) =>
-  pm2.connect(async (err) => {
-    if (err) {
-      console.log(err);
-      pm2.disconnect();
-      process.exit(2);
-    }
-
-    pm2.list((err, list) => {
-      if (err) {
-        console.log(err);
-        pm2.disconnect();
-        process.exit(2);
-      }
-
-      cb(list);
-
-      pm2.disconnect();
-    });
-  });

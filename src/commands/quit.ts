@@ -1,8 +1,7 @@
 import { send } from "../api/broadcast";
 import { addCmd } from "../api/cmds";
-import { emitter } from "../api/Emitter";
+import { hooks } from "../api/hooks";
 import { DbObj } from "../models/dbobj";
-import { setflags } from "../utils/utils";
 
 export default () => {
   addCmd({
@@ -10,10 +9,10 @@ export default () => {
     pattern: /^quit/i,
     render: async (args, ctx) => {
       const player = await DbObj.findOne({ dbref: ctx.socket.cid });
-      if (player) await setflags(player, "!connected");
+
+      await hooks.disconnect.execute(player);
       await send(ctx.socket, "See you space cowboy...", { command: "quit" });
 
-      emitter.emit("disconnected", player);
       setTimeout(() => ctx.socket.close(0), 10);
     },
   });

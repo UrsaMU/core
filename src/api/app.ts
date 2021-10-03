@@ -8,9 +8,7 @@ import expressWs from "express-ws";
 import WebSocket from "ws";
 import { nanoid } from "nanoid";
 import { hooks } from "./hooks";
-import { remConn } from "./connections";
 import { emitter } from "./Emitter";
-import { send } from "./broadcast";
 export { Next } from "@digibear/middleware";
 const ExpressApp = express();
 
@@ -39,7 +37,6 @@ wsExpress.app.ws("/", (ws: MUSocket) => {
     if (ws.id) {
       ctx.id = ws.id;
       ws.width = ctx.data.width || 78;
-
       ctx.socket = ws;
       hooks.input.execute(ctx);
     }

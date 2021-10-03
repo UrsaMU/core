@@ -3,8 +3,8 @@ import { DbObj } from "../models/dbobj";
 import { send } from "../api/broadcast";
 import { hash, id, sign } from "../utils/utils";
 import { emitter } from "../api/Emitter";
-import { conns } from "../api/connections";
-import { force } from "../api/hooks";
+import { conns } from "../api/conns";
+import { force, hooks } from "../api/hooks";
 
 export default () => {
   addCmd({
@@ -30,9 +30,9 @@ export default () => {
       await player.save();
       const token = await sign(player.dbref, process.env.SECRET || "");
       ctx.socket.cid = player.dbref;
-      conns.push(ctx.socket);
+      conns.add(ctx.socket);
+      await hooks.connect.execute(player);
       await send(ctx.socket, "Connected!", { token });
-      emitter.emit("connected", player);
       await force(ctx, "look");
     },
   });

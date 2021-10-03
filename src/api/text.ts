@@ -7,13 +7,7 @@ export interface TextEntry {
   desc?: string;
 }
 
-export const textDB = new Map<string, TextEntry[]>();
+export type ITextDB = { [key: string]: any };
 
-export const addText = (cat: string, entry: TextEntry) => {
-  if (textDB.has(cat)) {
-    textDB.get(cat)!.push(entry);
-  } else {
-    textDB.set(cat, []);
-    textDB.get(cat)!.push(entry);
-  }
-};
+const textDB: ITextDB = {};
+export { textDB };

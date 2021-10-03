@@ -1,7 +1,7 @@
 import { Data, MUSocket } from "./app";
 import { DbObj, IDbObj } from "../models/dbobj";
 import { parser } from "./parser";
-import { conns, getSocket } from "./connections";
+import { conns } from "./conns";
 
 /**
  *
@@ -25,7 +25,7 @@ export const send = async (socket: MUSocket, msg: string, data: Data = {}) => {
  * @param msg The message to all sockets.
  */
 export const broadcast = async (msg: string) => {
-  for (const conn of conns) {
+  for (const conn of conns.conns) {
     await send(conn, msg);
   }
 };
@@ -37,7 +37,7 @@ export const broadcast = async (msg: string) => {
  */
 export const broadcastTo = async (players: IDbObj[], msg: string) => {
   for (const player of players) {
-    const socket = getSocket(player.dbref);
+    const socket = conns.has(player.dbref);
     if (socket) await send(socket, msg);
   }
 };
@@ -51,8 +51,9 @@ export const broadcastToLoc = async (dbref: string, msg: string) => {
   const players = await DbObj.find({
     $and: [{ loc: dbref }, { flags: /connected/i }],
   });
+
   for (const player of players) {
-    const socket = getSocket(player.dbref);
+    const socket = conns.has(player.dbref);
     if (socket) await send(socket, msg);
   }
 };

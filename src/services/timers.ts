@@ -1,5 +1,6 @@
-import { getSocket } from "../api/connections";
+import { conns } from "../api/conns";
 import { emitter } from "../api/Emitter";
+import { hooks } from "../api/hooks";
 import { DbObj, IDbObj } from "../models/dbobj";
 
 export default async () => {
@@ -14,10 +15,10 @@ export default async () => {
           (Date.now() - player.temp.lastCommand || Date.now()) / (1000 * 30)
         );
 
-        const conn = getSocket(player.dbref);
+        const conn = conns.has(player.dbref);
 
         if (diff && player.temp.lastCommand && !conn) {
-          emitter.emit("disconnected", player);
+          await hooks.disconnect.execute(player);
         }
       }
     }
