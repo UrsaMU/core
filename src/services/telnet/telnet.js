@@ -14,17 +14,17 @@ const server = telnetlib.createServer(
   async (c) => {
     let token;
     c.id = nanoid();
+    const naws = c.getOption(NAWS);
+
+    // handle screen resize.
+    naws.on("resize", (data) => {
+      c.width = data.width;
+      c.height = data.height;
+    });
 
     const connect = (reboot = false) => {
       const s = new WebSocket("ws://localhost:3000");
-      const naws = c.getOption(NAWS);
       let retry = true;
-
-      // handle screen resize.
-      naws.on("resize", (data) => {
-        c.width = data.width;
-        c.height = data.height;
-      });
 
       if (reboot) {
         setTimeout(
@@ -70,6 +70,7 @@ const server = telnetlib.createServer(
       c.on("end", () => {
         retry = false;
         s.close();
+        c.remove;
       });
 
       c.on("error", (err) => {
