@@ -35,5 +35,5 @@ process.on("SIGINT", async () => {
   }
 
   await hooks.shutdown.execute({});
-  setTimeout(() => process.kill(process.pid), 1200);
+  setTimeout(() => process.kill(0), 1200);
 });
