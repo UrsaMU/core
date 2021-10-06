@@ -1,7 +1,6 @@
 import { Server } from "http";
 import { Socket, Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
-import broadcast from "./broadcast";
 
 export default (server: Server) => {
   const io = new IoServer(server);
