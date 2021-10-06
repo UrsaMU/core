@@ -1,4 +1,4 @@
-import { Context } from "./app";
+import { Context } from "..";
 
 export interface Cmd {
   name: string;
