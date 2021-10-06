@@ -6,6 +6,6 @@ export default () => {
     name: "think",
     pattern: "think *",
     flags: "connected",
-    render: async (args, ctx) => send(ctx.socket, args[1]),
+    render: async (args, ctx) => send(ctx.socket, args[1], ctx.data),
   });
 };

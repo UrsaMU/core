@@ -155,7 +155,7 @@ export const set = async (obj: IDbObj, f: string, d: Data = {}) => {
   obj.flags = tags;
   obj.data = { ...obj.data, ...data, ...d };
   obj.markModified("flags");
-  obj.save();
+  setTimeout(() => obj.save(), 100);
   return obj;
 };
 

@@ -8,23 +8,42 @@ export const remainder = (str: string, width: number, type = "telnet") => {
 
   const rem = Math.round(width % width);
 
-  let pad = "";
+  let strArray: string[] = [];
 
-  if (/%c/g.test(str) && subsStr >= 2)
-    pad =
-      str
-        .repeat(20)
-        .split("%c")
-        .filter(Boolean)
-        .slice(0, rem)
-        .map((char: string) => `%c${char}`)
-        .join("") + "%cn";
+  str
+    .trim()
+    .split("")
+    .reduce((pre, cur) => {
+      if (cur === "%") {
+        if (pre) strArray.push(pre);
 
-  if (/%c/g.test(str) && subsStr <= 1) pad = str.repeat(rem) + "%cn";
-  if (!/%c/g.test(str)) pad = str.slice(0, rem);
+        return cur;
+      } else {
+        if (/%c./.test(pre)) {
+          strArray.push(pre + cur);
+          return "";
+        } else if (/%[^cx]/.test(pre)) {
+          strArray.push(pre);
+          return cur;
+        } else {
+          return (pre += cur);
+        }
+      }
+    }, "");
 
-  // return repeat.repeat(width / reWidth);
-  return pad;
+  let ret: string[] = [];
+  for (const el of strArray) {
+    if (/%.*/.test(el)) {
+      ret.push(el);
+    } else {
+      ret.push(...el);
+    }
+  }
+
+  ret = ret.length > 0 ? ret : str.split("");
+  console.log(strArray);
+
+  return ret.splice(0, width).join("") + "%cn";
 };
 
 /**
@@ -38,23 +57,7 @@ export const repeat = (str: string, width: number, type = "telnet") => {
   const reWidth: number = parser.stripSubs(type ? type : "telnet", str).length;
 
   const rem = Math.round(width % reWidth);
-
-  let pad = "";
-
-  if (/%c/g.test(str) && reWidth >= 2)
-    pad =
-      str
-        .repeat(20)
-        .split("%c")
-        .filter(Boolean)
-        .slice(0, rem)
-        .map((char: string) => `%c${char}`)
-        .join("") + "%cn";
-
-  if (/%c/g.test(str) && reWidth <= 1) pad = str.repeat(rem) + "%cn";
-  if (!/%c/g.test(str)) pad = str.slice(0, rem);
-
-  return str.repeat(width / reWidth) + pad;
+  return str.repeat(width / reWidth) + remainder(str, rem);
 };
 
 /**
@@ -110,14 +113,10 @@ export const columns = (
 
 export const center = (str = "", width = 78, filler = " ", type = "telnet") => {
   const subWords = parser.stripSubs(type, str).length;
-  const subFiller = parser.stripSubs("telnet", filler).length;
+  const subFiller = parser.stripSubs(type, filler).length;
   const repWidth = width - subWords;
 
-  return (
-    repeat(filler, Math.round(repWidth / subFiller)) +
-    str +
-    repeat(filler, Math.floor(repWidth / subFiller))
-  );
+  return repeat(filler, repWidth / 2) + str + repeat(filler, repWidth / 2);
 };
 
 /**

@@ -92,7 +92,11 @@ export default () => {
       before: /%u/g,
       after: "\u001b[4m",
     },
-
+    {
+      before: /\s/g,
+      after: " ",
+      strip: ".",
+    },
     {
       before: "%cX",
       after: "\u001b[40m",

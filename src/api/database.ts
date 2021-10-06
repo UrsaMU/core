@@ -1,5 +1,3 @@
-import { Document } from "mongoose";
-import Datastore from "nedb";
 import { Data } from "./app";
 
 export interface Attribute {
@@ -32,3 +30,5 @@ export interface Database<T> {
   delete: (id: string) => Promise<any>;
   start: () => Promise<void>;
 }
+
+class DB {}

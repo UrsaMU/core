@@ -1,17 +1,15 @@
 import { parser } from "../api/parser";
+import { center, repeat } from "../utils/formatting";
 
 export default () => {
   const remainder = (str: string, count: number) => {
     let ret = str.split("%").filter(Boolean).splice(0, count).join("%");
-    return str.includes("%") ? "%" + ret + " %cn" : ret;
+    let len = parser.stripSubs("telnet", str).length;
+    return str.includes("%c") && len > 1 ? "%" + ret + " %cn" : ret;
   };
   // repeat(<string>, <width>)
   parser.add("repeat", async (args) => {
-    const strWidth = parser.stripSubs("telnet", args[0]).length;
-    const width = parseInt(args[1], 10);
-    const rep = Math.floor(width / strWidth);
-    const rem = width - strWidth * rep;
-    return args[0].repeat(rep) + remainder(args[0], rem);
+    return repeat(args[0], parseInt(args[1], 10));
   });
 
   // center(<string>,<width>,<filler>)
@@ -19,19 +17,7 @@ export default () => {
     const words = args[0] || "";
     const width = parseInt(args[1]) || 78;
     const filler = args[2] || " ";
-    const subWords = parser.stripSubs("telnet", words).length;
 
-    const subFiller = parser.stripSubs("telnet", filler).length;
-
-    const adjWidth = Math.floor((width - subWords) / 2);
-    const repWidth = Math.floor(adjWidth / subFiller);
-    const rem = Math.round(width % (adjWidth * 2 + subWords));
-
-    return (
-      filler.repeat(repWidth) +
-      words +
-      filler.repeat(repWidth) +
-      remainder(filler, rem)
-    );
+    return center(args[0], width, filler);
   });
 };

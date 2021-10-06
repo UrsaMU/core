@@ -1,5 +1,5 @@
 import { Document, model, Schema } from "mongoose";
-import { ChannelEntry } from "../api/channels";
+import { ChannelEntry } from "./channModel";
 
 export interface IDbObj extends Document {
   dbref: string;
@@ -18,15 +18,8 @@ export const DbObjSchema = new Schema<IDbObj>({
   dbref: { type: String, required: true, unique: true },
   name: { type: String, required: true, unique: true },
   password: { type: String, default: "" },
-
-  data: {
-    type: Schema.Types.Mixed,
-    default: { channels: { type: Array } },
-  },
-  temp: {
-    type: Schema.Types.Mixed,
-    default: {},
-  },
+  data: { type: Schema.Types.Mixed },
+  temp: { type: Schema.Types.Mixed },
   description: { type: String, default: "You see nothing special." },
   flags: { type: String, default: "" },
   alias: { type: String, default: "" },

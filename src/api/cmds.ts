@@ -25,6 +25,7 @@ export const addCmd = (...commands: Cmd[]) =>
         .replace(/([\/\+\(\))])/g, "\\$1")
         .replace(/\*/g, "(.*)")
         .replace(/\s+/, "\\s+")
+        .replace(/=/g, "\\s*=\\s*")
         .replace(/^\./, "[\\+@]");
       cmd.pattern = new RegExp("^" + tempPattern, "i");
     }
