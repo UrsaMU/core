@@ -1,4 +1,4 @@
-import { MUSocket } from "./app";
+import { MUSocket } from "..";
 
 let conns: MUSocket[] = [];
 

@@ -11,11 +11,30 @@ export interface Cmd {
 
 const cmds: Cmd[] = [];
 
-/**
- * Add one or more commands to the server.
- * @param commands The coma seperated list of commands to add to the system.
- * @returns
- */
 export const addCmd = (...commands: Cmd[]) =>
-  commands.forEach((cmd) => cmds.push(cmd));
+  commands.forEach((cmd) => {
+    if (typeof cmd.pattern === "string") {
+      const tempPattern = cmd.pattern
+        .replace(/([\/\+\(\))])/g, "\\$1")
+        .replace(/\*/g, "(.*)")
+        .replace(/\s+/, "\\s+")
+        .replace(/=/g, "\\s*=\\s*")
+        .replace(/^\./, "[\\+@]");
+      cmd.pattern = new RegExp("^" + tempPattern, "i");
+    }
+
+    cmds.push(cmd);
+  });
+
+export const matchCmd = async (ctx: Context) => {
+  const command = cmds.find((cmd) => {
+    if (ctx.msg?.match(cmd.pattern)) {
+      return true;
+    }
+    return false;
+  });
+  const match = ctx.msg?.match(command?.pattern || "");
+  return { args: Array.from(match || []), cmd: command };
+};
+
 export { cmds };
