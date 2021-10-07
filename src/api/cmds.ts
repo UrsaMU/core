@@ -19,13 +19,17 @@ export const addCmd = (...commands: Cmd[]) =>
         .replace(/\*/g, "(.*)")
         .replace(/\s+/, "\\s+")
         .replace(/=/g, "\\s*=\\s*")
-        .replace(/^\./, "[\\+@]");
+        .replace(/^\./, "[\\+@]?");
       cmd.pattern = new RegExp("^" + tempPattern, "i");
     }
 
     cmds.push(cmd);
   });
-
+/**
+ * Match a command pattern and flags with a player.
+ * @param ctx The Context being fed to the match system
+ * @returns
+ */
 export const matchCmd = async (ctx: Context) => {
   const command = cmds.find((cmd) => {
     if (ctx.msg?.match(cmd.pattern)) {

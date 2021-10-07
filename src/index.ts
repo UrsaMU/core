@@ -1,16 +1,13 @@
 import { Expression } from "@ursamu/parser";
-import { Server } from "http";
 import { Socket } from "socket.io";
-import app from "./api/app";
-import broadcast from "./api/broadcast";
-
 export * from "./api/broadcast";
-export * from "./api/connections";
+export * from "./api/app";
+export * from "./api/broadcast";
 export * from "./api/flags";
 export * from "./api/hooks";
 export * from "./api/parser";
 export * from "./api/cmds";
-export * from "./utils/utils";
+export * from "./api/plugins";
 export * from "./api/security";
 
 export interface DBObj {
@@ -104,10 +101,4 @@ export interface Channel {
 }
 export interface MuRequest extends Request {
   player?: DBObj;
-}
-
-export function mu(server: Server) {
-  const io = app(server);
-  const msg = broadcast(io);
-  return { io, msg };
 }

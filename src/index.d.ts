@@ -1,4 +1,4 @@
-import { DBObj } from "../../src";
+import { DBObj } from ".";
 
 declare global {
   namespace Express {

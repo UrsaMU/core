@@ -88,9 +88,9 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable"><a href="modules.html#cmds" class="tsd-kind-icon">cmds</a></li>
-								<li class="tsd-kind-variable"><a href="modules.html#conns" class="tsd-kind-icon">conns</a></li>
 								<li class="tsd-kind-variable"><a href="modules.html#flags" class="tsd-kind-icon">flags</a></li>
 								<li class="tsd-kind-variable"><a href="modules.html#hooks" class="tsd-kind-icon">hooks</a></li>
+								<li class="tsd-kind-variable"><a href="modules.html#io" class="tsd-kind-icon">io</a></li>
 								<li class="tsd-kind-variable"><a href="modules.html#parser" class="tsd-kind-icon">parser</a></li>
 							</ul>
 						</section>
@@ -98,14 +98,15 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function"><a href="modules.html#addCmd" class="tsd-kind-icon">add<wbr>Cmd</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#broadcast" class="tsd-kind-icon">broadcast</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#broadcastTo" class="tsd-kind-icon">broadcast<wbr>To</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#compare" class="tsd-kind-icon">compare</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#force" class="tsd-kind-icon">force</a></li>
-								<li class="tsd-kind-function"><a href="modules.html#getSocket" class="tsd-kind-icon">get<wbr>Socket</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#hash" class="tsd-kind-icon">hash</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#loadText" class="tsd-kind-icon">load<wbr>Text</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#loaddir" class="tsd-kind-icon">loaddir</a></li>
-								<li class="tsd-kind-function"><a href="modules.html#mu" class="tsd-kind-icon">mu</a></li>
-								<li class="tsd-kind-function"><a href="modules.html#remConn" class="tsd-kind-icon">rem<wbr>Conn</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#matchCmd" class="tsd-kind-icon">match<wbr>Cmd</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#send" class="tsd-kind-icon">send</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#setFlag" class="tsd-kind-icon">set<wbr>Flag</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#sign" class="tsd-kind-icon">sign</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#verify" class="tsd-kind-icon">verify</a></li>
@@ -122,7 +123,7 @@
 					<div class="tsd-signature tsd-kind-icon">Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/index.ts#L53">core/src/index.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/index.ts#L50">src/index.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -140,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">Next<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/node_modules/@digibear/middleware/dist/src/index.d.ts:1</li>
+							<li>Defined in node_modules/@digibear/middleware/dist/src/index.d.ts:1</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -165,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/index.ts#L52">core/src/index.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/index.ts#L49">src/index.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -186,17 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">cmds<span class="tsd-signature-symbol">:</span> <a href="interfaces/Cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/cmds.ts#L12">core/src/api/cmds.ts:12</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable">
-					<a name="conns" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> conns</h3>
-					<div class="tsd-signature tsd-kind-icon">conns<span class="tsd-signature-symbol">:</span> <a href="interfaces/MUSocket.html" class="tsd-signature-type" data-tsd-kind="Interface">MUSocket</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/connections.ts#L3">core/src/api/connections.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/cmds.ts#L12">src/api/cmds.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -206,7 +197,7 @@
 					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Tags</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/flags.ts#L3">core/src/api/flags.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/flags.ts#L3">src/api/flags.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -216,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">hooks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>connectn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>disconnect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/Context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>reconnect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>shutdown<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>startup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Pipe</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/hooks.ts#L4">core/src/api/hooks.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/hooks.ts#L5">src/api/hooks.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -244,12 +235,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="io" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> io</h3>
+					<div class="tsd-signature tsd-kind-icon">io<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/app.ts#L4">src/api/app.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="parser" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> parser</h3>
 					<div class="tsd-signature tsd-kind-icon">parser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Parser</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/parser.ts#L3">core/src/api/parser.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/parser.ts#L3">src/api/parser.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -266,24 +267,82 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/cmds.ts#L19">core/src/api/cmds.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/cmds.ts#L14">src/api/cmds.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>commands: <a href="interfaces/Cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="broadcast" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> broadcast</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">broadcast<span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/broadcast.ts#L53">src/api/broadcast.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add one or more commands to the server.</p>
+									<p>Broadcast a message to all connected sockets.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>commands: <a href="interfaces/Cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>msg: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The coma seperated list of commands to add to the system.</p>
+										<p>The message to broadcast</p>
+									</div>
+								</li>
+								<li>
+									<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Any data to be sent to the client</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="broadcastTo" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> broadcast<wbr>To</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">broadcast<wbr>To<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/broadcast.ts#L28">src/api/broadcast.ts:28</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>location: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>msg: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -297,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/security.ts#L23">core/src/api/security.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/security.ts#L23">src/api/security.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -334,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/hooks.ts#L15">core/src/api/hooks.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/hooks.ts#L16">src/api/hooks.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -351,42 +410,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="getSocket" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Socket</h3>
-					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Socket<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/MUSocket.html" class="tsd-signature-type" data-tsd-kind="Interface">MUSocket</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/connections.ts#L12">core/src/api/connections.ts:12</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p> Return the socket of an in-game object if a socket is available.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><p>const socket = getSocket(&#39;wErwwSFfgdfu&#39;);</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The _id or dbref of the target who&#39;s socket we want to retreive.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/MUSocket.html" class="tsd-signature-type" data-tsd-kind="Interface">MUSocket</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="hash" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> hash</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -396,7 +419,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/security.ts#L9">core/src/api/security.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/security.ts#L9">src/api/security.ts:9</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -427,7 +450,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/utils/utils.ts#L34">core/src/utils/utils.ts:34</a></li>
+									<li>Defined in src/api/plugins.ts:34</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -458,7 +481,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/utils/utils.ts#L9">core/src/utils/utils.ts:9</a></li>
+									<li>Defined in src/api/plugins.ts:9</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -480,171 +503,78 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="mu" class="tsd-anchor"></a>
-					<h3>mu</h3>
+					<a name="matchCmd" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> match<wbr>Cmd</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">mu<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>io<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>broadcast<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>broadcastTo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>send<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></li>
+						<li class="tsd-signature tsd-kind-icon">match<wbr>Cmd<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="interfaces/Context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/Cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/index.ts#L109">core/src/index.ts:109</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>server: <span class="tsd-signature-type">Server</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>io<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>broadcast<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>broadcastTo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>send<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter">
-									<h5>io<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Server</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DefaultEventsMap</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>broadcast<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>broadcastTo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>send<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>broadcast<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h5>
-											<ul class="tsd-parameters">
-												<li class="tsd-parameter-signature">
-													<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
-														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
-													</ul>
-													<ul class="tsd-descriptions">
-														<li class="tsd-description">
-															<div class="tsd-comment tsd-typography">
-																<div class="lead">
-																	<p>Broadcast a message to all connected sockets.</p>
-																</div>
-															</div>
-															<h4 class="tsd-parameters-title">Parameters</h4>
-															<ul class="tsd-parameters">
-																<li>
-																	<h5>msg: <span class="tsd-signature-type">string</span></h5>
-																	<div class="tsd-comment tsd-typography">
-																		<p>The message to broadcast</p>
-																	</div>
-																</li>
-																<li>
-																	<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
-																	<div class="tsd-comment tsd-typography">
-																		<p>Any data to be sent to the client</p>
-																	</div>
-																</li>
-															</ul>
-															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="tsd-parameter">
-											<h5>broadcast<wbr>To<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h5>
-											<ul class="tsd-parameters">
-												<li class="tsd-parameter-signature">
-													<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
-														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
-													</ul>
-													<ul class="tsd-descriptions">
-														<li class="tsd-description">
-															<h4 class="tsd-parameters-title">Parameters</h4>
-															<ul class="tsd-parameters">
-																<li>
-																	<h5>location: <span class="tsd-signature-type">string</span></h5>
-																</li>
-																<li>
-																	<h5>msg: <span class="tsd-signature-type">string</span></h5>
-																</li>
-																<li>
-																	<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
-																</li>
-															</ul>
-															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="tsd-parameter">
-											<h5>send<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h5>
-											<ul class="tsd-parameters">
-												<li class="tsd-parameter-signature">
-													<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
-														<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
-													</ul>
-													<ul class="tsd-descriptions">
-														<li class="tsd-description">
-															<div class="tsd-comment tsd-typography">
-																<dl class="tsd-comment-tags">
-																	<dt>example</dt>
-																	<dd><p>send(ctx.id, &quot;This is a rest&quot;, {some: &quot;data&quot;})</p>
-																	</dd>
-																</dl>
-															</div>
-															<h4 class="tsd-parameters-title">Parameters</h4>
-															<ul class="tsd-parameters">
-																<li>
-																	<h5>id: <span class="tsd-signature-type">string</span></h5>
-																	<div class="tsd-comment tsd-typography">
-																		<p>The ID of the socket connection to send the message to.</p>
-																	</div>
-																</li>
-																<li>
-																	<h5>msg: <span class="tsd-signature-type">string</span></h5>
-																	<div class="tsd-comment tsd-typography">
-																		<p>The message to send.</p>
-																	</div>
-																</li>
-																<li>
-																	<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
-																	<div class="tsd-comment tsd-typography">
-																		<p>Any data to be sent with the message to the client.</p>
-																	</div>
-																</li>
-															</ul>
-															<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="remConn" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> rem<wbr>Conn</h3>
-					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">rem<wbr>Conn<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/connections.ts#L24">core/src/api/connections.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/cmds.ts#L33">src/api/cmds.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Remove a connection from the connecitons list</p>
+									<p>Match a command pattern and flags with a player.</p>
 								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ctx: <a href="interfaces/Context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Context being fed to the match system</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/Cmd.html" class="tsd-signature-type" data-tsd-kind="Interface">Cmd</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="send" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> send</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">send<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/broadcast.ts#L13">src/api/broadcast.ts:13</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>send(ctx.id, &quot;This is a rest&quot;, {some: &quot;data&quot;})</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>id: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The Socket.id to be removed from the conn list.</p>
+										<p>The ID of the socket connection to send the message to.</p>
+									</div>
+								</li>
+								<li>
+									<h5>msg: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The message to send.</p>
+									</div>
+								</li>
+								<li>
+									<h5>data: <a href="modules.html#Data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a><span class="tsd-signature-symbol"> = {}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Any data to be sent with the message to the client.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -658,7 +588,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/flags.ts#L12">core/src/api/flags.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/flags.ts#L12">src/api/flags.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -713,7 +643,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/security.ts#L37">core/src/api/security.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/security.ts#L37">src/api/security.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -750,7 +680,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ursamu/core/blob/c4c5726/src/api/security.ts#L51">core/src/api/security.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/ursamu/core/blob/9b6bf60/src/api/security.ts#L51">src/api/security.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -832,13 +762,13 @@
 						<a href="modules.html#cmds" class="tsd-kind-icon">cmds</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="modules.html#conns" class="tsd-kind-icon">conns</a>
-					</li>
-					<li class=" tsd-kind-variable">
 						<a href="modules.html#flags" class="tsd-kind-icon">flags</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#hooks" class="tsd-kind-icon">hooks</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#io" class="tsd-kind-icon">io</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#parser" class="tsd-kind-icon">parser</a>
@@ -847,13 +777,16 @@
 						<a href="modules.html#addCmd" class="tsd-kind-icon">add<wbr>Cmd</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#broadcast" class="tsd-kind-icon">broadcast</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#broadcastTo" class="tsd-kind-icon">broadcast<wbr>To</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#compare" class="tsd-kind-icon">compare</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#force" class="tsd-kind-icon">force</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#getSocket" class="tsd-kind-icon">get<wbr>Socket</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#hash" class="tsd-kind-icon">hash</a>
@@ -865,10 +798,10 @@
 						<a href="modules.html#loaddir" class="tsd-kind-icon">loaddir</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#mu" class="tsd-kind-icon">mu</a>
+						<a href="modules.html#matchCmd" class="tsd-kind-icon">match<wbr>Cmd</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#remConn" class="tsd-kind-icon">rem<wbr>Conn</a>
+						<a href="modules.html#send" class="tsd-kind-icon">send</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#setFlag" class="tsd-kind-icon">set<wbr>Flag</a>
