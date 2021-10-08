@@ -72,21 +72,39 @@ addCmd({
 
 ## Hooks
 
-Hooks are a middleware chain specifically for user input. It's particularly useful for doing things like parsing real-time chat messages for commands, triggering events, exits - and anything else you might want to accomplish with user input.
+Hooks are middleware pipelines that can be used to modify data. There are serveral pre-defined hooks that you can utalize for the game, as well as a way to create your own custom hooks as needed by your addition or plugin. Data can be passed between hooks in a pipeline through the `context: ctx` object. Then, once done modifying the passed data, invoke the `next()` function to move onto the noext middleware in the pipeline.
 
 ```ts
-import { hooks, Context } from "@ursamu/core";
+import { hooks } from "@ursamu/core";
 
-hooks.use((ctx, next) => {
+hooks.input.use((ctx, next) => {
   ctx.data.foo = "bar";
   ctx.data.original.msg = ctx.msg;
   next();
 });
+```
 
-const ctx: Context = {
-  msg: "This is the player input.",
-  data: {},
-};
+Then, when we need to run the middleware pipeline in our code, we can invoke the `execute` function to run our middleware chain.
+
+```ts
+import { hooks, io } from "@uesamu/coro";
+
+io.on("connection", (socket: Socket) => {
+  socket.join(socket.id);
+
+  socket.on("message", (ctx) => {
+    try {
+      ctx = JSON.parse(ctx);
+      ctx.id = socket.id;
+      ctx.socket = socket;
+      hooks.input.execute(ctx);
+    } catch {
+      ctx.id = socket.id;
+      ctx.socket = socket;
+      hooks.input.execute(ctx);
+    }
+  });
+});
 ```
 
 ## Flags

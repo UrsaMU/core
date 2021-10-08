@@ -6,7 +6,7 @@ import { resolve } from "path";
  * @param path The path to the files to handle.
  * @param cb optional callback function.
  */
-export const loaddir = async (path: string) => {
+export const plugins = async (path: string) => {
   const dirent = await readdir(path, {
     withFileTypes: true,
   });

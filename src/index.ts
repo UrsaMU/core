@@ -33,19 +33,6 @@ export interface Attribute {
   lock?: string;
 }
 
-export interface Article {
-  _id?: string;
-  body: string;
-  category: string;
-  slug: string;
-  title: string;
-  created_by: string;
-  created_at?: number;
-  last_update?: number;
-  edit_by?: string;
-  flags?: string;
-}
-
 export type Query = { [key: string]: any };
 export type Data = { [key: string]: any };
 
@@ -59,6 +46,7 @@ export interface Database<T> {
 
 export interface MUSocket extends Socket {
   cid?: string;
+  uid?: string;
   dbref?: number;
   width?: number;
 }

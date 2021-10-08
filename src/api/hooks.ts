@@ -6,7 +6,7 @@ export const hooks = {
   input: pipeline<Context>(),
   startup: pipeline<any>(),
   shutdown: pipeline<any>(),
-  connectn: pipeline<any>(),
+  connect: pipeline<any>(),
   disconnect: pipeline<any>(),
   reconnect: pipeline<any>(),
 };

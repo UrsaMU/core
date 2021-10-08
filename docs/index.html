@@ -130,19 +130,34 @@
 				<a href="#hooks" id="hooks" style="color: inherit; text-decoration: none;">
 					<h2>Hooks</h2>
 				</a>
-				<p>Hooks are a middleware chain specifically for user input. It&#39;s particularly useful for doing things like parsing real-time chat messages for commands, triggering events, exits - and anything else you might want to accomplish with user input.</p>
-				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">hooks</span><span style="color: #000000">, </span><span style="color: #001080">Context</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@ursamu/core&quot;</span><span style="color: #000000">;</span>
+				<p>Hooks are middleware pipelines that can be used to modify data. There are serveral pre-defined hooks that you can utalize for the game, as well as a way to create your own custom hooks as needed by your addition or plugin. Data can be passed between hooks in a pipeline through the <code>context: ctx</code> object. Then, once done modifying the passed data, invoke the <code>next()</code> function to move onto the noext middleware in the pipeline.</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">hooks</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@ursamu/core&quot;</span><span style="color: #000000">;</span>
 
-<span style="color: #001080">hooks</span><span style="color: #000000">.</span><span style="color: #795E26">use</span><span style="color: #000000">((</span><span style="color: #001080">ctx</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #001080">hooks</span><span style="color: #000000">.</span><span style="color: #001080">input</span><span style="color: #000000">.</span><span style="color: #795E26">use</span><span style="color: #000000">((</span><span style="color: #001080">ctx</span><span style="color: #000000">, </span><span style="color: #001080">next</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">  </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">foo</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;bar&quot;</span><span style="color: #000000">;</span>
 <span style="color: #000000">  </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">original</span><span style="color: #000000">.</span><span style="color: #001080">msg</span><span style="color: #000000"> = </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">msg</span><span style="color: #000000">;</span>
 <span style="color: #000000">  </span><span style="color: #795E26">next</span><span style="color: #000000">();</span>
 <span style="color: #000000">});</span>
+</code></pre>
+				<p>Then, when we need to run the middleware pipeline in our code, we can invoke the <code>execute</code> function to run our middleware chain.</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">hooks</span><span style="color: #000000">, </span><span style="color: #001080">io</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@uesamu/coro&quot;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">Context</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #001080">msg:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;This is the player input.&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">data:</span><span style="color: #000000"> {},</span>
-<span style="color: #000000">};</span>
+<span style="color: #001080">io</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;connection&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">socket</span><span style="color: #000000">: </span><span style="color: #267F99">Socket</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">socket</span><span style="color: #000000">.</span><span style="color: #795E26">join</span><span style="color: #000000">(</span><span style="color: #001080">socket</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">socket</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;message&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">ctx</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">ctx</span><span style="color: #000000"> = </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">parse</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
+<span style="color: #000000">      </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000"> = </span><span style="color: #001080">socket</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">;</span>
+<span style="color: #000000">      </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">socket</span><span style="color: #000000"> = </span><span style="color: #001080">socket</span><span style="color: #000000">;</span>
+<span style="color: #000000">      </span><span style="color: #001080">hooks</span><span style="color: #000000">.</span><span style="color: #001080">input</span><span style="color: #000000">.</span><span style="color: #795E26">execute</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
+<span style="color: #000000">    } </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000"> = </span><span style="color: #001080">socket</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">;</span>
+<span style="color: #000000">      </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">socket</span><span style="color: #000000"> = </span><span style="color: #001080">socket</span><span style="color: #000000">;</span>
+<span style="color: #000000">      </span><span style="color: #001080">hooks</span><span style="color: #000000">.</span><span style="color: #001080">input</span><span style="color: #000000">.</span><span style="color: #795E26">execute</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  });</span>
+<span style="color: #000000">});</span>
 </code></pre>
 				<a href="#flags" id="flags" style="color: inherit; text-decoration: none;">
 					<h2>Flags</h2>
@@ -234,9 +249,6 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/Article.html" class="tsd-kind-icon">Article</a>
-					</li>
-					<li class=" tsd-kind-interface">
 						<a href="interfaces/Attribute.html" class="tsd-kind-icon">Attribute</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -309,10 +321,10 @@
 						<a href="modules.html#loadText" class="tsd-kind-icon">load<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#loaddir" class="tsd-kind-icon">loaddir</a>
+						<a href="modules.html#matchCmd" class="tsd-kind-icon">match<wbr>Cmd</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="modules.html#matchCmd" class="tsd-kind-icon">match<wbr>Cmd</a>
+						<a href="modules.html#plugins" class="tsd-kind-icon">plugins</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#send" class="tsd-kind-icon">send</a>
