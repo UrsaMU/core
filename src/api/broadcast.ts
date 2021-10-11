@@ -12,14 +12,17 @@ import { io } from "./app";
  */
 export const send = async (id: string, msg: string, data: Data = {}) => {
   io.to(id).emit("message", {
-    msg: await parser.string("telnet", {
-      msg,
-      data,
-      scope: {
-        ...{ "%#": "" },
-        ...data.scope,
-      },
-    }),
+    msg: parser.substitute(
+      "telnet",
+      (await parser.run({
+        msg,
+        data,
+        scope: {
+          ...{ "%#": "" },
+          ...data.scope,
+        },
+      })) || ""
+    ),
     data,
   });
   return this;
@@ -31,14 +34,17 @@ export const broadcastTo = async (
   data: Data = {}
 ) => {
   io.to(location).emit("message", {
-    msg: await parser.string("telnet", {
-      msg,
-      data,
-      scope: {
-        ...{ "%#": "" },
-        ...data.scope,
-      },
-    }),
+    msg: parser.substitute(
+      "telnet",
+      (await parser.run({
+        msg,
+        data,
+        scope: {
+          ...{ "%#": "" },
+          ...data.scope,
+        },
+      })) || ""
+    ),
     data,
   });
   return this;
@@ -53,15 +59,15 @@ export const broadcastTo = async (
 export const broadcast = async (msg: string, data: Data = {}) => {
   io.emit("message", {
     msg: parser.substitute(
-      data.type || "telnet",
-      await parser.string(data.type || "telnet", {
+      "telnet",
+      (await parser.run({
         msg,
         data,
         scope: {
           ...{ "%#": "" },
           ...data.scope,
         },
-      })
+      })) || ""
     ),
     data,
   });
