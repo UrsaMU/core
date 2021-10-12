@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "description": "A Modern MUSH Server",
   "main": "dist/index.js",
-  "repository": "https://github.com/lcanady/ursamu",
+  "repository": "https://github.com/ursamu/core.git",
   "author": "Lemuel Canady, Jr",
   "license": "MIT",
   "files": [
