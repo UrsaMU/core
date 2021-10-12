@@ -4,7 +4,6 @@ import { resolve } from "path";
 /**
  * Load all js files from a directory.
  * @param path The path to the files to handle.
- * @param cb optional callback function.
  */
 export const plugins = async (path: string) => {
   const dirent = await readdir(path, {
