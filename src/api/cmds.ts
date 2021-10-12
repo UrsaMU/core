@@ -3,7 +3,7 @@ import { Context } from "..";
 export interface Cmd {
   name: string;
   pattern: RegExp | string;
-  render: (args: string[], ctx: Context) => Promise<void>;
+  render: (ctx: Context, args: string[]) => Promise<void>;
   flags?: string;
   help?: string;
   hidden?: boolean;
