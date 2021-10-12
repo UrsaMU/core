@@ -11,6 +11,18 @@ export interface Cmd {
 
 const cmds: Cmd[] = [];
 
+/**
+ * Add a list of command objects to the game.
+ * @param commands A comma seperated list of command objects to be added to the game.
+ * @example
+ * addCmd({
+ *  name: "test",
+ *  pattern: "test",
+ *  flags: "connected",
+ *  render: (ctx) => await end(ctx.id, "This is a test!")
+ * })
+ * @returns
+ */
 export const addCmd = (...commands: Cmd[]) =>
   commands.forEach((cmd) => {
     if (typeof cmd.pattern === "string") {

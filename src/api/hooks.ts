@@ -12,7 +12,12 @@ export const hooks = {
 };
 
 export { Next };
-
+/**
+ * Force a socket to execute a given command using the supplied context object.
+ * @param ctx The context object to b e passed to the command
+ * @param command The string to trigger the wanted command.
+ * @example force(ctx, "look");
+ */
 export const force = async (ctx: Context, command: string) => {
   await hooks.input.execute({
     ...ctx,
