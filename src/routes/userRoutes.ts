@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { read } from "fs";
 import { hash, MuRequest, sign } from "..";
 import { dbObj } from "../models/DBObj";
 import { id } from "../utils/utils";
@@ -21,12 +20,12 @@ router.post("/", async (req: MuRequest, res, next) => {
   const player = await dbObj.create({
     name: req.body.name,
     password: await hash(req.body.password),
-    flags: count ? "player" : "immortal player",
+    flags: count ? "player immortal" : "player",
     dbref,
     owner: dbref,
   });
 
-  const token = sign(player.dbref);
+  const token = await sign(player.dbref);
   if (player) req.user = player;
   return res.status(200).json({ token, player });
 });

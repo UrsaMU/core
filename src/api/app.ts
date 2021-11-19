@@ -4,13 +4,19 @@ import express from "express";
 import { createServer } from "http";
 import { config, plugins } from "..";
 import mongoose from "mongoose";
-import auth from "../routes/auth";
+import user from "../routes/userRoutes";
+import dbobjRoutes from "../routes/dbobjRoutes";
+import authRoutes from "../routes/authRoutes";
 import { join } from "path";
+import authReq from "../middleware/authReq";
+
 const app = express();
 const server = createServer(app);
 const io = new IoServer(server);
 app.use(express.json());
-app.use("/auth", auth);
+app.use("/users", user);
+app.use("/dbobjs", authReq, dbobjRoutes);
+app.use("/auth", authRoutes);
 
 io.on("connection", (socket: Socket) => {
   socket.join(socket.id);

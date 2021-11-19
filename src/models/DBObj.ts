@@ -2,12 +2,12 @@ import { Document, model, Schema, SchemaTypes } from "mongoose";
 
 export interface DBObj extends Document {
   name: string;
-  alias: string;
-  password: string;
-  location: string;
+  alias?: string;
+  password?: string;
+  location?: string;
   owner: string;
   dbref: string;
-  data: Map<string, any>;
+  data?: { [key: string]: any };
   flags: string;
 }
 
@@ -19,7 +19,7 @@ const DBSchema = new Schema<DBObj>(
     password: String,
     location: String,
     owner: String,
-    data: { type: SchemaTypes.Map, default: new Map<string, any>() },
+    data: { type: SchemaTypes.Mixed, default: {} },
     flags: String,
   },
   { timestamps: true }

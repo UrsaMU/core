@@ -80,4 +80,6 @@ export interface Channel {
 }
 export interface MuRequest extends Request {
   user?: Partial<DBObj>;
+  isStaff?: boolean;
+  isWizard?: boolean;
 }
