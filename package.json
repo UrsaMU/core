@@ -1,9 +1,9 @@
 {
   "name": "@ursamu/core",
   "version": "0.3.0",
-  "description": "A Modern MUSH Server",
+  "description": "A Modern MUSH Server.",
   "main": "dist/index.js",
-  "repository": "https://github.com/lcanady/ursamu",
+  "repository": "https://github.com/ursamu/core.git",
   "author": "Lemuel Canady, Jr",
   "license": "MIT",
   "files": [
@@ -11,6 +11,7 @@
   ],
   "private": false,
   "scripts": {
+    "dev": "npx ts-node-dev src/index",
     "build": "rm -rf dist && tsc -p tsconfig.json && yarn docs",
     "docs": "rm -rf docs && npx typedoc src/index.ts --media ./media --readme readme.md"
   },
@@ -19,15 +20,19 @@
     "@digibear/tags": "^0.2.11",
     "@ursamu/parser": "^1.2.3",
     "bcrypt": "^5.0.1",
+    "config": "^3.3.6",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/config": "^0.0.40",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/helmet": "^4.0.0",
@@ -36,6 +41,7 @@
     "@types/socket.io": "^3.0.2",
     "eslint": "^7.26.0",
     "nodemon": "^2.0.7",
+    "ts-node-dev": "^1.1.8",
     "typedoc": "^0.21.3",
     "typescript": "^4.3.2"
   }

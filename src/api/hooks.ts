@@ -1,8 +1,17 @@
-import { pipeline, Next } from "@digibear/middleware";
-import { createServer } from "http";
+import { pipeline, Next, Pipe } from "@digibear/middleware";
 import { Context } from "..";
 
-export const hooks = {
+interface HookObject {
+  [index: string]: any;
+  input: Pipe<Context>;
+  startup: Pipe<any>;
+  shutdown: Pipe<any>;
+  connect: Pipe<any>;
+  disconnect: Pipe<any>;
+  reconnect: Pipe<any>;
+}
+
+export const hooks: HookObject = {
   input: pipeline<Context>(),
   startup: pipeline<any>(),
   shutdown: pipeline<any>(),
@@ -22,6 +31,6 @@ export const force = async (ctx: Context, command: string) => {
   await hooks.input.execute({
     ...ctx,
     ...{ msg: command },
-    ...{ ...ctx.data, ...{ found: false } },
+    ...ctx.data,
   });
 };

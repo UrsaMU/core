@@ -10,22 +10,15 @@ import { io } from "./app";
  * @example send(ctx.id, "This is a rest", {some: "data"})
  * @returns
  */
-export const send = async (id: string, msg: string, data: Data = {}) => {
-  io.to(id).emit("message", {
-    msg: parser.substitute(
-      "telnet",
-      (await parser.run({
-        msg,
-        data,
-        scope: {
-          ...{ "%#": "" },
-          ...data.scope,
-        },
-      })) || ""
-    ),
+export const send = async (
+  id: string | string[],
+  msg: string,
+  data: Data = {}
+) => {
+  io.to(typeof id === "string" ? id : [...id]).emit("message", {
+    msg: parser.substitute("telnet", msg),
     data,
   });
-  return this;
 };
 
 /**
@@ -38,18 +31,7 @@ export const send = async (id: string, msg: string, data: Data = {}) => {
  */
 export const broadcast = async (msg: string, data: Data = {}) => {
   io.emit("message", {
-    msg: parser.substitute(
-      "telnet",
-      (await parser.run({
-        msg,
-        data,
-        scope: {
-          ...{ "%#": "" },
-          ...data.scope,
-        },
-      })) || ""
-    ),
+    msg: parser.substitute("telnet", msg),
     data,
   });
-  return this;
 };

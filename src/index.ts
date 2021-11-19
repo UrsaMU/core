@@ -1,5 +1,9 @@
 import { Expression } from "@ursamu/parser";
 import { Socket } from "socket.io";
+import config from "config";
+import dotenv from "dotenv";
+import { Request } from "express";
+import { DBObj } from "./models/DBObj";
 export * from "./api/broadcast";
 export * from "./api/app";
 export * from "./api/broadcast";
@@ -10,21 +14,8 @@ export * from "./api/cmds";
 export * from "./api/plugins";
 export * from "./api/security";
 
-export interface DBObj {
-  _id?: string;
-  dbref?: number;
-
-  data: { [key: string]: any; channels?: ChannelEntry[] };
-  temp: { [key: string]: any };
-  description: string;
-  alias?: string;
-  attrs: { [key: string]: Attribute };
-  name: string;
-  flags: string;
-  location: string;
-  owner: string;
-  password?: string;
-}
+dotenv.config();
+export { config, DBObj };
 
 export interface Attribute {
   setby: string;
@@ -88,5 +79,5 @@ export interface Channel {
   description?: string;
 }
 export interface MuRequest extends Request {
-  player?: DBObj;
+  user?: Partial<DBObj>;
 }

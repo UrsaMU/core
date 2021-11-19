@@ -34,9 +34,9 @@ export const compare = (data: string, pass: string): Promise<Boolean> =>
  * @param secret The game secret for signing JWTs
  * @returns
  */
-export const sign = (id: any, secret: string): Promise<string | undefined> =>
+export const sign = (id: any): Promise<string | undefined> =>
   new Promise((resolve, reject) =>
-    jwt.sign(id, secret, {}, (err, token) => {
+    jwt.sign(id, process.env.SECRET || "", {}, (err, token) => {
       if (err) reject(err);
       resolve(token);
     })
@@ -48,9 +48,9 @@ export const sign = (id: any, secret: string): Promise<string | undefined> =>
  * @param secret The secret to use as a key.
  * @returns
  */
-export const verify = (token: string, secret: string): Promise<any> =>
+export const verify = (token: string): Promise<any> =>
   new Promise((resolve, reject) =>
-    jwt.verify(token, secret, (err, res) => {
+    jwt.verify(token, process.env.SECRET || "", (err, res) => {
       if (err) reject(err);
       resolve(res);
     })
