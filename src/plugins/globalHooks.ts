@@ -1,4 +1,4 @@
-import { config, hooks } from "..";
+import { config, flags, hooks, matchCmd } from "..";
 import { dbObj } from "../models/DBObj";
 import { id } from "../utils/utils";
 
@@ -16,6 +16,14 @@ export default () => {
         owner: dbref,
         flags: "room",
       });
+    }
+    next();
+  });
+
+  hooks.input.use(async (ctx, next) => {
+    const { args, cmd } = await matchCmd(ctx);
+    if (cmd && flags.check(ctx.player?.flags || "", cmd.flags || "")) {
+      return await cmd.render(ctx, args);
     }
     next();
   });

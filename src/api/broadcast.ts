@@ -1,6 +1,7 @@
 import { Data } from "..";
 import { parser } from "./parser";
 import { io } from "./app";
+import { Msgs } from "../models/Msgs";
 
 /**
  * Send a message to a client.
@@ -15,9 +16,16 @@ export const send = async (
   msg: string,
   data: Data = {}
 ) => {
-  io.to(typeof id === "string" ? id : [...id]).emit("message", {
+  io.to(id).emit("message", {
     msg: parser.substitute("telnet", msg),
+    tars: id,
     data,
+  });
+
+  Msgs.create({
+    text: parser.substitute("telnet", msg),
+    data,
+    tars: id,
   });
 };
 
@@ -33,5 +41,11 @@ export const broadcast = async (msg: string, data: Data = {}) => {
   io.emit("message", {
     msg: parser.substitute("telnet", msg),
     data,
+  });
+
+  Msgs.create({
+    text: parser.substitute("telnet", msg),
+    data,
+    tars: ["*"],
   });
 };
