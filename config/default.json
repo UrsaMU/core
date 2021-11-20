@@ -1,4 +1,5 @@
 {
     "port": 4201,
-    "startingRoom": "The Beginning"
+    "startingRoom": "The Beginning",
+    "playerStart": "#0"
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { hash, MuRequest, sign } from "..";
+import { config, hash, MuRequest, sign } from "..";
 import { dbObj } from "../models/DBObj";
 import { id } from "../utils/utils";
 
@@ -23,11 +23,24 @@ router.post("/", async (req: MuRequest, res, next) => {
     flags: count ? "player immortal" : "player",
     dbref,
     owner: dbref,
+    location: config.get("playerStart") || "#0",
   });
 
   const token = await sign(player.dbref);
   if (player) req.user = player;
   return res.status(200).json({ token, player });
+});
+
+router.get("/", async (req: MuRequest, res, next) => {
+  if (req.isWizard) {
+    const users = await dbObj.find({ flags: /player/ });
+    res.status(200).json(users);
+  } else {
+    const users = await dbObj.find({
+      $and: [{ flags: /player/ }, { owner: req.user?.dbref }],
+    });
+    res.status(200).json();
+  }
 });
 
 export default router;

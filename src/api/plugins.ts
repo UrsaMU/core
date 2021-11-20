@@ -10,7 +10,10 @@ export const plugins = async (path: string) => {
     withFileTypes: true,
   });
   for (const file of dirent) {
-    if (file.name.endsWith(".ts") || file.name.endsWith(".js")) {
+    if (
+      (file.name.endsWith(".ts") && !file.name.endsWith(".d.ts")) ||
+      file.name.endsWith(".js")
+    ) {
       const module = await import(path + file.name);
       if (module.default) await module.default();
     } else if (file.isDirectory()) {
