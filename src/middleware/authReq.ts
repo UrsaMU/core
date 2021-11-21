@@ -1,4 +1,3 @@
-import e from "cors";
 import { NextFunction, Response } from "express";
 import { flags, MuRequest, verify } from "..";
 import { dbObj } from "../models/DBObj";

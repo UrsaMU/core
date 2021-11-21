@@ -2,7 +2,7 @@ import { Socket, Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { cmds, config, plugins } from "..";
+import { config, plugins } from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/users", user);
 app.use("/dbobjs", authReq, dbobjRoutes);
 app.use("/auth", authRoutes);
-app.use("/exec", authReq, execRoutes);
+app.use("/exec", execRoutes);
 
 // Default Error handler.
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -45,4 +45,4 @@ server.listen(config.get("port") || 4000, () => {
   });
 });
 
-export { io, server, express };
+export { io, server, express, mongoose };
