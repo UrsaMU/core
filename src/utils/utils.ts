@@ -1,4 +1,6 @@
-import { dbObj } from "../models/DBObj";
+import { Socket } from "socket.io";
+import { Context, send } from "..";
+import { dbObj, DBObj } from "../models/DBObj";
 
 /**
  * Return the next available DBref number.
@@ -20,4 +22,22 @@ export const id = async () => {
     return acc;
   }, []);
   return mia.length > 0 ? `#${mia[0]}` : `#${nums.length}`;
+};
+
+export const handleConnect = (ctx: Context) => {
+  // Handle channels via socket if one exists.
+  if (ctx.socket) {
+    ctx.socket?.join(ctx.player?.location || "");
+    ctx.socket?.join(ctx.player?.dbref!);
+    ctx.player?.channels?.forEach((channel) => ctx.socket?.join(channel));
+    send(ctx.player?.dbref!, "Connected!");
+  }
+};
+
+export const scrub = async (obj: DBObj) => {
+  obj.password = undefined;
+  obj.channels = undefined;
+  obj.password = undefined;
+  obj.data = undefined;
+  obj.flags = undefined;
 };

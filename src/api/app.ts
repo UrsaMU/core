@@ -31,6 +31,7 @@ io.on("connection", (socket: Socket) => {
   socket.on("message", (ctx) => {
     ctx.id = socket.id;
     ctx.socket = socket;
+    console.log(ctx.msg);
     hooks.input.execute(ctx);
   });
 });

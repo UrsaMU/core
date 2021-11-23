@@ -8,7 +8,8 @@ export interface DBObj extends Document {
   owner: string;
   dbref: string;
   data?: { [key: string]: any };
-  flags: string;
+  flags?: string;
+  channels?: string[];
 }
 
 const DBSchema = new Schema<DBObj>(

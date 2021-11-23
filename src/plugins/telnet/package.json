@@ -1,0 +1,8 @@
+{
+  "name": "telnet",
+  "version": "0.1.0",
+  "description": "A Telnet module for UrsaMU",
+  "main": "index.ts",
+  "author": "Lemuel L. Canady, Jr",
+  "license": "MIT"
+}

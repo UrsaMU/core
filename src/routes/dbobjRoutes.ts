@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { flags, MuRequest, DBObj } from "..";
 import { dbObj } from "../models/DBObj";
-import { id } from "../utils/utils";
+import { id, scrub } from "../utils/utils";
 
 const router = Router();
 
@@ -10,19 +10,33 @@ router.post("/", async (req: MuRequest, res, next) => {
     const dbref = await id();
     const data = req.body.data ? req.body.data : {};
 
-    const obj = dbObj.create({
+    const obj = await dbObj.create({
       dbref,
       data,
       name: req.body.name,
       flags: req.body.flags ? req.body.flags : "thing",
     });
 
-    console.log(obj);
-
     res.status(200).json({ obj });
   } else {
     next(new Error("Permission denied."));
   }
+});
+
+router.get("/:id", async (req: MuRequest, res, next) => {
+  const obj = await dbObj.findOne({ dbref: "#" + req.params.id });
+
+  if (obj) {
+    if (
+      obj.owner === req.user?.dbref ||
+      flags.check(req.user?.flags || "", "wizard+")
+    ) {
+      obj.password = undefined;
+
+      return res.status(200).json(obj);
+    }
+  }
+  res.status(200).json({});
 });
 
 router.get("/", async (req: MuRequest, res, next) => {
@@ -40,5 +54,4 @@ router.get("/", async (req: MuRequest, res, next) => {
     return res.status(200).json(objs);
   }
 });
-
 export default router;
