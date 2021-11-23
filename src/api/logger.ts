@@ -6,17 +6,19 @@ class Logger extends EventEmitter {
     super();
   }
 
-  info(...strs: string[]) {
+  _getTimeStamp() {
     const date = new Date();
     const hrs = date.getHours().toString().padStart(2, "0");
     const mins = date.getMinutes().toString().padStart(2, "0");
     const secs = date.getSeconds().toString().padStart(2, "0");
 
-    const combinedTime = `${hrs}:${mins}:${secs}`;
+    return `${hrs}:${mins}:${secs}`;
+  }
 
+  info(...strs: string[]) {
     console.log(
-      `[${chalk.cyanBright("INFO")}] ${chalk.gray(combinedTime)}`,
-      ...strs.map((str) => " " + str)
+      `[${chalk.cyanBright("INFO")}] ${chalk.gray(this._getTimeStamp())}`,
+      ...strs
     );
   }
 }
