@@ -6,6 +6,12 @@ interface SDKOptions {
   URL: string;
   key: string;
 }
+interface _FetchOptions {
+  path: string;
+  data?: { [key: string]: any };
+  headers?: { [key: string]: any };
+  method?: "get" | "post" | "put" | "patch" | "delete";
+}
 
 export class SDK extends EventEmitter {
   _key: string;
@@ -17,13 +23,18 @@ export class SDK extends EventEmitter {
     this.url = URL;
   }
 
-  async create(data: Partial<DBObj>) {
-    const res = await axios.post(`${this.url}/dbobjs`, data, {
+  async _fetch({ path, data, headers, method = "get" }: _FetchOptions) {
+    const res = await axios[method](`${this.url}/${path}`, data, {
       headers: {
         Authorization: `Bearer ${this._key}`,
+        ...headers,
       },
     });
     return res.data;
+  }
+
+  async create(data: Partial<DBObj>) {
+    return await this._fetch({ path: "dbobj", data, method: "post" });
   }
 
   async getById(dbref: string) {
@@ -42,5 +53,16 @@ export class SDK extends EventEmitter {
       },
     });
     return res.data;
+  }
+
+  async createPlayer(name: string, password: string) {
+    return await this._fetch({
+      method: "post",
+      path: "users",
+      data: {
+        name,
+        password,
+      },
+    });
   }
 }

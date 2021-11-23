@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { flags, MuRequest, DBObj } from "..";
 import { dbObj } from "../models/DBObj";
-import { id, scrub } from "../utils/utils";
+import { id } from "../utils/utils";
 
 const router = Router();
 

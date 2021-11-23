@@ -1,5 +1,6 @@
 import config from "config";
 import dotenv from "dotenv";
+import { logger } from "./api/logger";
 import { start } from "./api/app";
 export { DBObj } from "./models/DBObj";
 export * from "./api/broadcast";
@@ -12,9 +13,10 @@ export * from "./api/cmds";
 export * from "./api/plugins";
 export * from "./api/sdk";
 export * from "./api/security";
-export * from "./api/logger";
 export * from "./declorations";
 dotenv.config();
-export { config };
+export { config, logger };
 
 start();
+
+process.on("uncaughtException", (err) => logger.error(err.message));

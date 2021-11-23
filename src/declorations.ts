@@ -1,6 +1,6 @@
 import { Expression } from "@ursamu/parser";
 import { Socket } from "socket.io";
-import { DBObj } from ".";
+import { DBObj, SDK } from ".";
 import { Request } from "express";
 
 export interface Attribute {
@@ -22,9 +22,8 @@ export interface Database<T> {
 }
 
 export interface MUSocket extends Socket {
-  cid?: string;
-  uid?: string;
-  dbref?: number;
+  pid?: string;
+  height?: number;
   width?: number;
 }
 
@@ -36,6 +35,7 @@ export interface Context {
   expr?: Expression;
   msg?: string;
   width?: number;
+  sdk?: SDK;
 }
 
 export interface ChannelEntry {

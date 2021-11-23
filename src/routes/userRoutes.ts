@@ -8,20 +8,18 @@ const router = Router();
 
 router.post("/", async (req: MuRequest, res, next) => {
   const regex = new RegExp(req.body.name, "i");
-  const players = await dbObj
-    .find({
-      $or: [{ name: regex }, { alias: regex }],
-    })
-    .count();
+  const players = await dbObj.find({
+    $or: [{ name: regex }, { alias: regex }],
+  });
   const count = await dbObj.count();
 
-  if (players) return next(new Error("That name is unavailable"));
+  if (players.length) return next(new Error("That name is unavailable"));
 
   const dbref = await id();
   const player = await dbObj.create({
     name: req.body.name,
     password: await hash(req.body.password),
-    flags: count ? "player immortal" : "player",
+    flags: count ? "player" : "player immortal",
     dbref,
     owner: dbref,
     location: config.get("playerStart") || "#0",

@@ -21,6 +21,13 @@ class Logger extends EventEmitter {
       ...strs
     );
   }
+
+  error(...strs: string[]) {
+    console.log(
+      `[${chalk.redBright("ERROR")}] ${chalk.gray(this._getTimeStamp())}`,
+      ...strs
+    );
+  }
 }
 
 export const logger = new Logger();

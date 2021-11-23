@@ -2,7 +2,7 @@ import { Socket, Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { config, logger, plugins } from "..";
+import { config, logger, MUSocket, plugins, verify } from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -10,6 +10,7 @@ import authRoutes from "../routes/authRoutes";
 import { join } from "path";
 import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
+import { dbObj } from "../models/DBObj";
 
 const app = express();
 const server = createServer(app);
@@ -25,13 +26,17 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: "ERROR: " + err.message });
 });
 
-io.on("connection", (socket: Socket) => {
+io.on("connection", (socket: MUSocket) => {
   socket.join(socket.id);
 
-  socket.on("message", (ctx) => {
+  socket.on("message", async (ctx) => {
     ctx.id = socket.id;
     ctx.socket = socket;
-    console.log(ctx.msg);
+    if (ctx.data.token) {
+      const dbref = await verify(ctx.data.token);
+      ctx.player = await dbObj.findOne({ dbref: dbref });
+    }
+
     hooks.input.execute(ctx);
   });
 });
