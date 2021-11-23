@@ -17,4 +17,4 @@ const MsgModel = new Schema(
   }
 );
 
-export const Msgs = model("msgs", MsgModel);
+export const Msgs = model<Msg>("msgs", MsgModel);

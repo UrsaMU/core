@@ -17,16 +17,16 @@ export const send = async (
   data: Data = {}
 ) => {
   io.to(id).emit("message", {
-    msg: parser.substitute("telnet", msg),
+    msg: msg,
     tars: id,
     data,
   });
 
-  Msgs.create({
-    text: parser.substitute("telnet", msg),
-    data,
-    tars: id,
-  });
+  // Msgs.create({
+  //   text: msg,
+  //   data,
+  //   tars: id,
+  // });
 };
 
 /**

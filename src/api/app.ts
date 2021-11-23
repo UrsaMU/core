@@ -11,6 +11,7 @@ import { join } from "path";
 import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
+import { handleConnect } from "../utils/utils";
 
 const app = express();
 const server = createServer(app);
@@ -35,6 +36,7 @@ io.on("connection", (socket: MUSocket) => {
     if (ctx.data.token) {
       const dbref = await verify(ctx.data.token);
       ctx.player = await dbObj.findOne({ dbref: dbref });
+      await handleConnect(ctx);
     }
 
     hooks.input.execute(ctx);

@@ -20,7 +20,7 @@ export default () => {
         ctx.player = user;
         ctx.data = ctx.data ? ctx.data : {};
         ctx.data.token = token;
-        handleConnect(ctx);
+        await handleConnect(ctx);
       }
     },
   });

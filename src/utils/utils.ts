@@ -28,6 +28,6 @@ export const handleConnect = async (ctx: Context) => {
     ctx.socket.pid = ctx.player?.dbref;
 
     await set(ctx.player, "connected");
-    send(ctx.player?.dbref!, "Connected!", { token: ctx.data?.token });
+    await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
   }
 };
