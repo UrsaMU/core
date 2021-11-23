@@ -43,6 +43,7 @@ export const start = () => {
       logger.info("MongoDB Connected.");
       await plugins(join(__dirname, "../plugins/"));
       await plugins(join(__dirname, "../commands/"));
+      await plugins(join(__dirname, "../hooks/"));
       hooks.startup.execute({});
     });
   });

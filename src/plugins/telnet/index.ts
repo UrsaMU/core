@@ -18,13 +18,9 @@ export default () => {
         if (!proc) {
           pm2.start(
             {
-              script: join(__dirname, "telnet.ts"),
+              script: join(__dirname, "telnet.js"),
               name: "telnet",
               cwd: __dirname,
-              interpreter: join(
-                __dirname,
-                "../../../node_modules/.bin/ts-node"
-              ),
             },
             function (err, apps) {
               if (err) {
