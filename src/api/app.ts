@@ -2,7 +2,7 @@ import { Socket, Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { config, plugins } from "..";
+import { config, logger, plugins } from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -36,14 +36,16 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-server.listen(config.get("port") || 4000, () => {
-  console.log("server Listening on port " + config.get("port"));
-  mongoose.connect(process.env.DATABASE_URI || "", async () => {
-    console.log("MongoDB Connected.");
-    await plugins(join(__dirname, "../plugins/"));
-    await plugins(join(__dirname, "../commands/"));
-    hooks.startup.execute({});
+export const start = () => {
+  server.listen(config.get("port") || 4000, () => {
+    logger.info("server Listening on port " + config.get("port"));
+    mongoose.connect(process.env.DATABASE_URI || "", async () => {
+      logger.info("MongoDB Connected.");
+      await plugins(join(__dirname, "../plugins/"));
+      await plugins(join(__dirname, "../commands/"));
+      hooks.startup.execute({});
+    });
   });
-});
+};
 
 export { io, server, express, mongoose };

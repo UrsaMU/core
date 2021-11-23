@@ -1,5 +1,4 @@
 import axios from "axios";
-import fetch from "node-fetch";
 import { EventEmitter } from "stream";
 import { DBObj } from "..";
 
@@ -8,7 +7,7 @@ interface SDKOptions {
   key: string;
 }
 
-class SDK extends EventEmitter {
+export class SDK extends EventEmitter {
   _key: string;
   url: string;
 
@@ -35,11 +34,13 @@ class SDK extends EventEmitter {
     });
     return res.data;
   }
+
+  async get() {
+    const res = await axios.get(`${this.url}/dbobjs`, {
+      headers: {
+        Authorization: `Bearer ${this._key}`,
+      },
+    });
+    return res.data;
+  }
 }
-
-const mu = new SDK({
-  URL: "http://localhost:4201",
-  key: "eyJhbGciOiJIUzI1NiJ9.IzE.GsE22XxajCnpxrEpIIM8wUW_osHI-FSBjE4vDUojjDk",
-});
-
-mu.getById("#1").then((data) => console.log(data));
