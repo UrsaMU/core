@@ -22,11 +22,11 @@ export const send = async (
     data,
   });
 
-  // Msgs.create({
-  //   text: msg,
-  //   data,
-  //   tars: id,
-  // });
+  Msgs.create({
+    text: msg,
+    data,
+    tars: id,
+  });
 };
 
 /**

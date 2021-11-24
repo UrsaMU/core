@@ -12,13 +12,15 @@ export default () => {
           });
 
           ctx.sdk = sdk;
-          return await cmd.render(ctx, args);
+          hooks.commands.get(cmd.name)?.before.execute(ctx);
+          await cmd.render(ctx, args);
+          hooks.commands.get(cmd.name)?.after.execute(ctx);
         }
       }
       next();
     },
     async (ctx) => {
-      send(ctx.id, "Huh? Type 'help' for help.");
+      if (ctx.msg?.trim()) send(ctx.id, "Huh? Type 'help' for help.");
     }
   );
 };

@@ -6,11 +6,11 @@ export interface Msg extends Document {
   tars: string[];
 }
 
-const MsgModel = new Schema(
+const MsgModel = new Schema<Msg>(
   {
-    text: { type: String, required: true },
+    text: String,
     data: SchemaTypes.Mixed,
-    tars: { type: Array, required: true },
+    tars: SchemaTypes.Array,
   },
   {
     timestamps: true,
