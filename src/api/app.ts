@@ -1,4 +1,4 @@
-import { Socket, Server as IoServer } from "socket.io";
+import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
@@ -12,6 +12,9 @@ import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
 import { handleConnect } from "../utils/utils";
+import checkCmd from "../hooks/checkCmd";
+import huh from "../hooks/huh";
+import checkLimbo from "../hooks/checkLimbo";
 
 const app = express();
 const server = createServer(app);
@@ -50,7 +53,9 @@ export const start = () => {
       logger.info("MongoDB Connected.");
       await plugins(join(__dirname, "../plugins/"));
       await plugins(join(__dirname, "../commands/"));
-      await plugins(join(__dirname, "../hooks/"));
+
+      hooks.startup.use(checkLimbo);
+      hooks.input.use(checkCmd, huh);
       hooks.startup.execute({});
     });
   });

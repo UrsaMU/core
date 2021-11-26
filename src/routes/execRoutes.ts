@@ -11,7 +11,11 @@ router.post("/", async (req: MuRequest, res, next) => {
   };
   try {
     await hooks.input.execute(ctx);
-    res.sendStatus(200);
+    if (ctx.res) {
+      res.status(200).json({ text: ctx.res });
+    } else {
+      res.sendStatus(200);
+    }
   } catch (error) {
     next(error);
   }

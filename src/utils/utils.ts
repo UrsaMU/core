@@ -11,7 +11,7 @@ export const id = async () => {
   return `#${dbrefs.length}`;
 };
 
-const set = async (obj: DBObj, flgs: string) => {
+export const setFlgs = async (obj: DBObj, flgs: string) => {
   const { data, tags } = flags.set(obj.flags || "", obj.data || {}, flgs);
   obj.flags = tags;
   obj.data = data;
@@ -27,7 +27,7 @@ export const handleConnect = async (ctx: Context) => {
     ctx.player.channels?.forEach((channel) => ctx.socket?.join(channel));
     ctx.socket.pid = ctx.player?.dbref;
 
-    await set(ctx.player, "connected");
+    await setFlgs(ctx.player, "connected");
     await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
   }
 };

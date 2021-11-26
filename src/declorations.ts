@@ -36,6 +36,7 @@ export interface Context {
   msg?: string;
   width?: number;
   sdk?: SDK;
+  res?: string;
 }
 
 export interface ChannelEntry {
