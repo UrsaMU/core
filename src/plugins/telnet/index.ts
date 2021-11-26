@@ -1,4 +1,4 @@
-import { hooks } from "../..";
+import { config, hooks, logger } from "../..";
 import pm2 from "pm2";
 import { join } from "path";
 
@@ -12,7 +12,6 @@ export default () => {
 
       pm2.list((err, list) => {
         if (err) console.log(err);
-
         const proc = list.find((proc) => proc.name === "telnet");
 
         if (!proc) {
@@ -28,6 +27,7 @@ export default () => {
                 return next();
               }
               pm2.disconnect();
+              logger.info("Telnet Started on port:", config.get("telnetPort"));
               return next();
             }
           );

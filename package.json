@@ -34,7 +34,6 @@
     "pm2": "^5.1.2",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.0.2",
-    "telnet-rxjs": "^2.2.0",
     "telnetlib": "^1.0.1"
   },
   "devDependencies": {

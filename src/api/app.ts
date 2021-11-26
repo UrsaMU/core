@@ -11,7 +11,7 @@ import { join } from "path";
 import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
-import { handleConnect } from "../utils/utils";
+import { handleConnect, setFlgs } from "../utils/utils";
 import checkCmd from "../hooks/checkCmd";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
@@ -41,6 +41,11 @@ io.on("connection", (socket: MUSocket) => {
       ctx.player = await dbObj.findOne({ dbref: dbref });
       await handleConnect(ctx);
     }
+
+    socket.on("disconnect", async () => {
+      const player = await dbObj.findOne({ dbref: socket.pid });
+      if (player) setFlgs(player, "!connected");
+    });
 
     hooks.input.execute(ctx);
   });

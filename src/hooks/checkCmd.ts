@@ -10,7 +10,7 @@ export default async (ctx: Context, next: Next) => {
       });
 
       ctx.sdk = sdk;
-      await cmd.render(ctx, args);
+      return await cmd.render(ctx, args);
     }
   }
   next();

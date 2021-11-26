@@ -15,7 +15,7 @@ export const setFlgs = async (obj: DBObj, flgs: string) => {
   const { data, tags } = flags.set(obj.flags || "", obj.data || {}, flgs);
   obj.flags = tags;
   obj.data = data;
-  await dbObj.findOneAndUpdate({ dbref: obj.dbref }, { data, flags: tags });
+  await dbObj.findOneAndUpdate({ dbref: obj.dbref }, obj);
   return obj;
 };
 
