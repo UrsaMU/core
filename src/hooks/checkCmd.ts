@@ -1,4 +1,4 @@
-import { send, flags, hooks, matchCmd, SDK, Context, Next } from "..";
+import { flags, matchCmd, SDK, Context, Next } from "..";
 
 export default async (ctx: Context, next: Next) => {
   const { args, cmd } = await matchCmd(ctx);
