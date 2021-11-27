@@ -16,6 +16,7 @@ import checkCmd from "../hooks/checkCmd";
 import pm2 from "pm2";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
+import cleanShutdown from "../hooks/cleanShutdown";
 
 const app = express();
 const server = createServer(app);
@@ -61,6 +62,7 @@ export const start = () => {
       await plugins(join(__dirname, "../commands/"));
       hooks.startup.use(checkLimbo);
       hooks.input.use(checkCmd, huh);
+      hooks.shutdown.use(cleanShutdown);
       hooks.startup.execute({});
     });
   });
@@ -68,18 +70,4 @@ export const start = () => {
 
 export { io, server, express, mongoose };
 
-process.on("SIGINT", async () => {
-  pm2.connect(async (err) => {
-    if (err) logger.error(err.message);
-
-    const players = await dbObj.find({ flags: /connected/ });
-
-    for (const player of players) {
-      await setFlgs(player, "!connected");
-    }
-
-    pm2.delete("telnet", (err) => {
-      process.exit(0);
-    });
-  });
-});
+process.on("SIGINT", async () => hooks.shutdown.execute({}));
