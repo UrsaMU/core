@@ -11,8 +11,9 @@ import { join } from "path";
 import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
-import { handleConnect, setFlgs } from "../utils/utils";
+import { setFlgs } from "../utils/utils";
 import checkCmd from "../hooks/checkCmd";
+import pm2 from "pm2";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 
@@ -36,18 +37,18 @@ io.on("connection", (socket: MUSocket) => {
   socket.on("message", async (ctx) => {
     ctx.id = socket.id;
     ctx.socket = socket;
+
     if (ctx.data.token) {
       const dbref = await verify(ctx.data.token);
       ctx.player = await dbObj.findOne({ dbref: dbref });
-      await handleConnect(ctx);
     }
 
-    socket.on("disconnect", async () => {
-      const player = await dbObj.findOne({ dbref: socket.pid });
-      if (player) setFlgs(player, "!connected");
-    });
-
     hooks.input.execute(ctx);
+  });
+
+  socket.on("disconnect", async () => {
+    const player = await dbObj.findOne({ dbref: socket.pid });
+    if (player) setFlgs(player, "!connected");
   });
 });
 
@@ -58,7 +59,6 @@ export const start = () => {
       logger.info("MongoDB Connected.");
       await plugins(join(__dirname, "../plugins/"));
       await plugins(join(__dirname, "../commands/"));
-
       hooks.startup.use(checkLimbo);
       hooks.input.use(checkCmd, huh);
       hooks.startup.execute({});
@@ -67,3 +67,19 @@ export const start = () => {
 };
 
 export { io, server, express, mongoose };
+
+process.on("SIGINT", async () => {
+  pm2.connect(async (err) => {
+    if (err) logger.error(err.message);
+
+    const players = await dbObj.find({ flags: /connected/ });
+
+    for (const player of players) {
+      await setFlgs(player, "!connected");
+    }
+
+    pm2.delete("telnet", (err) => {
+      process.exit(0);
+    });
+  });
+});

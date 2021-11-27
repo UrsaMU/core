@@ -29,5 +29,6 @@ export const handleConnect = async (ctx: Context) => {
 
     await setFlgs(ctx.player, "connected");
     await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
+    send(ctx.id, "Connected!!");
   }
 };

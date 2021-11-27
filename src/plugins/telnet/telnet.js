@@ -1,5 +1,4 @@
 const telnetlib = require("telnetlib");
-const config = require("config");
 const { nanoid } = require("nanoid");
 const { io } = require("socket.io-client");
 
@@ -20,20 +19,19 @@ const server = telnetlib.createServer(
       c.height = data.height;
     });
 
-    const s = new io(`http://localhost:${config.get("telnetPort")}`);
+    const s = new io(`http://localhost:4201`);
 
     s.on("message", (ctx) => {
-      const { token: tkn, command } = ctx.data;
+      const { token: tkn, quit } = ctx.data;
 
       if (tkn) token = tkn;
       if (ctx.msg) c.write(ctx.msg + "\r\n");
+      if (quit) return c.end();
     });
 
     s.on("error", (err) => {
       console.error(err);
     });
-
-    s.on("disconnect", () => c.close());
 
     c.on("data", (data) => {
       s.send({

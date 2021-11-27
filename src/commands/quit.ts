@@ -7,8 +7,13 @@ export default () =>
     name: "quit",
     pattern: "quit",
     render: async (ctx) => {
+      console.log("made it!!");
+      console.log(ctx.socket);
       if (ctx.socket) {
-        await send(ctx.id, "See you space cowboy...", { log: false });
+        await send(ctx.id, "See you space cowboy...", {
+          log: false,
+          quit: true,
+        });
         if (ctx.socket) ctx.socket.disconnect();
         if (ctx.player) await setFlgs(ctx.player, "!connected");
       }

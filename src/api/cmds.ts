@@ -50,6 +50,7 @@ export const matchCmd = async (ctx: Context) => {
     return false;
   });
   const match = ctx.msg?.match(command?.pattern || "");
+
   return { args: Array.from(match || []), cmd: command };
 };
 
