@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { flags, MuRequest, DBObj } from "..";
+import { flags, MuRequest } from "..";
 import { dbObj } from "../models/DBObj";
 import { id } from "../utils/utils";
 

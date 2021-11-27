@@ -1,5 +1,4 @@
-import { Socket } from "socket.io";
-import { Context, flags, send, setFlag } from "..";
+import { Context, flags, send } from "..";
 import { dbObj, DBObj } from "../models/DBObj";
 
 /**

@@ -13,7 +13,6 @@ import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
 import { setFlgs } from "../utils/utils";
 import checkCmd from "../hooks/checkCmd";
-import pm2 from "pm2";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
@@ -28,7 +27,7 @@ app.use("/auth", authRoutes);
 app.use("/exec", execRoutes);
 
 // Default Error handler.
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ message: "ERROR: " + err.message });
 });
 
@@ -62,7 +61,6 @@ export const start = () => {
       await plugins(join(__dirname, "../commands/"));
       hooks.startup.use(checkLimbo);
       hooks.input.use(checkCmd, huh);
-      hooks.shutdown.use(cleanShutdown);
       hooks.startup.execute({});
     });
   });
@@ -70,4 +68,8 @@ export const start = () => {
 
 export { io, server, express, mongoose };
 
-process.on("SIGINT", async () => hooks.shutdown.execute({}));
+process.on("SIGINT", async () => {
+  // This should be the very last hook in the pipeline as it holds our process#exit call.
+  hooks.shutdown.use(cleanShutdown);
+  hooks.shutdown.execute({});
+});

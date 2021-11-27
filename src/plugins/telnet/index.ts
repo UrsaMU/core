@@ -3,7 +3,7 @@ import pm2 from "pm2";
 import { join } from "path";
 
 export default () => {
-  hooks.startup.use((ctx, next) => {
+  hooks.startup.use((_ctx, next) => {
     pm2.connect(function (err) {
       if (err) {
         console.error(err);
@@ -21,13 +21,13 @@ export default () => {
               name: "telnet",
               cwd: __dirname,
             },
-            function (err, apps) {
+            function (err) {
               if (err) {
                 console.error(err);
                 return next();
               }
               pm2.disconnect();
-              logger.info("Telnet Started on port:", config.get("telnetPort"));
+              logger.info("Telnet Started on port: " + process.env.TELNETPORT);
               return next();
             }
           );
