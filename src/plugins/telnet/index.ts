@@ -1,4 +1,4 @@
-import { config, hooks, logger } from "../..";
+import { hooks, logger } from "../..";
 import pm2 from "pm2";
 import { join } from "path";
 

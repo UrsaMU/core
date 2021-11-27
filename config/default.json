@@ -1,6 +1,4 @@
 {
-    "port": 4201,
-    "telnetPort": 4202,
     "startingRoom": "The Beginning",
     "playerStart": "#0"
 }
