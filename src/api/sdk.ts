@@ -1,9 +1,10 @@
 import axios from "axios";
+import fetch from "node-fetch";
 import { EventEmitter } from "stream";
-import { DBObj } from "..";
+import { DBObj, logger } from "..";
 
 interface SDKOptions {
-  URL: string;
+  URL?: string;
   key: string;
 }
 interface _FetchOptions {
@@ -15,44 +16,49 @@ interface _FetchOptions {
 
 export class SDK extends EventEmitter {
   _key: string;
-  url: string;
+  url?: string;
 
-  constructor({ URL, key }: SDKOptions) {
+  constructor({ URL = "http://localhost:4201", key }: SDKOptions) {
     super();
     this._key = key;
     this.url = URL;
   }
 
-  async _fetch({ path, data, headers, method = "get" }: _FetchOptions) {
-    const res = await axios[method](`${this.url}/${path}`, data, {
-      headers: {
-        Authorization: `Bearer ${this._key}`,
-        ...headers,
-      },
+  async _fetch({
+    path,
+    data = {},
+    headers = {},
+    method = "get",
+  }: _FetchOptions) {
+    const res = await axios({
+      url: this.url + path,
+      method,
+      headers: { Authorization: `Bearer ${this._key}`, ...headers },
     });
     return res.data;
   }
 
   async create(data: Partial<DBObj>) {
-    return await this._fetch({ path: "dbobj", data, method: "post" });
+    return await this._fetch({ path: "/dbobjs", data, method: "post" });
   }
 
-  async getById(dbref: string) {
-    const res = await axios.get(`${this.url}/dbobjs/${dbref.slice(1)}`, {
-      headers: {
-        Authorization: `Bearer ${this._key}`,
-      },
-    });
-    return res.data;
-  }
+  async get(params: any) {
+    const data = Object.keys(params)
 
-  async get() {
-    const res = await axios.get(`${this.url}/dbobjs`, {
-      headers: {
-        Authorization: `Bearer ${this._key}`,
-      },
-    });
-    return res.data;
+      .reduce((pre: string[], curr: string) => {
+        pre.push(`${curr}=${params[curr]}`);
+        return pre;
+      }, [])
+      .join("&");
+
+    try {
+      console.log(
+        await this._fetch({ path: `/dbobjs${data ? "?" + data : ""}` })
+      );
+      return await this._fetch({ path: `/dbobjs${data ? "?" + data : ""}` });
+    } catch (error: any) {
+      logger.error("Error: " + error.message);
+    }
   }
 
   async createPlayer(name: string, password: string) {

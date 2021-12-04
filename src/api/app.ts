@@ -2,7 +2,7 @@ import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { logger, MUSocket, plugins, verify } from "..";
+import { Context, logger, MUSocket, plugins, SDK, verify } from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -11,13 +11,15 @@ import { join } from "path";
 import authReq from "../middleware/authReq";
 import execRoutes from "../routes/execRoutes";
 import { dbObj } from "../models/DBObj";
-import { setFlgs } from "../utils/utils";
+import { handleConnect, setFlgs } from "../utils/utils";
 import checkCmd from "../hooks/checkCmd";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 const server = createServer(app);
 const io = new IoServer(server);
 app.use(express.json());
@@ -34,15 +36,22 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 io.on("connection", (socket: MUSocket) => {
   socket.join(socket.id);
 
-  socket.on("message", async (ctx) => {
+  socket.on("message", async (ctx: Context) => {
     ctx.id = socket.id;
     ctx.socket = socket;
 
-    if (ctx.data.token) {
+    if (ctx.data?.token) {
       const dbref = await verify(ctx.data.token);
-      ctx.player = await dbObj.findOne({ dbref: dbref });
+      const player = await dbObj.findOne({ dbref: dbref });
+      if (player) ctx.player = player;
+
+      const sdk = new SDK({
+        key: ctx.data.token,
+      });
+      ctx.sdk = sdk;
     }
 
+    handleConnect(ctx);
     hooks.input.execute(ctx);
   });
 
@@ -52,16 +61,19 @@ io.on("connection", (socket: MUSocket) => {
   });
 });
 
-export const start = () => {
+export const start = (cb = (ctx = {}) => {}) => {
   server.listen(process.env.PORT || 4000, () => {
     logger.info("server Listening on port: " + process.env.PORT);
     mongoose.connect(process.env.DATABASE_URI || "", async () => {
       logger.info("MongoDB Connected.");
-      await plugins(join(__dirname, "../plugins/"));
       await plugins(join(__dirname, "../commands/"));
+      logger.info("Commands directory loaded.");
+      await plugins(join(__dirname, "../plugins/"));
+      logger.info("Plugins directory loaded.");
       hooks.startup.use(checkLimbo);
       hooks.input.use(checkCmd, huh);
-      hooks.startup.execute({});
+      cb({});
+      await hooks.startup.execute({});
     });
   });
 };

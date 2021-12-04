@@ -19,4 +19,4 @@ export { config, logger };
 
 start();
 
-process.on("uncaughtException", (err) => logger.error(err.message));
+process.on("uncaughtException", (err) => logger.error("Error: " + err.message));

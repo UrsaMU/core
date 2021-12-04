@@ -28,6 +28,26 @@ export const handleConnect = async (ctx: Context) => {
 
     await setFlgs(ctx.player, "connected");
     await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
-    send(ctx.id, "Connected!!");
+  }
+};
+
+export const target = async (ctx: Context, str: string) => {
+  switch (str.toLowerCase()) {
+    case "me":
+      return ctx.player;
+    case "":
+    case "here":
+      return (
+        await ctx.sdk?.get({
+          dbref: ctx.player?.location?.slice(1) || "",
+        })
+      )[0];
+    default:
+      const regex = RegExp(str, "i");
+      return (
+        await ctx.sdk?.get({
+          $or: [{ name: regex }, { alias: regex }, { dbref: str.slice(1) }],
+        })
+      )[0];
   }
 };

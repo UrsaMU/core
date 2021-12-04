@@ -21,6 +21,8 @@ export default () => {
         ctx.data = ctx.data ? ctx.data : {};
         ctx.data.token = token;
         await handleConnect(ctx);
+      } else {
+        send(ctx.id, "Inavlid Name or Password.", { log: false });
       }
     },
   });

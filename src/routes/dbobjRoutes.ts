@@ -23,8 +23,30 @@ router.post("/", async (req: MuRequest, res, next) => {
   }
 });
 
+router.patch("/:id", async (req: MuRequest, res, next) => {
+  const regex = new RegExp(req.params.id, "i");
+  try {
+    const obj = await dbObj.findOne({
+      $or: [{ dbref: "#" + req.params.id }, { name: regex }, { alias: regex }],
+    });
+
+    const data = await dbObj.updateOne({ dbref: obj?.dbref }, req.body);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+interface IParams {
+  [index: string]: any;
+}
+
 router.get("/:id", async (req: MuRequest, res, next) => {
-  const obj = await dbObj.findOne({ dbref: "#" + req.params.id });
+  const regex = new RegExp(req.params.id, "i");
+
+  const obj = await dbObj.findOne({
+    $or: [{ dbref: "#" + req.params.id }, { name: regex }, { alias: regex }],
+  });
 
   if (obj) {
     if (
@@ -40,18 +62,26 @@ router.get("/:id", async (req: MuRequest, res, next) => {
 });
 
 router.get("/", async (req: MuRequest, res, next) => {
-  if (req.isWizard) {
-    const objs = (await dbObj.find({})).map((obj) => {
-      obj.password = undefined;
-      return obj;
-    });
-    return res.status(200).json(objs);
-  } else {
-    const objs = (await dbObj.find({ owner: req.user?.dbref })).map((obj) => {
-      obj.password = undefined;
-      return obj;
-    });
-    return res.status(200).json(objs);
+  if (req.query.dbref) req.query.dbref = "#" + req.query.dbref;
+
+  try {
+    if (req.isWizard) {
+      const objs = (await dbObj.find(req.query)).map((obj) => {
+        obj.password = undefined;
+        return obj;
+      });
+      return res.status(200).json(objs);
+    } else {
+      const objs = (
+        await dbObj.find({ owner: req.user?.dbref, ...req.query })
+      ).map((obj) => {
+        obj.password = undefined;
+        return obj;
+      });
+      return res.status(200).json(objs);
+    }
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 });
 export default router;

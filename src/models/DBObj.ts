@@ -7,6 +7,7 @@ export interface DBObj extends Document {
   location?: string;
   owner: string;
   dbref: string;
+  description: string;
   data?: { [key: string]: any };
   flags?: string;
   channels?: string[];
@@ -21,6 +22,7 @@ const DBSchema = new Schema<DBObj>(
     location: String,
     owner: String,
     data: { type: SchemaTypes.Mixed, default: {} },
+    description: { type: String, default: "You see nothing special." },
     flags: String,
   },
   { timestamps: true }
