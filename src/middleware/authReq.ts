@@ -4,7 +4,7 @@ import { dbObj } from "../models/DBObj";
 
 export default async (req: MuRequest, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
-  console.log(req.headers);
+
   if (token) {
     const dbref = await verify(token);
     const user = await dbObj.findOne({ dbref });

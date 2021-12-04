@@ -9,6 +9,7 @@
   "files": [
     "/dist/**/*"
   ],
+  "keywords": ["HTTP","MUSH", "MUD"],
   "private": false,
   "scripts": {
     "test": "ts-jest",

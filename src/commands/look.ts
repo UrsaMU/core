@@ -1,5 +1,5 @@
-import { addCmd, send } from "..";
-import { target } from "../utils/utils";
+import { addCmd, DBObj, send } from "..";
+import { name, target } from "../utils/utils";
 
 export default () => {
   addCmd({
@@ -10,7 +10,7 @@ export default () => {
       const tar = await target(ctx, args[1]);
 
       // Maje sure tar was returned with more than an empty object.
-      if (tar.dbref) {
+      if (tar?.dbref) {
         // Can they see the object?
         if (
           ctx.player?.location === tar.dbref ||
@@ -30,8 +30,11 @@ export default () => {
             desc += "\nCarrying:\n";
           }
 
-          const contents = await ctx.sdk?.get({ location: tar.dbref });
-
+          const contents = await ctx.sdk?.get({ location: tar.dbref.slice(1) });
+          desc += contents
+            .filter((item: DBObj) => !item.flags?.includes("room"))
+            .map((item: DBObj) => name(ctx.player!, item))
+            .join("\n");
           send(ctx.id, desc);
         } else {
           send(ctx.id, "I can't find that here.");

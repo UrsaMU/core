@@ -37,10 +37,6 @@ router.patch("/:id", async (req: MuRequest, res, next) => {
   }
 });
 
-interface IParams {
-  [index: string]: any;
-}
-
 router.get("/:id", async (req: MuRequest, res, next) => {
   const regex = new RegExp(req.params.id, "i");
 
@@ -63,6 +59,7 @@ router.get("/:id", async (req: MuRequest, res, next) => {
 
 router.get("/", async (req: MuRequest, res, next) => {
   if (req.query.dbref) req.query.dbref = "#" + req.query.dbref;
+  if (req.query.location) req.query.location = "#" + req.query.location;
 
   try {
     if (req.isWizard) {

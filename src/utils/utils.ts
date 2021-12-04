@@ -51,3 +51,11 @@ export const target = async (ctx: Context, str: string) => {
       )[0];
   }
 };
+
+export const name = (en: DBObj, tar: DBObj) => {
+  if (flags.check(en.flags || "", tar.flags || "") || tar.owner === en.dbref) {
+    return `${tar.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
+  } else {
+    return tar.name;
+  }
+};

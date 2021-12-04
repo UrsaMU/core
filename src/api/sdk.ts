@@ -44,7 +44,6 @@ export class SDK extends EventEmitter {
 
   async get(params: any) {
     const data = Object.keys(params)
-
       .reduce((pre: string[], curr: string) => {
         pre.push(`${curr}=${params[curr]}`);
         return pre;
@@ -52,9 +51,6 @@ export class SDK extends EventEmitter {
       .join("&");
 
     try {
-      console.log(
-        await this._fetch({ path: `/dbobjs${data ? "?" + data : ""}` })
-      );
       return await this._fetch({ path: `/dbobjs${data ? "?" + data : ""}` });
     } catch (error: any) {
       logger.error("Error: " + error.message);
