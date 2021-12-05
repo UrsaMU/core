@@ -44,11 +44,9 @@ export const target = async (ctx: Context, str: string) => {
       )[0];
     default:
       const regex = RegExp(str, "i");
-      return (
-        await ctx.sdk?.get({
-          $or: [{ name: regex }, { alias: regex }, { dbref: str.slice(1) }],
-        })
-      )[0];
+      return await dbObj.findOne({
+        $or: [{ name: regex }, { alias: regex }, { dbref: regex }],
+      });
   }
 };
 
