@@ -18,23 +18,20 @@ export default () => {
         ) {
           let desc = "";
           desc += tar.name + "\n";
-          desc += tar.description + "\n";
+          desc += tar.description;
+          const contents = await ctx.sdk?.get({ location: tar.dbref });
 
-          // Is this a room or something else? Is our looker inside?
-          if (
-            tar.flags.includes("room") ||
-            ctx.player?.location === tar.dbref
-          ) {
-            desc += "\nContents:\n";
-          } else {
-            desc += "\nCarrying:\n";
+          if (contents.length) {
+            // Is this a room or something else? Is our looker inside?
+            desc += tar.flags.includes("room")
+              ? "\n\nContents:\n"
+              : "\n\nCarrying:\n";
+            desc += contents
+              .filter((item: DBObj) => !item.flags?.includes("room"))
+              .map((item: DBObj) => name(ctx.player!, item))
+              .join("\n");
           }
 
-          const contents = await ctx.sdk?.get({ location: tar.dbref.slice(1) });
-          desc += contents
-            .filter((item: DBObj) => !item.flags?.includes("room"))
-            .map((item: DBObj) => name(ctx.player!, item))
-            .join("\n");
           send(ctx.id, desc);
         } else {
           send(ctx.id, "I can't find that here.");

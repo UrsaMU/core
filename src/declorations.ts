@@ -2,7 +2,7 @@ import { Expression } from "@ursamu/parser";
 import { Socket } from "socket.io";
 import { DBObj, SDK } from ".";
 import { Request } from "express";
-
+import { IConfig } from "config";
 export interface Attribute {
   setby: string;
   value: string;
@@ -36,6 +36,7 @@ export interface Context {
   msg?: string;
   width?: number;
   sdk?: SDK;
+  config?: IConfig;
   res?: string;
 }
 

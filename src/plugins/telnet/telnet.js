@@ -1,10 +1,9 @@
 const telnetlib = require("telnetlib");
 const { nanoid } = require("nanoid");
 const { io } = require("socket.io-client");
-const dotenv = require("dotenv");
 const { NAWS } = telnetlib.options;
 
-dotenv.config();
+args = process.argv.slice(1).map((arg) => parseInt(arg, 10));
 
 const server = telnetlib.createServer(
   {
@@ -22,7 +21,7 @@ const server = telnetlib.createServer(
       c.height = data.height;
     });
 
-    const s = new io(`http://localhost:${process.env.PORT || 4201}`);
+    const s = new io(`http://localhost:${args[1]}`);
 
     s.on("message", (ctx) => {
       const { token: tkn, quit } = ctx.data;
@@ -45,4 +44,4 @@ const server = telnetlib.createServer(
   }
 );
 
-server.listen(process.env.TELNETPORT || 4202);
+server.listen(args[2]);

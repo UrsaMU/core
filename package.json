@@ -9,7 +9,11 @@
   "files": [
     "/dist/**/*"
   ],
-  "keywords": ["HTTP","MUSH", "MUD"],
+  "keywords": [
+    "HTTP",
+    "MUSH",
+    "MUD"
+  ],
   "private": false,
   "scripts": {
     "test": "ts-jest",
@@ -20,9 +24,10 @@
     "start": "node dist/src/index"
   },
   "dependencies": {
-    "@digibear/middleware": "^0.2.3",
+    "@digibear/middleware": "^0.2.9",
     "@digibear/tags": "^0.2.15",
     "@types/jest": "^27.0.3",
+    "@types/telnetlib": "^1.0.0",
     "@ursamu/parser": "^1.2.3",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",

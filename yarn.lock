@@ -44,10 +44,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@digibear/middleware@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.npmjs.org/@digibear/middleware/-/middleware-0.2.3.tgz"
-  integrity sha512-aZffpROKZ5OQFQheqxBJLzxbNSDV8+SZ+aJET669N/eIMqRInKIDehPz4J+di+DCOkeN7OCItpOsXdX3R6zYHQ==
+"@digibear/middleware@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@digibear/middleware/-/middleware-0.2.9.tgz#1c917b4e0e20eeae9311fc8337cb6a06e10f109b"
+  integrity sha512-7wHtafhpMlgopf+I/zVZCQHZvMvulJHzdpuRMJ1UK9gqSN8Sf2nCx4st/5f8l4A7wwlEFNv7OapDyA9M1XNGjA==
 
 "@digibear/tags@^0.2.15":
   version "0.2.15"
@@ -384,6 +384,11 @@
   version "0.0.30"
   resolved "https://registry.npmjs.org/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
+
+"@types/telnetlib@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/telnetlib/-/telnetlib-1.0.0.tgz#8ed3a41b8e891e123518b4329fe74bf7c0054738"
+  integrity sha512-i7orRzaECpiK6YXKdkMTwrygFrW4SFeQStg26XEwzZpYMOr+TzJ+g+I+dewxsExXbl3R83ZsZF/7sQQC9j0TWA==
 
 "@types/webidl-conversions@*":
   version "6.1.1"

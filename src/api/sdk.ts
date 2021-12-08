@@ -43,6 +43,11 @@ export class SDK extends EventEmitter {
   }
 
   async get(params: any) {
+    if (params.location?.startsWith("#"))
+      params.location = params.location.slice(1);
+    if (params.dbref?.startsWith("#")) params.dbref = params.dbref.slice(1);
+    if (params.owner?.startsWith("#")) params.owner = params.owner.slice(1);
+
     const data = Object.keys(params)
       .reduce((pre: string[], curr: string) => {
         pre.push(`${curr}=${params[curr]}`);

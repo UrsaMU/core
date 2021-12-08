@@ -1,11 +1,11 @@
 import { addCmd, flags, logger, send } from "..";
 import { dbObj } from "../models/DBObj";
-import { target } from "../utils/utils";
+import { name, target } from "../utils/utils";
 
 export default () => {
   addCmd({
-    name: "name",
-    pattern: ".name *=*",
+    name: "desc",
+    pattern: ".desc *=*",
     flags: "connected",
     render: async (ctx, args) => {
       const tar = await target(ctx, args[1]);
@@ -14,10 +14,13 @@ export default () => {
         flags.check(ctx.player?.flags || "", "wizard+") ||
         tar?.owner === ctx.player?.dbref
       ) {
-        await dbObj.updateOne({ dbref: tar?.dbref }, { name: args[2] });
-        return await send(ctx.id, "Done. Name updated.");
+        await dbObj.updateOne({ dbref: tar?.dbref }, { description: args[2] });
+        return await send(
+          ctx.id,
+          `Done. description for ${name(ctx.player!, tar)} updated.`
+        );
       } else {
-        return send(ctx.id, "I can't find that.");
+        return await send(ctx.id, "I can't find that.");
       }
     },
   });

@@ -2,7 +2,7 @@ import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { Context, logger, MUSocket, plugins, SDK, verify } from "..";
+import { config, Context, logger, MUSocket, plugins, SDK, verify } from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -49,6 +49,7 @@ io.on("connection", (socket: MUSocket) => {
         key: ctx.data.token,
       });
       ctx.sdk = sdk;
+      ctx.config = config;
     }
 
     handleConnect(ctx);

@@ -1,9 +1,9 @@
-import { hooks, logger } from "../..";
+import { config, hooks, logger } from "../..";
 import pm2 from "pm2";
 import { join } from "path";
 
 export default () => {
-  hooks.startup.use((_ctx, next) => {
+  hooks.startup.use((ctx, next) => {
     pm2.connect(function (err) {
       if (err) {
         console.error(err);
@@ -20,6 +20,9 @@ export default () => {
               script: join(__dirname, "telnet.js"),
               name: "telnet",
               cwd: __dirname,
+              args: `${config.get("port") || "4201"} ${
+                config.get("telnetPort") || "4202"
+              }`,
             },
             function (err) {
               if (err) {

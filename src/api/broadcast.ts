@@ -22,11 +22,14 @@ export const send = async (
     data,
   });
 
-  Msgs.create({
-    text: msg,
-    data,
-    tars: id,
-  });
+  if (data.log === true)
+    Msgs.create({
+      text: msg,
+      data,
+      tars: id,
+    });
+
+  return msg;
 };
 
 /**
@@ -43,9 +46,10 @@ export const broadcast = async (msg: string, data: Data = {}) => {
     data,
   });
 
-  Msgs.create({
-    text: parser.substitute("telnet", msg),
-    data,
-    tars: ["*"],
-  });
+  if (data.log === true)
+    Msgs.create({
+      text: parser.substitute("telnet", msg),
+      data,
+      tars: ["*"],
+    });
 };

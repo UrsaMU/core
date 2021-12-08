@@ -1,4 +1,4 @@
-import { flags, matchCmd, SDK, Context, Next } from "..";
+import { flags, matchCmd, SDK, Context, Next, send, logger } from "..";
 
 export default async (ctx: Context, next: Next) => {
   const { args, cmd } = await matchCmd(ctx);
@@ -10,7 +10,15 @@ export default async (ctx: Context, next: Next) => {
       });
 
       ctx.sdk = sdk;
-      return await cmd.render(ctx, args);
+      try {
+        return await cmd.render(ctx, args);
+      } catch (error: any) {
+        logger.error(error);
+        await send(
+          ctx.id,
+          "Uh oh! You found a bug! .\nERROR MESSAGE: " + error.message
+        );
+      }
     }
   }
   next();
