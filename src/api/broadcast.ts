@@ -17,19 +17,17 @@ export const send = async (
   data: Data = {}
 ) => {
   io.to(id).emit("message", {
-    msg: msg,
+    msg: parser.substitute("telnet", msg),
     tars: id,
     data,
   });
 
   if (data.log === true)
     Msgs.create({
-      text: msg,
+      text: parser.substitute("telnet", msg),
       data,
       tars: id,
     });
-
-  return msg;
 };
 
 /**
