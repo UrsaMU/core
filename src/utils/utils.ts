@@ -1,3 +1,4 @@
+import { readdir } from "fs/promises";
 import { Context, flags, send } from "..";
 import { dbObj, DBObj } from "../models/DBObj";
 
@@ -10,6 +11,12 @@ export const id = async () => {
   return `#${dbrefs.length}`;
 };
 
+/**
+ * Set a list of flags on an object.
+ * @param obj The obj to set the flag expression on.
+ * @param flgs The flag expression to set on the object.
+ * @returns
+ */
 export const setFlgs = async (obj: DBObj, flgs: string) => {
   const { data, tags } = flags.set(obj.flags || "", obj.data || {}, flgs);
   obj.flags = tags;
@@ -18,6 +25,10 @@ export const setFlgs = async (obj: DBObj, flgs: string) => {
   return obj;
 };
 
+/**
+ * Handle a new connection to the game.
+ * @param ctx The context object.
+ */
 export const handleConnect = async (ctx: Context) => {
   // Handle channels via socket if one exists.
   if (ctx.socket && ctx.player) {
@@ -31,6 +42,12 @@ export const handleConnect = async (ctx: Context) => {
   }
 };
 
+/**
+ * Try to determine what the enactor is trying to target.
+ * @param ctx The Context object
+ * @param str The string to match
+ * @returns
+ */
 export const target = async (ctx: Context, str: string) => {
   switch (str.toLowerCase()) {
     case "me":
@@ -50,6 +67,12 @@ export const target = async (ctx: Context, str: string) => {
   }
 };
 
+/**
+ * Get an object's name depending on the lookers relationship to the lookee.
+ * @param en The command enactor (looker)
+ * @param tar The target (lookee)
+ * @returns
+ */
 export const name = (en: DBObj, tar: DBObj) => {
   if (flags.check(en.flags || "", tar.flags || "") || tar.owner === en.dbref) {
     return `${tar.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;

@@ -1,0 +1,14 @@
+
+Welcome to: 
+
+db    db d8888b. .d8888.  .d8b.  .88b  d88. db    db 
+88    88 88  `8D 88'  YP d8' `8b 88'YbdP`88 88    88 
+88    88 88oobY' `8bo.   88ooo88 88  88  88 88    88 
+88    88 88`8b     `Y8b. 88~~~88 88  88  88 88    88 
+88b  d88 88 `88. db   8D 88   88 88  88  88 88b  d88 
+~Y8888P' 88   YD `8888Y' YP   YP YP  YP  YP ~Y8888P' 
+
+Type '%chcreate%cn <%chname%cn> <%chpassword%cn>' to create a character.
+Type '%chconnect%cn <%chname%cn> <%chpassword%cn>' to connect to a character.
+
+Type '%chQUIT%cn' to quit.

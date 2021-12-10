@@ -23,6 +23,8 @@ const server = telnetlib.createServer(
 
     const s = new io(`http://localhost:${args[1]}`);
 
+    s.send({ msg: "", data: { login: true } });
+
     s.on("message", (ctx) => {
       const { token: tkn, quit } = ctx.data;
 

@@ -2,7 +2,16 @@ import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { config, Context, logger, MUSocket, plugins, SDK, verify } from "..";
+import {
+  config,
+  Context,
+  logger,
+  MUSocket,
+  plugins,
+  SDK,
+  send,
+  verify,
+} from "..";
 import mongoose from "mongoose";
 import user from "../routes/userRoutes";
 import dbobjRoutes from "../routes/dbobjRoutes";
@@ -17,6 +26,8 @@ import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
 import cors from "cors";
+import { readFileSync } from "fs";
+import e from "cors";
 
 const app = express();
 app.use(cors());
@@ -27,6 +38,10 @@ app.use("/users", user);
 app.use("/dbobjs", authReq, dbobjRoutes);
 app.use("/auth", authRoutes);
 app.use("/exec", execRoutes);
+
+const connect = readFileSync(join(__dirname, "../../text/connect.txt"), {
+  encoding: "utf8",
+});
 
 // Default Error handler.
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -46,10 +61,14 @@ io.on("connection", (socket: MUSocket) => {
       if (player) ctx.player = player;
 
       const sdk = new SDK({
-        key: ctx.data.token,
+        key: ctx.data?.token,
       });
       ctx.sdk = sdk;
       ctx.config = config;
+    }
+
+    if (ctx.data?.login) {
+      send(ctx.id, connect);
     }
 
     handleConnect(ctx);
