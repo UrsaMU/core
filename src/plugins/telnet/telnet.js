@@ -39,7 +39,7 @@ const server = telnetlib.createServer(
 
     c.on("data", (data) => {
       s.send({
-        data: { token, height: c.height, width: c.width },
+        data: { token, height: c.height, width: c.width, type: "telnet" },
         msg: data.toString(),
       });
     });

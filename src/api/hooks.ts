@@ -57,6 +57,5 @@ export const force = async (ctx: Context, command: string) => {
   await hooks.input.execute({
     ...ctx,
     ...{ msg: command },
-    ...ctx.data,
   });
 };

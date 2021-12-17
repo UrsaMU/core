@@ -1,4 +1,4 @@
-import { addCmd, compare, send, sign } from "..";
+import { addCmd, compare, force, send, sign } from "..";
 import { dbObj } from "../models/DBObj";
 import { handleConnect } from "../utils/utils";
 
@@ -21,6 +21,7 @@ export default () => {
         ctx.data = ctx.data ? ctx.data : {};
         ctx.data.token = token;
         await handleConnect(ctx);
+        await force(ctx, "look");
       } else {
         send(ctx.id, "Inavlid Name or Password.", { log: false });
       }

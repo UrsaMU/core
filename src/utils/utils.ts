@@ -1,5 +1,5 @@
 import { readdir } from "fs/promises";
-import { Context, flags, send } from "..";
+import { Context, flags, force, send } from "..";
 import { dbObj, DBObj } from "../models/DBObj";
 
 /**
@@ -48,7 +48,7 @@ export const handleConnect = async (ctx: Context) => {
  * @param str The string to match
  * @returns
  */
-export const target = async (ctx: Context, str: string) => {
+export const target = async (ctx: Context, str: string = "") => {
   switch (str.toLowerCase()) {
     case "me":
       return ctx.player;

@@ -26,7 +26,7 @@ import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
 import cors from "cors";
-import { readFileSync } from "fs";
+import { chmodSync, readFileSync } from "fs";
 import e from "cors";
 
 const app = express();
@@ -65,6 +65,7 @@ io.on("connection", (socket: MUSocket) => {
       });
       ctx.sdk = sdk;
       ctx.config = config;
+      ctx.width = ctx.data.width;
     }
 
     if (ctx.data?.login) {

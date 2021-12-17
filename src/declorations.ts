@@ -49,23 +49,6 @@ export interface ChannelEntry {
   joined?: boolean;
 }
 
-export interface Channel {
-  [key: string]: any;
-  _id?: string;
-  name: string;
-  header?: string;
-  display?: string;
-  access?: string;
-  read?: string;
-  write?: string;
-  modify?: string;
-  private?: boolean;
-  loud?: boolean;
-  mask?: boolean;
-  alias?: string;
-
-  description?: string;
-}
 export interface MuRequest extends Request {
   user?: Partial<DBObj>;
   isStaff?: boolean;
