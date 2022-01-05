@@ -10,6 +10,19 @@ export interface Attribute {
   lock?: string;
 }
 
+export interface DBObj {
+  _id: string;
+  dbref: string;
+  flags: string;
+  data: {
+    name?: string;
+    alias?: string;
+    password?: string;
+    description?: string;
+    [key: string]: any;
+  };
+}
+
 export type Query = { [key: string]: any };
 export type Data = { [key: string]: any };
 

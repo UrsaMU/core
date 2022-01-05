@@ -1,13 +1,12 @@
-import { readdir } from "fs/promises";
-import { Context, flags, force, send } from "..";
-import { dbObj, DBObj } from "../models/DBObj";
+import { Context, dbObj, flags, send } from "..";
+import { DBObj } from "../declorations";
 
 /**
  * Return the next available DBref number.
  * @returns
  */
 export const id = async () => {
-  const dbrefs = await dbObj.find({}).populate("dbref").exec();
+  const dbrefs = await dbObj.find({});
   return `#${dbrefs.length}`;
 };
 
@@ -34,7 +33,7 @@ export const handleConnect = async (ctx: Context) => {
   if (ctx.socket && ctx.player) {
     ctx.socket.join(ctx.player.location || "");
     ctx.socket.join(ctx.player.dbref!);
-    ctx.player.channels?.forEach((channel) => ctx.socket?.join(channel));
+
     ctx.socket.pid = ctx.player?.dbref;
 
     await setFlgs(ctx.player, "connected");
@@ -74,9 +73,12 @@ export const target = async (ctx: Context, str: string = "") => {
  * @returns
  */
 export const name = (en: DBObj, tar: DBObj) => {
-  if (flags.check(en.flags || "", tar.flags || "") || tar.owner === en.dbref) {
-    return `${tar.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
+  if (
+    flags.check(en.flags || "", tar.flags || "") ||
+    tar.data.owner === en.dbref
+  ) {
+    return `${tar.data.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
   } else {
-    return tar.name;
+    return tar.data.name;
   }
 };
