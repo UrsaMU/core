@@ -31,7 +31,7 @@ export const setFlgs = async (obj: DBObj, flgs: string) => {
 export const handleConnect = async (ctx: Context) => {
   // Handle channels via socket if one exists.
   if (ctx.socket && ctx.player) {
-    ctx.socket.join(ctx.player.location || "");
+    ctx.socket.join(ctx.player.data.location || "");
     ctx.socket.join(ctx.player.dbref!);
 
     ctx.socket.pid = ctx.player?.dbref;
@@ -53,11 +53,7 @@ export const target = async (ctx: Context, str: string = "") => {
       return ctx.player;
     case "":
     case "here":
-      return (
-        await ctx.sdk?.get({
-          dbref: ctx.player?.location?.slice(1) || "",
-        })
-      )[0];
+      return await dbObj.get(ctx.player?.data.location);
     default:
       const regex = RegExp(str, "i");
       return await dbObj.findOne({
