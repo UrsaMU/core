@@ -60,7 +60,7 @@ io.on("connection", (socket: MUSocket) => {
   });
 });
 
-export const start = () => {
+export const start = (cb = () => {}) => {
   server.listen(config.get("port") || 4000, async () => {
     logger.info("server Listening on port: " + config.get("port"));
     await plugins(join(__dirname, "../commands/"));
@@ -69,7 +69,7 @@ export const start = () => {
     logger.info("Plugins directory loaded.");
     hooks.startup.use(checkLimbo);
     hooks.input.use(verifyToken, checkCmd);
-
+    cb()
     await hooks.startup.execute({});
   });
 };
