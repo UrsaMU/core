@@ -44,10 +44,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@digibear/middleware@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@digibear/middleware/-/middleware-1.0.0.tgz#780f35907606595044878816adaeb00acdc3f6ef"
-  integrity sha512-HvPinxMSrPoBPKejl4EL3tzinPf+iRL9qdZC9qZebuGXGBJlKENp7RI/hLlqo/T47lWDoQcxy37YTpnrBF7WCg==
+"@digibear/middleware@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@digibear/middleware/-/middleware-1.0.1.tgz#85b28fd14c7ec90366efade21685398201a57dbb"
+  integrity sha512-wJLmh16t+SSphGxqcSl5EUsl+G9qAkq4N4U1dYbIXHHJGobWjZ0SqwLZNN4MlLb6Nm4KSRM/d74BDIylhV9f1A==
 
 "@digibear/tags@^0.2.15":
   version "0.2.15"

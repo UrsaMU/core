@@ -63,7 +63,7 @@ router.get("/", async (req: MuRequest, res, next) => {
   try {
     if (req.isWizard) {
       const objs = (await dbObj.find(req.query)).map((obj) => {
-        obj.password = undefined;
+        obj.data.password = undefined;
         return obj;
       });
       return res.status(200).json(objs);
@@ -71,7 +71,7 @@ router.get("/", async (req: MuRequest, res, next) => {
       const objs = (
         await dbObj.find({ owner: req.user?.dbref, ...req.query })
       ).map((obj) => {
-        obj.password = undefined;
+        obj.data.password = undefined;
         return obj;
       });
       return res.status(200).json(objs);

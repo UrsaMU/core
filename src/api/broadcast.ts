@@ -1,7 +1,6 @@
 import { Data } from "..";
 import { parser } from "./parser";
 import { io } from "./app";
-import { Msgs } from "../models/Msgs";
 
 /**
  * Send a message to a client.
@@ -22,12 +21,12 @@ export const send = async (
     data,
   });
 
-  if (data.log === true)
-    Msgs.create({
-      text: parser.substitute("telnet", msg),
-      data,
-      tars: id,
-    });
+//   if (data.log === true)
+//     Msgs.create({
+//       text: parser.substitute("telnet", msg),
+//       data,
+//       tars: id,
+//     });
 };
 
 /**
@@ -44,10 +43,10 @@ export const broadcast = async (msg: string, data: Data = {}) => {
     data,
   });
 
-  if (data.log === true)
-    Msgs.create({
-      text: parser.substitute("telnet", msg),
-      data,
-      tars: ["*"],
-    });
+//   if (data.log === true)
+//     Msgs.create({
+//       text: parser.substitute("telnet", msg),
+//       data,
+//       tars: ["*"],
+//     });
 };

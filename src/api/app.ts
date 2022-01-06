@@ -26,7 +26,7 @@ app.use("/dbobjs", authReq, dbobjRoutes);
 app.use("/auth", authRoutes);
 
 // declate databases
-export const dbObj = new DB<DBObj>("../../data/objs.db");
+export const dbObj = new DB<DBObj>(join(__dirname,"../../data/objs.db"));
 
 const connect = readFileSync(join(__dirname, "../../text/connect.txt"), {
   encoding: "utf8",

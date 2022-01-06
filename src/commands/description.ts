@@ -1,5 +1,5 @@
-import { addCmd, flags, logger, send } from "..";
-import { dbObj } from "../models/DBObj";
+import { addCmd, flags, send } from "..";
+import { dbObj } from "../api/app";
 import { name, target } from "../utils/utils";
 
 export default () => {
@@ -10,11 +10,15 @@ export default () => {
     render: async (ctx, args) => {
       const tar = await target(ctx, args[1]);
 
+  
       if (
-        flags.check(ctx.player?.flags || "", "wizard+") ||
-        tar?.owner === ctx.player?.dbref
-      ) {
-        await dbObj.updateOne({ dbref: tar?.dbref }, { description: args[2] });
+        tar && (flags.check(ctx.player?.flags || "", "wizard+") ||
+        tar.data.owner === ctx.player?.dbref
+      )) {
+        await dbObj.update(
+          { dbref: tar.dbref },
+          { data: { ...tar.data, ...{ description: args[2] } } }
+        );
         return await send(
           ctx.id,
           `Done. description for ${name(ctx.player!, tar)} updated.`

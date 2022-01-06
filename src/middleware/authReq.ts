@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import { flags, MuRequest, verify } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 
 export default async (req: MuRequest, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];

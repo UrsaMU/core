@@ -1,5 +1,5 @@
 import { addCmd, flags, logger, send } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 import { target } from "../utils/utils";
 
 export default () => {
@@ -11,10 +11,14 @@ export default () => {
       const tar = await target(ctx, args[1]);
 
       if (
-        flags.check(ctx.player?.flags || "", "wizard+") ||
-        tar?.owner === ctx.player?.dbref
+        tar &&
+        (flags.check(ctx.player?.flags || "", "wizard+") ||
+          tar.data.owner === ctx.player?.dbref)
       ) {
-        await dbObj.updateOne({ dbref: tar?.dbref }, { name: args[2] });
+        await dbObj.update(
+          { dbref: tar.dbref },
+          { data: { ...tar.data, ...{ name: args[2] } } }
+        );
         return await send(ctx.id, "Done. Name updated.");
       } else {
         return send(ctx.id, "I can't find that.");

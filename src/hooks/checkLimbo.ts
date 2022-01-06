@@ -1,5 +1,5 @@
 import { config, Context, hooks, Next } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 import { id } from "../utils/utils";
 
 export default async (ctx: Context, next: Next) => {

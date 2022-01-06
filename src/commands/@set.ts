@@ -19,7 +19,7 @@ export default () => {
               ctx.id,
               `Done. Flag (%ch${flgCpy}%cn) ${
                 flg.startsWith("!") ? "removed from" : "set on"
-              } %ch${tar.name}%cn.`
+              } %ch${tar.data.name}%cn.`
             );
           } else {
             send(ctx.id, `I don't recognize flag: %ch%cy${flg}%cn`);

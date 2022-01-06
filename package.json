@@ -24,7 +24,7 @@
     "start": "node dist/src/index"
   },
   "dependencies": {
-    "@digibear/middleware": "^1.0.0",
+    "@digibear/middleware": "^1.0.1",
     "@digibear/tags": "^0.2.15",
     "@types/jest": "^27.0.3",
     "@types/nedb": "^1.8.12",

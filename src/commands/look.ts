@@ -1,4 +1,5 @@
 import { addCmd, DBObj, send } from "..";
+import { dbObj } from "../api/app";
 import { center, repeat } from "../utils/format";
 import { name, target } from "../utils/utils";
 
@@ -14,14 +15,14 @@ export default () => {
       if (tar?.dbref) {
         // Can they see the object?
         if (
-          ctx.player?.location === tar.dbref ||
+          ctx.player?.data.location === tar.dbref ||
           ctx.player?.dbref === tar.dbref
         ) {
           let desc = "";
           console.log(ctx.data?.width);
-          desc += center(`< ${tar.name} >`, ctx.width, "-") + "\n\n";
-          desc += tar.description;
-          const contents = await ctx.sdk?.get({ location: tar.dbref });
+          desc += `${tar.data.name}\n\n`;
+          desc += tar.data.description;
+          const contents = await dbObj.find({ location: tar.dbref });
 
           if (contents.length) {
             // Is this a room or something else? Is our looker inside?
