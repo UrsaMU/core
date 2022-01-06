@@ -333,13 +333,6 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/mockingoose@^2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@types/mockingoose/-/mockingoose-2.13.0.tgz#2805ecb34364e73dc9bbb29d7e76ca0b4907b428"
-  integrity sha512-1jWhd9DT0bom1cf+c+JG4AwvZtxc3WYyIwJ7xHbM2CGvx73q13mB1n47gyIb8jDgcyc3iMb6iau+8oWNXG8kAA==
-  dependencies:
-    mockingoose "*"
-
 "@types/nedb@^1.8.12":
   version "1.8.12"
   resolved "https://registry.yarnpkg.com/@types/nedb/-/nedb-1.8.12.tgz#597bb124ddaf16039c6d478f4abc0a8f2006b134"
@@ -408,13 +401,6 @@
   integrity sha512-T8Yc9wt/5LbJyCaLiHPReJa0kApcIgJ7Bn735GjItUfh08Z1pJvu8QZqb9s+mMvKV6WUQRV7K2R46YbjMXTTJw==
   dependencies:
     "@types/yargs-parser" "*"
-
-"@ursamu/parser@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/@ursamu/parser/-/parser-1.2.3.tgz"
-  integrity sha512-a7WPKq7yA2KM8L8R3czp94osTOj4UqbrAspUGwABAiS4D1cgXtoLTQhHj40OkX5GO/TyHf1JpdShgSH5glhfwQ==
-  dependencies:
-    pegjs "^0.10.0"
 
 abbrev@1:
   version "1.1.1"
@@ -675,13 +661,6 @@ axios@^0.21.0:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
-
-axios@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
-  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
-  dependencies:
-    follow-redirects "^1.14.4"
 
 backo2@~1.0.2:
   version "1.0.2"
@@ -1211,11 +1190,6 @@ data-uri-to-buffer@3:
   version "3.0.1"
   resolved "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-3.0.1.tgz"
   integrity sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==
-
-data-uri-to-buffer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
-  integrity sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==
 
 date-fns@^2.16.1:
   version "2.26.0"
@@ -1775,13 +1749,6 @@ fclone@1.0.11, fclone@~1.0.11:
   resolved "https://registry.npmjs.org/fclone/-/fclone-1.0.11.tgz"
   integrity sha1-EOhdo4v+p/xZk0HClu4ddyZu5kA=
 
-fetch-blob@^3.1.2:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/fetch-blob/-/fetch-blob-3.1.3.tgz#a7dca4855e39d3e3c5a1da62d4ee335c37d26012"
-  integrity sha512-ax1Y5I9w+9+JiM+wdHkhBoxew+zG4AJ2SvAD1v1szpddUIiPERVGBxrMcB2ZqW0Y3PP8bOWYv2zqQq1Jp2kqUQ==
-  dependencies:
-    web-streams-polyfill "^3.0.3"
-
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -1845,7 +1812,7 @@ flatted@^3.1.0:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.1.1.tgz"
   integrity sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
 
-follow-redirects@^1.14.0, follow-redirects@^1.14.4:
+follow-redirects@^1.14.0:
   version "1.14.5"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.5.tgz"
   integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
@@ -1854,13 +1821,6 @@ for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
   integrity sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=
-
-formdata-polyfill@^4.0.10:
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
-  integrity sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
-  dependencies:
-    fetch-blob "^3.1.2"
 
 forwarded@0.2.0:
   version "0.2.0"
@@ -3003,7 +2963,7 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-mockingoose@*, mockingoose@^2.15.2:
+mockingoose@^2.15.2:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/mockingoose/-/mockingoose-2.15.2.tgz#d22366a1baade956ec84fe21c8dca433c84a48ea"
   integrity sha512-50mtbAk29Go5hdhzqTmjmE67Z/cB0yPz45u2jrHoGm4nkYnnBq224viWgyKwnxzWw8birnqn98viM2cRBTnJvw==
@@ -3126,15 +3086,6 @@ node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.1.tgz"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
-
-node-fetch@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.1.0.tgz#714f4922dc270239487654eaeeab86b8206cb52e"
-  integrity sha512-QU0WbIfMUjd5+MUzQOYhenAazakV7Irh1SGkWCsRzBwvm4fAhzEUaHMJ6QLP7gWT6WO9/oH2zhKMMGMuIrDyKw==
-  dependencies:
-    data-uri-to-buffer "^4.0.0"
-    fetch-blob "^3.1.2"
-    formdata-polyfill "^4.0.10"
 
 nodemon@^2.0.7:
   version "2.0.7"
@@ -3463,11 +3414,6 @@ path-type@^3.0.0:
   integrity sha512-T2ZUsdZFHgA3u4e5PfPbjd7HDDpxPnQb5jN0SrDsjNSuVXHJqtwTnWqG0B1jZrgmJ/7lj1EmVIByWt1gxGkWvg==
   dependencies:
     pify "^3.0.0"
-
-pegjs@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/pegjs/-/pegjs-0.10.0.tgz"
-  integrity sha1-z4uvrm7d/0tafvsYUmnqr0YQ3b0=
 
 picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.0"
@@ -4771,11 +4717,6 @@ vscode-textmate@5.2.0:
   version "5.2.0"
   resolved "https://registry.npmjs.org/vscode-textmate/-/vscode-textmate-5.2.0.tgz"
   integrity sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==
-
-web-streams-polyfill@^3.0.3:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
-  integrity sha512-EqPmREeOzttaLRm5HS7io98goBgZ7IVz79aDvqjD0kYXLtFZTc0T/U6wHTPKyIjb+MdN7DFIIX6hgdBEpWmfPA==
 
 which@^2.0.1:
   version "2.0.2"
