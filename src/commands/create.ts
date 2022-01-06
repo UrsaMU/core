@@ -1,6 +1,8 @@
-import { addCmd } from "..";
+import { addCmd, config } from "..";
 import { dbObj } from "../api/app";
-import { hash } from "../api/security";
+import { send } from "../api/broadcast";
+import { force } from "../api/hooks";
+import { hash, sign } from "../api/security";
 import { handleConnect, id } from "../utils/utils";
 
 export default () => {
@@ -9,7 +11,7 @@ export default () => {
     pattern: /^create\s+(\w+)\s+(\w+)/i,
     flags: "!connected",
     render: async (ctx, args) => {
-      const players = await dbObj.find({});
+      const players = await dbObj.find({ flags: /player/ });
       const regex = new RegExp(args[1], "i");
       const taken = await dbObj.findOne({
         $or: [{ name: regex }, { alias: regex }],
@@ -20,16 +22,24 @@ export default () => {
           dbref: await id(),
           flags: players.length
             ? "player connected"
-            : "plsyer connnected immprtal",
-          data: {
+            : "player connected immortal",
             name: args[1],
-            password: hash(args[2]),
-          },
+            password: await hash(args[2]),
+            location: config.get("playerStart"),
+            description: "You see nothing special."
+          
         });
 
         if (player) {
           ctx.player = player;
+          const token = await sign(player.dbref);
+          if (!ctx.data) ctx.data = {};
+          if (token) ctx.data.token = token;
+          
           await handleConnect(ctx);
+          force(ctx, "look");
+        } else {
+          send(ctx.id, "Unable to create character!");
         }
       }
     },

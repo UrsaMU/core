@@ -13,11 +13,13 @@ export interface DBObj {
   _id: string;
   dbref: string;
   flags: string;
+  name?: string;
+  alias?: string;
+  password?: string;
+  description?: string;
+  location?: string;
+  owner:string,
   data: {
-    name?: string;
-    alias?: string;
-    password?: string;
-    description?: string;
     [key: string]: any;
   };
 }

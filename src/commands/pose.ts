@@ -7,8 +7,8 @@ export default () => {
     flags: "connected",
     render: async (ctx, args) => {
       send(
-        ctx.player?.data.location || "",
-        `${ctx.player?.data.name}${args[1].startsWith(";") ? "" : " "}${args[2]}`
+        ctx.player?.location || "",
+        `${ctx.player?.name}${args[1].startsWith(";") ? "" : " "}${args[2]}`
       );
     },
   });

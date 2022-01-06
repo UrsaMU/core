@@ -13,11 +13,11 @@ export default () => {
       if (
         tar &&
         (flags.check(ctx.player?.flags || "", "wizard+") ||
-          tar.data.owner === ctx.player?.dbref)
+          tar.owner === ctx.player?.dbref)
       ) {
         await dbObj.update(
           { dbref: tar.dbref },
-          { data: { ...tar.data, ...{ name: args[2] } } }
+          { name: args[2]  }
         );
         return await send(ctx.id, "Done. Name updated.");
       } else {

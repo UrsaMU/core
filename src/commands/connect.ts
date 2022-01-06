@@ -13,9 +13,7 @@ export default () => {
       const user = await dbObj.findOne({
         $or: [{ name: regexp }, { alias: regexp }],
       });
-
-      if (user && (await compare(args[2], user.data.password || ""))) {
-        user.data.password = undefined;
+      if (user && (await compare(args[2], user.password || ""))) {
         const token = await sign(user.dbref);
         ctx.player = user;
         ctx.data = ctx.data ? ctx.data : {};

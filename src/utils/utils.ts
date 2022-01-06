@@ -31,7 +31,7 @@ export const setFlgs = async (obj: DBObj, flgs: string) => {
 export const handleConnect = async (ctx: Context) => {
   // Handle channels via socket if one exists.
   if (ctx.socket && ctx.player) {
-    ctx.socket.join(ctx.player.data.location || "");
+    ctx.socket.join(ctx.player.location || "");
     ctx.socket.join(ctx.player.dbref!);
 
     ctx.socket.pid = ctx.player?.dbref;
@@ -53,7 +53,9 @@ export const target = async (ctx: Context, str: string = "") => {
       return ctx.player;
     case "":
     case "here":
-      return await dbObj.get(ctx.player?.data.location);
+    if (ctx.player?.location) {
+        return await dbObj.findOne({dbref: ctx.player?.location});
+    }
     default:
       const regex = RegExp(str, "i");
       return await dbObj.findOne({
@@ -71,10 +73,10 @@ export const target = async (ctx: Context, str: string = "") => {
 export const name = (en: DBObj, tar: DBObj) => {
   if (
     flags.check(en.flags || "", tar.flags || "") ||
-    tar.data.owner === en.dbref
+    tar.owner === en.dbref
   ) {
-    return `${tar.data.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
+    return `${tar.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
   } else {
-    return tar.data.name;
+    return tar.name;
   }
 };

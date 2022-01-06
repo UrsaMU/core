@@ -61,9 +61,8 @@ io.on("connection", (socket: MUSocket) => {
 });
 
 export const start = () => {
-  server.listen(process.env.PORT || 4000, async () => {
+  server.listen(config.get("port") || 4000, async () => {
     logger.info("server Listening on port: " + config.get("port"));
-    logger.info("MongoDB Connected.");
     await plugins(join(__dirname, "../commands/"));
     logger.info("Commands directory loaded.");
     await plugins(join(__dirname, "../plugins/"));

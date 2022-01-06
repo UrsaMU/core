@@ -17,7 +17,7 @@ export default () => {
       )) {
         await dbObj.update(
           { dbref: tar.dbref },
-          { data: { ...tar.data, ...{ description: args[2] } } }
+          {  ...tar, description: args[2] }
         );
         return await send(
           ctx.id,
