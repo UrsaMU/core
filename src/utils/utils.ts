@@ -1,5 +1,6 @@
-import { Context, dbObj, flags, send } from "..";
-import { DBObj } from "../declorations";
+import { channel, Context, dbObj, flags, send } from "..";
+import { ChannelEntry, DBObj } from "../declorations";
+import checkLimbo from "../hooks/checkLimbo";
 
 /**
  * Return the next available DBref number.
@@ -94,4 +95,36 @@ export const msgFmt = (msg: string) => {
   }
 
   return ` says, "${msg.trim()}"`;
+};
+
+/**
+ * Toggle a player's participation in a channel.
+ * @param tar The target player to add to a channel
+ * @param chan The name of the channel
+ */
+export const toggleChan = async (ctx: Context, chan: string, sw?: boolean) => {
+  const regex = new RegExp(chan, "i");
+  const listing = await channel.findOne({ name: regex });
+
+  if (ctx.player) {
+    ctx.player.channels = ctx.player.channels.map((ch) => {
+      if (ch.name.toLowerCase() === chan.toLowerCase()) {
+        if (sw) {
+          ch.joined = true;
+        } else {
+          ch.joined = false;
+        }
+        if (ch.joined && listing) {
+          ctx.socket?.join(ch.name);
+          send(
+            ch.name,
+            `${listing.header} ${ctx.player?.name} has joined the channel.`
+          );
+        }
+      }
+      return ch;
+    });
+
+    await dbObj.update({ dbref: ctx.player.dbref }, ctx.player);
+  }
 };

@@ -1,5 +1,5 @@
 import { channel, send, Context, Next } from "..";
-import { msgFmt } from "../utils/utils";
+import { msgFmt, toggleChan } from "../utils/utils";
 
 export default async (ctx: Context, next: Next) => {
   if (ctx.player?.channels) {
@@ -14,6 +14,27 @@ export default async (ctx: Context, next: Next) => {
 
         // if the channel exists, send a message!
         if (chan) {
+          // Check to see if the channel is being toggled.
+          const msgPieces = ctx.msg?.split(" ");
+          if (msgPieces) {
+            msgPieces.shift();
+            const msg = msgPieces?.join(" ").trim();
+
+            if (msg === "off") {
+              if (!ch.joined)
+                return send(ctx.id, "You've already left that channel!");
+              send(ctx.id, `You quietly leave the %ch${chan.name}%cn channel.`);
+              return toggleChan(ctx, chan.name);
+            }
+
+            if (msg === "on")
+              if (ch.joined)
+                return send(ctx.id, "You've already joined that channel.");
+            return toggleChan(ctx, chan.name, true);
+          }
+
+          if (!ch.joined) return send(ctx.id, "You aren't on that channel.");
+
           const text = `${chan.header} ${ctx.player.name}${msgFmt(ctx.msg)}`;
           return await send(chan.name, text);
         }

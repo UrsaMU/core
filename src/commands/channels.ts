@@ -1,4 +1,5 @@
-import { dbObj, io,addCmd, channel, send } from "..";
+import { force, dbObj, flags, addCmd, channel, send } from "..";
+import { toggleChan } from "../utils/utils";
 
 export default () => {
   addCmd({
@@ -20,22 +21,45 @@ export default () => {
           join: pcs[1] ? pcs[1] : undefined,
         });
 
-        if (chan && ctx.player) {
-          ctx.player.channels.push({
-            name: pcs[0],
-            alias: pcs[1] ? pcs[1] : "",
-            joined: true,
-          });
-          
-          ctx.socket?.join(pcs[0]);
-          send(pcs[0], `${chan.header} ${ctx.player.name} has joined the channel.`);
-
-          await dbObj.update({ dbref: ctx.player.dbref }, ctx.player);
-          return send(ctx.id, `Done. Channel %ch${pcs[0]}%cn created.`);
+        if (chan) {
+          return send(ctx.id, `Done. Channel %ch${chan.name}%cn created.`);
         }
+
         send(ctx.id, "Unable to create channel.");
       } else {
         send(ctx.id, "That channel already exists");
+      }
+    },
+  });
+
+  addCmd({
+    name: "addchan",
+    pattern: "addchan *=*",
+    flags: "connected",
+    render: async (ctx, args) => {
+      const regex = new RegExp(`${args[2]}`, "i");
+      const chan = await channel.findOne({ name: regex });
+      console.log(regex, chan);
+      if (chan && flags.check(ctx.player?.flags || "", chan.read)) {
+        const added = ctx.player?.channels.find((ch) => ch.name === chan.name);
+        if (!added) {
+          ctx.player?.channels.push({
+            name: chan.name,
+            alias: args[1],
+            joined: false,
+          });
+          send(
+            ctx.id,
+            `Done. Channel %ch${chan.name}%cn added with alias %ch${args[1]}%cn.`
+          );
+          return toggleChan(ctx, chan.name);
+        }
+        send(
+          ctx.id,
+          `Channel %ch${added.name}%cn already added with alias: %ch${added.alias}%cn`
+        );
+      } else {
+        send(ctx.id, "I can't find that channel.");
       }
     },
   });
