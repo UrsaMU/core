@@ -13,10 +13,11 @@ import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
 import cors from "cors";
-import { readFileSync } from "fs";
 import { DB } from "./database";
 import verifyToken from "../hooks/verifyToken";
 import { Channel } from "../declorations";
+import { textFiles } from "./plugins";
+import checkChans from "../hooks/checkChans";
 
 const app = express();
 app.use(cors());
@@ -27,12 +28,8 @@ app.use("/dbobjs", authReq, dbobjRoutes);
 app.use("/auth", authRoutes);
 
 // declate databases
-export const dbObj = new DB<DBObj>(join(__dirname,"../../data/objs.db"));
+export const dbObj = new DB<DBObj>(join(__dirname, "../../data/objs.db"));
 export const channel = new DB<Channel>(join(__dirname, "../../data/chans.db"));
-
-const connect = readFileSync(join(process.cwd(), "/text/connect.txt"), {
-  encoding: "utf8",
-});
 
 // Default Error handler.
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -50,7 +47,7 @@ io.on("connection", (socket: MUSocket) => {
     ctx.width = ctx.data?.width;
 
     if (ctx.data?.login) {
-      send(ctx.id, connect);
+      send(ctx.id, textFiles.get("connect") || "");
     }
     hooks.input.use(huh);
     hooks.input.execute(ctx);
@@ -69,9 +66,11 @@ export const start = (cb = () => {}) => {
     logger.info("Commands directory loaded.");
     await plugins(join(__dirname, "../plugins/"));
     logger.info("Plugins directory loaded.");
+    await plugins(join(__dirname, "../../text/"));
+    logger.info("Text files loaded.");
     hooks.startup.use(checkLimbo);
-    hooks.input.use(verifyToken, checkCmd);
-    cb()
+    hooks.input.use(verifyToken, checkCmd, checkChans);
+    cb();
     await hooks.startup.execute({});
   });
 };

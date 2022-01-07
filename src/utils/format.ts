@@ -13,3 +13,9 @@ export const center = (str: string, width = 78, filler = " ") => {
   fillLength = fillLength / parser.stripSubs("telnet", filler).length;
   return repeat(filler, fillLength) + str + repeat(filler, fillLength);
 };
+
+export const left = (str: string, width = 78, filler = " ") => {
+  let fillLength = width - parser.stripSubs("telnet", str).length - 4;
+  fillLength = fillLength / parser.stripSubs("telnet", filler).length;
+  return repeat(filler, 4) + str + repeat(filler, fillLength);
+};

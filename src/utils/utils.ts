@@ -37,6 +37,12 @@ export const handleConnect = async (ctx: Context) => {
     ctx.socket.pid = ctx.player?.dbref;
 
     await setFlgs(ctx.player, "connected");
+
+    // join channels
+    ctx.player.channels.forEach((chan) => {
+      if (chan.joined) ctx.socket?.join(chan.name);
+    });
+
     await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
   }
 };
@@ -53,9 +59,9 @@ export const target = async (ctx: Context, str: string = "") => {
       return ctx.player;
     case "":
     case "here":
-    if (ctx.player?.location) {
-        return await dbObj.findOne({dbref: ctx.player?.location});
-    }
+      if (ctx.player?.location) {
+        return await dbObj.findOne({ dbref: ctx.player?.location });
+      }
     default:
       const regex = RegExp(str, "i");
       return await dbObj.findOne({
@@ -71,12 +77,22 @@ export const target = async (ctx: Context, str: string = "") => {
  * @returns
  */
 export const name = (en: DBObj, tar: DBObj) => {
-  if (
-    flags.check(en.flags || "", tar.flags || "") ||
-    tar.owner === en.dbref
-  ) {
+  if (flags.check(en.flags || "", tar.flags || "") || tar.owner === en.dbref) {
     return `${tar.name}(${tar.dbref}${flags.codes(tar.flags || "")})`;
   } else {
     return tar.name;
   }
+};
+
+export const msgFmt = (msg: string) => {
+  const msgPieces = msg.split(" ");
+  msgPieces.shift();
+  msg = msgPieces.join(" ").trim();
+  // poses
+  console.log("+++++", msg);
+  if (msg.startsWith(":") || msg.startsWith(";")) {
+    return `${msg[0] === ":" ? " " : ""}${msg.slice(1)}`;
+  }
+
+  return ` says, "${msg.trim()}"`;
 };

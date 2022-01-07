@@ -1,6 +1,8 @@
 import { readdir, readFile } from "fs/promises";
 import { join, resolve } from "path";
 
+export const textFiles = new Map<string, string>();
+
 /**
  * Load all js files from a directory.
  * @param path The path to the files to handle.
@@ -24,15 +26,11 @@ export const plugins = async (path: string) => {
       const data = JSON.parse(pack);
       const module = await import(join(path, file.name, data.main));
       if (module.default) await module.default();
+    } else if (file.name.endsWith(".md") || file.name.endsWith(".txt")) {
+      textFiles.set(
+        file.name.split(".")[0],
+        await readFile(path + file.name, { encoding: "utf-8" })
+      );
     }
   }
-};
-
-/**
- * Load a file from a given path.
- * @param path Tge path to the file.
- * @returns
- */
-export const loadText = async (path: string) => {
-  return await readFile(path, { encoding: "utf-8" });
 };

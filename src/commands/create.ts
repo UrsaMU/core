@@ -23,12 +23,12 @@ export default () => {
           flags: players.length
             ? "player connected"
             : "player connected immortal",
-            name: args[1],
-            password: await hash(args[2]),
-            location: config.get("playerStart"),
-            description: "You see nothing special.",
-            data: {},
-            channels: []
+          name: args[1],
+          password: await hash(args[2]),
+          location: config.get("playerStart"),
+          description: "You see nothing special.",
+          data: {},
+          channels: [],
         });
 
         if (player) {
@@ -36,7 +36,7 @@ export default () => {
           const token = await sign(player.dbref);
           if (!ctx.data) ctx.data = {};
           if (token) ctx.data.token = token;
-          
+
           await handleConnect(ctx);
           force(ctx, "look");
         } else {
