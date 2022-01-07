@@ -10,7 +10,6 @@ export default () => {
 
       const regex = new RegExp(pcs[0], "i");
       const exists = await channel.find({ name: regex });
-      console.log(exists);
       if (exists.length <= 0) {
         const chan = await channel.create({
           name: pcs[0],

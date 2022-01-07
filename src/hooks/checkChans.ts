@@ -14,7 +14,6 @@ export default async (ctx: Context, next: Next) => {
 
         // if the channel exists, send a message!
         if (chan) {
-          console.log("+++++++++", msgFmt("st :tests"));
           const text = `${chan.header} ${ctx.player.name}${msgFmt(ctx.msg)}`;
           return await send(chan.name, text);
         }

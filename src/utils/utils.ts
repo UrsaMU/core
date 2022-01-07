@@ -89,7 +89,6 @@ export const msgFmt = (msg: string) => {
   msgPieces.shift();
   msg = msgPieces.join(" ").trim();
   // poses
-  console.log("+++++", msg);
   if (msg.startsWith(":") || msg.startsWith(";")) {
     return `${msg[0] === ":" ? " " : ""}${msg.slice(1)}`;
   }
