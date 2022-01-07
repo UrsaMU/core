@@ -14,7 +14,9 @@ export default async (ctx: Context, next: Next) => {
       location: dbref,
       owner: dbref,
       flags: "room",
-      description: "You see nothing special."
+      description: "You see nothing special.",
+      data: {},
+      channels: []
     });
   }
   next();

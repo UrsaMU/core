@@ -352,6 +352,13 @@
   resolved "https://registry.yarnpkg.com/@types/telnetlib/-/telnetlib-1.0.0.tgz#8ed3a41b8e891e123518b4329fe74bf7c0054738"
   integrity sha512-i7orRzaECpiK6YXKdkMTwrygFrW4SFeQStg26XEwzZpYMOr+TzJ+g+I+dewxsExXbl3R83ZsZF/7sQQC9j0TWA==
 
+"@ursamu/parser@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@ursamu/parser/-/parser-1.2.4.tgz#1da59f4aff27a0833e2ddd4bb9a9055baaf4f030"
+  integrity sha512-DFAdy/9Dz+LMh5EPspOLQZR0ysqncpt3c8tAAXHUg7mzmzJwK0UMmTkQt4LyZlUR2YRREmxtwt74kazdiJDbuA==
+  dependencies:
+    pegjs "^0.10.0"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz"
@@ -3329,6 +3336,11 @@ path-type@^3.0.0:
   integrity sha512-T2ZUsdZFHgA3u4e5PfPbjd7HDDpxPnQb5jN0SrDsjNSuVXHJqtwTnWqG0B1jZrgmJ/7lj1EmVIByWt1gxGkWvg==
   dependencies:
     pify "^3.0.0"
+
+pegjs@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
+  integrity sha1-z4uvrm7d/0tafvsYUmnqr0YQ3b0=
 
 picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.0"

@@ -19,6 +19,7 @@ export interface DBObj {
   description?: string;
   location?: string;
   owner:string,
+  channels: ChannelEntry[];
   data: {
     [key: string]: any;
   };
@@ -54,12 +55,23 @@ export interface Context {
 }
 
 export interface ChannelEntry {
-  _id: string;
+  _id?: string;
   name: string;
-  title: string;
-  mask: string;
+  title?: string;
+  mask?: string;
   alias: string;
   joined?: boolean;
+}
+
+
+export interface Channel {
+    _id: string;
+    name: string;
+    read: string;
+    write: string;
+    modify: string;
+    header: string;
+    alias?: string;
 }
 
 export interface MuRequest extends Request {

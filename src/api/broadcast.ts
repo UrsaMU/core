@@ -1,6 +1,7 @@
 import { Data } from "..";
 import { parser } from "./parser";
 import { io } from "./app";
+import { ChannelEntry, Context, DBObj } from "../declorations";
 
 /**
  * Send a message to a client.

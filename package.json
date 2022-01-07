@@ -26,6 +26,7 @@
   "dependencies": {
     "@digibear/middleware": "^1.0.1",
     "@digibear/tags": "^0.2.15",
+    "@ursamu/parser": "^1.2.4",
     "bcrypt": "^5.0.1",
     "chalk": "^4.1.2",
     "config": "^3.3.6",

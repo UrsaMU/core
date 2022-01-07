@@ -16,6 +16,7 @@ import cors from "cors";
 import { readFileSync } from "fs";
 import { DB } from "./database";
 import verifyToken from "../hooks/verifyToken";
+import { Channel } from "../declorations";
 
 const app = express();
 app.use(cors());
@@ -27,8 +28,9 @@ app.use("/auth", authRoutes);
 
 // declate databases
 export const dbObj = new DB<DBObj>(join(__dirname,"../../data/objs.db"));
+export const channel = new DB<Channel>(join(__dirname, "../../data/chans.db"));
 
-const connect = readFileSync(join(__dirname, "../../text/connect.txt"), {
+const connect = readFileSync(join(process.cwd(), "/text/connect.txt"), {
   encoding: "utf8",
 });
 

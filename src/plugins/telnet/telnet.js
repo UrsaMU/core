@@ -3,7 +3,7 @@ const { nanoid } = require("nanoid");
 const { io } = require("socket.io-client");
 const { NAWS } = telnetlib.options;
 
-args = process.argv.slice(1).map((arg) => parseInt(arg, 10));
+const args = process.argv.slice(1).map((arg) => parseInt(arg, 10));
 
 const server = telnetlib.createServer(
   {

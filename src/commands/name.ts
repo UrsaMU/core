@@ -17,7 +17,7 @@ export default () => {
       ) {
         await dbObj.update(
           { dbref: tar.dbref },
-          { name: args[2]  }
+          { ...tar, name: args[2]  }
         );
         return await send(ctx.id, "Done. Name updated.");
       } else {

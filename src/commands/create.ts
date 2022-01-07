@@ -26,8 +26,9 @@ export default () => {
             name: args[1],
             password: await hash(args[2]),
             location: config.get("playerStart"),
-            description: "You see nothing special."
-          
+            description: "You see nothing special.",
+            data: {},
+            channels: []
         });
 
         if (player) {
