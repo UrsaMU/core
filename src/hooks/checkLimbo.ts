@@ -1,5 +1,5 @@
 import { config, Context, hooks, Next } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 import { id } from "../utils/utils";
 
 export default async (ctx: Context, next: Next) => {
@@ -14,6 +14,9 @@ export default async (ctx: Context, next: Next) => {
       location: dbref,
       owner: dbref,
       flags: "room",
+      description: "You see nothing special.",
+      data: {},
+      channels: []
     });
   }
   next();

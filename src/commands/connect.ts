@@ -1,5 +1,5 @@
 import { addCmd, compare, force, send, sign } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 import { handleConnect } from "../utils/utils";
 
 export default () => {
@@ -13,9 +13,7 @@ export default () => {
       const user = await dbObj.findOne({
         $or: [{ name: regexp }, { alias: regexp }],
       });
-
       if (user && (await compare(args[2], user.password || ""))) {
-        user.password = undefined;
         const token = await sign(user.dbref);
         ctx.player = user;
         ctx.data = ctx.data ? ctx.data : {};

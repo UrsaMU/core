@@ -1,6 +1,5 @@
 import { Expression } from "@ursamu/parser";
 import { Socket } from "socket.io";
-import { DBObj, SDK } from ".";
 import { Request } from "express";
 import { IConfig } from "config";
 export interface Attribute {
@@ -8,6 +7,22 @@ export interface Attribute {
   value: string;
   flags?: string;
   lock?: string;
+}
+
+export interface DBObj {
+  _id: string;
+  dbref: string;
+  flags: string;
+  name?: string;
+  alias?: string;
+  password?: string;
+  description?: string;
+  location?: string;
+  owner:string,
+  channels: ChannelEntry[];
+  data: {
+    [key: string]: any;
+  };
 }
 
 export type Query = { [key: string]: any };
@@ -35,18 +50,28 @@ export interface Context {
   expr?: Expression;
   msg?: string;
   width?: number;
-  sdk?: SDK;
   config?: IConfig;
   res?: string;
 }
 
 export interface ChannelEntry {
-  _id: string;
+  _id?: string;
   name: string;
-  title: string;
-  mask: string;
+  title?: string;
+  mask?: string;
   alias: string;
   joined?: boolean;
+}
+
+
+export interface Channel {
+    _id: string;
+    name: string;
+    read: string;
+    write: string;
+    modify: string;
+    header: string;
+    alias?: string;
 }
 
 export interface MuRequest extends Request {

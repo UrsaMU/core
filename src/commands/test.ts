@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import { addCmd, send } from "..";
 
 export default () => {

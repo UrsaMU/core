@@ -1,6 +1,6 @@
 import pm2 from "pm2";
 import { logger } from "..";
-import { dbObj } from "../models/DBObj";
+import { dbObj } from "../api/app";
 import { setFlgs } from "../utils/utils";
 
 export default () => {

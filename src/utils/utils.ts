@@ -1,13 +1,12 @@
-import { readdir } from "fs/promises";
-import { Context, flags, force, send } from "..";
-import { dbObj, DBObj } from "../models/DBObj";
+import { Context, dbObj, flags, send } from "..";
+import { DBObj } from "../declorations";
 
 /**
  * Return the next available DBref number.
  * @returns
  */
 export const id = async () => {
-  const dbrefs = await dbObj.find({}).populate("dbref").exec();
+  const dbrefs = await dbObj.find({});
   return `#${dbrefs.length}`;
 };
 
@@ -34,10 +33,16 @@ export const handleConnect = async (ctx: Context) => {
   if (ctx.socket && ctx.player) {
     ctx.socket.join(ctx.player.location || "");
     ctx.socket.join(ctx.player.dbref!);
-    ctx.player.channels?.forEach((channel) => ctx.socket?.join(channel));
+
     ctx.socket.pid = ctx.player?.dbref;
 
     await setFlgs(ctx.player, "connected");
+
+    // join channels
+    ctx.player.channels.forEach((chan) => {
+      if (chan.joined) ctx.socket?.join(chan.name);
+    });
+
     await send(ctx.player?.dbref!, "", { token: ctx.data?.token });
   }
 };
@@ -54,11 +59,9 @@ export const target = async (ctx: Context, str: string = "") => {
       return ctx.player;
     case "":
     case "here":
-      return (
-        await ctx.sdk?.get({
-          dbref: ctx.player?.location?.slice(1) || "",
-        })
-      )[0];
+      if (ctx.player?.location) {
+        return await dbObj.findOne({ dbref: ctx.player?.location });
+      }
     default:
       const regex = RegExp(str, "i");
       return await dbObj.findOne({
@@ -79,4 +82,16 @@ export const name = (en: DBObj, tar: DBObj) => {
   } else {
     return tar.name;
   }
+};
+
+export const msgFmt = (msg: string) => {
+  const msgPieces = msg.split(" ");
+  msgPieces.shift();
+  msg = msgPieces.join(" ").trim();
+  // poses
+  if (msg.startsWith(":") || msg.startsWith(";")) {
+    return `${msg[0] === ":" ? " " : ""}${msg.slice(1)}`;
+  }
+
+  return ` says, "${msg.trim()}"`;
 };

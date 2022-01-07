@@ -30,7 +30,7 @@ export default () => {
                 return next();
               }
               pm2.disconnect();
-              logger.info("Telnet Started on port: " + process.env.TELNETPORT);
+              logger.info("Telnet Started on port: " + config.get("telnetPort"));
               return next();
             }
           );

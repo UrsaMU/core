@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { compare, sign } from "..";
-import { dbObj } from "../models/DBObj";
+import { compare, dbObj, sign } from "..";
 
 const router = Router();
 
@@ -11,8 +10,8 @@ router.post("/", async (req, res, next) => {
       $or: [{ name: regexp }, { alias: regexp }],
     });
 
-    if (user && (await compare(req.body.password!, user.password!))) {
-      user.password = undefined;
+    if (user && (await compare(req.body.password!, user.data.password!))) {
+      user.data.password = undefined;
       const token = await sign(user.dbref);
       res.status(200).json({ token, user });
     } else {

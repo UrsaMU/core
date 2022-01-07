@@ -1,4 +1,5 @@
 import { addCmd, DBObj, send } from "..";
+import { dbObj } from "../api/app";
 import { center, repeat } from "../utils/format";
 import { name, target } from "../utils/utils";
 
@@ -9,7 +10,7 @@ export default () => {
     pattern: /^(?:look|l)(?:\s+(.*))?/i,
     render: async (ctx, args) => {
       const tar = await target(ctx, args[1]);
-
+      
       // Maje sure tar was returned with more than an empty object.
       if (tar?.dbref) {
         // Can they see the object?
@@ -18,21 +19,15 @@ export default () => {
           ctx.player?.dbref === tar.dbref
         ) {
           let desc = "";
-          console.log(ctx.data?.width);
-          desc += center(`< ${tar.name} >`, ctx.width, "-") + "\n\n";
-          desc += tar.description;
-          const contents = await ctx.sdk?.get({ location: tar.dbref });
+          desc += `%ch%cc${tar.name}%cn\n`;
+          desc += tar.description + "\n\n";
+          const contents = await dbObj.find({ location: tar.dbref });
 
           if (contents.length) {
             // Is this a room or something else? Is our looker inside?
-            desc +=
-              "\n\n" +
-              center(
-                tar.flags.includes("room") ? "< Contents >" : "< Carrying >",
-                ctx.width,
-                "-"
-              ) +
-              "\n";
+            (desc +=
+              "\n\n" + tar.flags.includes("room") ? "Contents\n" : "Carrying\n"),
+              +"\n";
             desc += contents
               .filter((item: DBObj) => !item.flags?.includes("room"))
               .map((item: DBObj) => name(ctx.player!, item))

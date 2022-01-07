@@ -2,46 +2,34 @@ import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import {
-  config,
-  Context,
-  logger,
-  MUSocket,
-  plugins,
-  SDK,
-  send,
-  verify,
-} from "..";
-import mongoose from "mongoose";
-import user from "../routes/userRoutes";
+import { config, Context, DBObj, logger, MUSocket, plugins, send } from "..";
 import dbobjRoutes from "../routes/dbobjRoutes";
 import authRoutes from "../routes/authRoutes";
 import { join } from "path";
 import authReq from "../middleware/authReq";
-import execRoutes from "../routes/execRoutes";
-import { dbObj } from "../models/DBObj";
-import { handleConnect, setFlgs } from "../utils/utils";
+import { setFlgs } from "../utils/utils";
 import checkCmd from "../hooks/checkCmd";
 import huh from "../hooks/huh";
 import checkLimbo from "../hooks/checkLimbo";
 import cleanShutdown from "../hooks/cleanShutdown";
 import cors from "cors";
-import { chmodSync, readFileSync } from "fs";
-import e from "cors";
+import { DB } from "./database";
+import verifyToken from "../hooks/verifyToken";
+import { Channel } from "../declorations";
+import { textFiles } from "./plugins";
+import checkChans from "../hooks/checkChans";
 
 const app = express();
 app.use(cors());
 const server = createServer(app);
 const io = new IoServer(server);
 app.use(express.json());
-app.use("/users", user);
 app.use("/dbobjs", authReq, dbobjRoutes);
 app.use("/auth", authRoutes);
-app.use("/exec", execRoutes);
 
-const connect = readFileSync(join(__dirname, "../../text/connect.txt"), {
-  encoding: "utf8",
-});
+// declate databases
+export const dbObj = new DB<DBObj>(join(__dirname, "../../data/objs.db"));
+export const channel = new DB<Channel>(join(__dirname, "../../data/chans.db"));
 
 // Default Error handler.
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -55,24 +43,13 @@ io.on("connection", (socket: MUSocket) => {
     ctx.id = socket.id;
     ctx.socket = socket;
 
-    if (ctx.data?.token) {
-      const dbref = await verify(ctx.data.token);
-      const player = await dbObj.findOne({ dbref: dbref });
-      if (player) ctx.player = player;
-
-      const sdk = new SDK({
-        key: ctx.data?.token,
-      });
-      ctx.sdk = sdk;
-      ctx.config = config;
-      ctx.width = ctx.data.width;
-    }
+    ctx.config = config;
+    ctx.width = ctx.data?.width;
 
     if (ctx.data?.login) {
-      send(ctx.id, connect);
+      send(ctx.id, textFiles.get("connect") || "");
     }
-
-    handleConnect(ctx);
+    hooks.input.use(huh);
     hooks.input.execute(ctx);
   });
 
@@ -82,24 +59,23 @@ io.on("connection", (socket: MUSocket) => {
   });
 });
 
-export const start = (cb = (ctx = {}) => {}) => {
-  server.listen(process.env.PORT || 4000, () => {
-    logger.info("server Listening on port: " + process.env.PORT);
-    mongoose.connect(process.env.DATABASE_URI || "", async () => {
-      logger.info("MongoDB Connected.");
-      await plugins(join(__dirname, "../commands/"));
-      logger.info("Commands directory loaded.");
-      await plugins(join(__dirname, "../plugins/"));
-      logger.info("Plugins directory loaded.");
-      hooks.startup.use(checkLimbo);
-      hooks.input.use(checkCmd, huh);
-      cb({});
-      await hooks.startup.execute({});
-    });
+export const start = (cb = () => {}) => {
+  server.listen(config.get("port") || 4000, async () => {
+    logger.info("server Listening on port: " + config.get("port"));
+    await plugins(join(__dirname, "../commands/"));
+    logger.info("Commands directory loaded.");
+    await plugins(join(__dirname, "../plugins/"));
+    logger.info("Plugins directory loaded.");
+    await plugins(join(__dirname, "../../text/"));
+    logger.info("Text files loaded.");
+    hooks.startup.use(checkLimbo);
+    hooks.input.use(verifyToken, checkCmd, checkChans);
+    cb();
+    await hooks.startup.execute({});
   });
 };
 
-export { io, server, express, mongoose };
+export { io, server, express };
 
 process.on("SIGINT", async () => {
   // This should be the very last hook in the pipeline as it holds our process#exit call.
