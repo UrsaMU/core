@@ -1,27 +1,32 @@
 ![Ursamu](./media/ursamu_github_banner.png)
 
-> Ursamu is a modern, HTTP based implementation of a MUSH server, a text based, intertnet roleplaying game of the 1990s. This work is definitely done on the shoulders of giants. This Repo is also in a very alpha state and the api is surely destinied to change as I move towards a stable 1.0.
+> Ursamu is the authors take on a modern implementation of a MUSH. A text based, intertnet roleplaying game of the 1990s and early 2000s (Though it's still happening today! - clearly!). This work is definitely done on the shoulders of giants. This Repo is also in a very alpha state and the api is surely destinied to change as I move towards a stable 1.0.
 
-This repo represents the core or the ursamu engine. It has the bare essentials to start an URSAMU server. For more information about the core API, check out the [documentation](https://ursamu.github.io/core). _warning!_ Still a work in progress!
+This repo represents the core or the ursamu engine. It has It has the author's opinion on what makes a full fledged MU. 
 
 - [Basic Usage](#basic-usage)
 - [Commands](#commands)
 - [Hooks](#hooks)
 - [Flags](#flags)
 - [Logger](#logger)
-- [SDK](#sdk)
-- [Security](#security)
 - [The Plugin System](#the-plugin-system)
 - [Development](#development)
 - [License](#license)
 
 ## Basic Usage
 
-```ts
-import { start } from "@ursamu/core";
+For the most basic usage of UrsaMU, the only thing your code needs to incorporate is the `start()` function. It takes a callback function that's executed at the end of the startup process. This makes an ideal place to add custom elements to your game.
 
-start();
+```ts
+import { start, plugins } from "@ursamu/core";
+import { join } from "path";
+start( async ()=>{
+    await plugins(join(__dirname,"../../commands"));
+    await plugins(joinn(__dirname,"../../plugins"));
+    console.log("Game Loaded!");
+);
 ```
+
 ## Commands
 
 While softcoded commands are not yet available, it's very easy to add new 'hardcode' commands to **UrsamMU**. A command holds the following structure:
@@ -46,19 +51,34 @@ addCmd({
 
 ## Hooks
 
-Hooks are middleware pipelines that can be used to modify data. There are serveral pre-defined hooks that you can utalize for the game, as well as a way to create your own custom hooks as needed by your addition or plugin. Data can be passed between hooks in a pipeline through the `Context` object. Then, once done modifying the passed data, invoke the `next()` function to move onto the noext middleware in the pipeline.
+Hooks offer a way to modify some of the basic functionality of the server. Hooks in a nutshell are individual middleware processes, much like those used by the underlying `express` server.
+
+```ts
+interface HookObject {
+  input: Pipe<Context>;
+  startup: Pipe<any>;
+  shutdown: Pipe<any>;
+  connect: Pipe<DBObj>;
+  disconnect: Pipe<DBObj>;
+}
+```
+
+To add support for one of the middleware pipelines in your code, it can be added to a plugin in the following format:
 
 ```ts
 import { hooks } from "@ursamu/core";
 
-hooks.input.use((ctx, next) => {
-  ctx.data.foo = "bar";
-  ctx.data.original.msg = ctx.msg;
-  next();
-});
+// plugin.ts
+
+export default () => {
+    hooks.connect.use(ctx:Context, next: Next) => {
+        context.data.foo = "bar";
+        next();
+    }
+}
 ```
 
-Then, when we need to run the middleware pipeline in our code, we can invoke the `execute` function to run our middleware chain.
+Then, when we need to run the middleware pipeline in our code, we can invoke the `execute` function to run our middleware pipeline.
 
 ```ts
 import { hooks, io } from "@uesamu/coro";
@@ -67,24 +87,20 @@ io.on("connection", (socket: Socket) => {
   socket.join(socket.id);
 
   socket.on("message", (ctx) => {
-      ctx.id = socket.id;
-      ctx.socket = socket;
-      hooks.input.execute(ctx);    
+    ctx.id = socket.id;
+    ctx.socket = socket;
+    hooks.input.execute(ctx);
   });
 });
 ```
 
 ## Flags
+
 Coming soon
 
 ## Logger
-Comming soon
 
-## SDK
 Comming soon
-
-## Security
-Coming soon
 
 ## The Plugin System
 
@@ -100,6 +116,7 @@ The **plugin** system is simple to use! Simplpy put your code inside of a folder
 ```
 
 **`index.ts`**
+
 ```ts
 import { plugins, start } from "@ursamu/core";
 import { join } from "fs";
@@ -107,7 +124,7 @@ import { join } from "fs";
 // I'm only inteterested in adding files with the js or ts  extension,
 // or folders with an 'index.js' file available, and avoid files that
 // end in '.d.ts'
-start(()=> plugins(join(__dirname, "./plugins/")))
+start(() => plugins(join(__dirname, "./plugins/")));
 ```
 
 **`plugins/plugin1.ts`**
@@ -139,7 +156,11 @@ export default () => {
 
 ## Development
 
-coming soon
+```
+git clone https://github.com/ursamu/core.git
+cd core
+npm install or yarn
+```
 
 ## License
 
