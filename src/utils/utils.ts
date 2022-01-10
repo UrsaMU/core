@@ -1,4 +1,4 @@
-import { channel, Context, dbObj, flags, send } from "..";
+import { Channel, channel, Context, dbObj, flags, send } from "..";
 import { ChannelEntry, DBObj } from "../declorations";
 import checkLimbo from "../hooks/checkLimbo";
 
@@ -85,16 +85,18 @@ export const name = (en: DBObj, tar: DBObj) => {
   }
 };
 
-export const msgFmt = (msg: string) => {
+export const msgFmt = (en: DBObj, chan: Channel, msg: string) => {
   const msgPieces = msg.split(" ");
   msgPieces.shift();
   msg = msgPieces.join(" ").trim();
   // poses
   if (msg.startsWith(":") || msg.startsWith(";")) {
-    return `${msg[0] === ":" ? " " : ""}${msg.slice(1)}`;
+    return `${chan.header} ${en.name}${msg[0] === ":" ? " " : ""}${msg.slice(
+      1
+    )}`;
   }
 
-  return ` says, "${msg.trim()}"`;
+  return `${chan.header} ${en.name} says, "${msg.trim()}"`;
 };
 
 /**

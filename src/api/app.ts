@@ -17,7 +17,6 @@ import { DB } from "./database";
 import verifyToken from "../hooks/verifyToken";
 import { Channel } from "../declorations";
 import { textFiles } from "./plugins";
-import checkChans from "../hooks/checkChans";
 
 const app = express();
 app.use(cors());
@@ -69,7 +68,7 @@ export const start = (cb = () => {}) => {
     await plugins(join(__dirname, "../../text/"));
     logger.info("Text files loaded.");
     hooks.startup.use(checkLimbo);
-    hooks.input.use(verifyToken, checkCmd, checkChans);
+    hooks.input.use(verifyToken, checkCmd);
     cb();
     await hooks.startup.execute({});
   });

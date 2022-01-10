@@ -41,11 +41,11 @@ router.patch("/:id", async (req: MuRequest, res, next) => {
 router.get("/:id", async (req: MuRequest, res, next) => {
   const regex = new RegExp(req.params.id, "i");
 
-  const obj = await dbObj.findOne({ _id: req.params.id });
+  const obj = await dbObj.findOne({ dbref: "#" + req.params.id });
 
   if (obj) {
     if (
-      obj.data.owner === req.user?.dbref ||
+      obj.owner === req.user?.dbref ||
       flags.check(req.user?.flags || "", "wizard+")
     ) {
       obj.data.password = undefined;
