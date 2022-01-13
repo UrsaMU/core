@@ -2,7 +2,16 @@ import { Server as IoServer } from "socket.io";
 import { hooks } from "./hooks";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
-import { config, Context, DBObj, logger, MUSocket, plugins, send } from "..";
+import {
+  config,
+  Context,
+  DBObj,
+  logger,
+  MUSocket,
+  plugins,
+  send,
+  getPlugins,
+} from "..";
 import dbobjRoutes from "../routes/dbobjRoutes";
 import authRoutes from "../routes/authRoutes";
 import { join } from "path";
@@ -64,6 +73,7 @@ export const start = (cb = () => {}) => {
     await plugins(join(__dirname, "../commands/"));
     logger.info("Commands directory loaded.");
     await plugins(join(__dirname, "../plugins/"));
+    getPlugins();
     logger.info("Plugins directory loaded.");
     await plugins(join(__dirname, "../../text/"));
     logger.info("Text files loaded.");

@@ -1,14 +1,11 @@
 ![Ursamu](./media/ursamu_github_banner.png)
 
-> Ursamu is the authors take on a modern implementation of a MUSH. A text based, intertnet roleplaying game of the 1990s and early 2000s (Though it's still happening today! - clearly!). This work is definitely done on the shoulders of giants. This Repo is also in a very alpha state and the api is surely destinied to change as I move towards a stable 1.0.
-
-This repo represents the core or the ursamu engine. It has It has the author's opinion on what makes a full fledged MU. 
+> Ursamu is the author's take on a modern implementation of a MUSH-like. A text based, intertnet roleplaying game of the 1990s and early 2000s (Though it's still happening today! - clearly!). This work is definitely done on the shoulders of giants. This Repo is also in a very alpha state and the api is surely destinied to change as I move towards a stable 1.0.
 
 - [Basic Usage](#basic-usage)
 - [Commands](#commands)
 - [Hooks](#hooks)
 - [Flags](#flags)
-- [Logger](#logger)
 - [The Plugin System](#the-plugin-system)
 - [Development](#development)
 - [License](#license)
@@ -33,7 +30,7 @@ While softcoded commands are not yet available, it's very easy to add new 'hardc
 
 **Cmd**
 
-- `name: string` The name of the function. Used in `+help`.
+- `name: string` The name of the command. Used in `+help`.
 - `pattern: string | RegExp` The pattern for the command to match against. **UrsamMI** suppprts two kinds of patterns when you write your commands, string and regex (though honestly strings are processed and converted to regex under the hood). Regex allows for more powerful pattern matching. In regex, `(group)` matches will become the `args` array of the `render` property. Whene using strings, use wildcard `*` matching. To maych any input use an asterisk, if that input is optional use a question mark `?` instead.
 - `flags: string` This is the flag expression the command enactor must pass before the command will match.
 - `render: (ctx, args) => Promise<any>` This is where the business logic of the command goes. `ctx` represents the current context object being passed through the `hooks.input.execute(ctx)` run. Args repreresents any grouped matches from the the commands `pattern`.
@@ -96,11 +93,64 @@ io.on("connection", (socket: Socket) => {
 
 ## Flags
 
-Coming soon
+The flag system for **UrsaMU** offers a way to group similar dbobjects, and label them for different perpouses in game. Think of **UrsaMU's** flag system as a way to tag, and even lock systems to different objecs. First, we need to create a few flags:
 
-## Logger
+```ts
+import { flags } from "@ursamu/core";
 
-Comming soon
+flags.add(
+  {
+    name: "admin",
+    lvl: 7,
+    code: "a",
+    lock: "admin+",
+  },
+  {
+    name: "thing",
+    lvl: 0,
+    code: "t",
+    lock: "admin+",
+  },
+  {
+    name: "room",
+    lvl: 0,
+    code: "r",
+    lock: "admin+",
+  },
+  {
+    name: "player",
+    lvl: 0,
+    code: "p",
+    lock: "admin+",
+  },
+  {
+    name: "account",
+    lvl: 0,
+    code: "a",
+    lock: "admin+",
+    data: {
+      foo: "bar",
+      another: 1,
+    },
+  }
+);
+```
+
+This way, you can set whatever flags you wish for your game. UrsaMU comes with a couple of predefined flags however, `immortal`, `admin`, `player`, `room` and `thing`. Though honestly, even the built in flags can be overwritten with your own specs when included with a plugin. :)
+
+The **lock** field on a flag accepts a **flag expression**. Think of flag expressions as a lock, and to pass the lock the object has to have the right flags. You can look for a flag in particular, or you can use conditional operators to match certain conditions.
+
+```
+staff
+!guest
+wizard+
+werewolf|vampire
+werewolf|vampire|staff+ !guest
+```
+
+This also acts as the default locking mechanisim used in **UrsaMU**.
+
+The very first player object created will recieve the immortal flag, which gives them unrestricted access to all systems in the game. To set a flag on an object in-game, use `@set <name>=<flag>[[!]<flag>][[!]<flag>][[!]<flag>]`
 
 ## The Plugin System
 

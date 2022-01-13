@@ -1,4 +1,5 @@
 import { readdir, readFile } from "fs/promises";
+import { glob } from "glob";
 import { join, resolve } from "path";
 
 export const textFiles = new Map<string, string>();
@@ -34,3 +35,12 @@ export const plugins = async (path: string) => {
     }
   }
 };
+
+export const getPlugins = () =>
+  glob("node_modules/**/ursamu-plugin-*", async (err, matches) => {
+    if (err) throw err;
+    for (const match of matches) {
+      const module = await import(match);
+      if (typeof module.default === "function") module.default();
+    }
+  });
