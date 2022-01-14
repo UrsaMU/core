@@ -1,7 +1,7 @@
 import config from "config";
 import dotenv from "dotenv";
 import { logger } from "./api/logger";
-// import { start } from "./api/app";
+import { start } from "./api/app";
 export * from "./api/broadcast";
 export * from "./api/app";
 export * from "./api/broadcast";
@@ -15,6 +15,6 @@ export * from "./declorations";
 dotenv.config();
 export { config, logger };
 
-// start();
+start();
 
 process.on("uncaughtException", (err) => logger.error("Error: " + err.message));

@@ -25,7 +25,7 @@ export default () => {
             : "player connected immortal",
           name: args[1],
           password: await hash(args[2]),
-          location: config.get("playerStart"),
+          location: config.get("playerStart") || "#0",
           description: "You see nothing special.",
           data: {},
           channels: [],

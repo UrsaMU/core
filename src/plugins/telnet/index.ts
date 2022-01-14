@@ -20,9 +20,7 @@ export default () => {
               script: join(__dirname, "telnet.js"),
               name: "telnet",
               cwd: __dirname,
-              args: `${config.get("port") || "4201"} ${
-                config.get("telnetPort") || "4202"
-              }`,
+              args: `${process.env.PORT} ${process.env.TELNETPORT}`,
             },
             function (err) {
               if (err) {
@@ -30,7 +28,7 @@ export default () => {
                 return next();
               }
               pm2.disconnect();
-              logger.info("Telnet Started on port: " + config.get("telnetPort"));
+              logger.info("Telnet Started on port: " + process.env.TELNETPORT);
               return next();
             }
           );

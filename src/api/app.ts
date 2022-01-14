@@ -67,9 +67,22 @@ io.on("connection", (socket: MUSocket) => {
   });
 });
 
-export const start = (cb = () => {}) => {
-  server.listen(config.get("port") || 4000, async () => {
-    logger.info("server Listening on port: " + config.get("port"));
+interface StartOptions {
+  port?: string;
+  telnetPort?: string;
+  load?: () => any | Promise<any>;
+}
+
+export const start = ({
+  port = "4000",
+  telnetPort = "4001",
+  load = () => {},
+}: StartOptions = {}) => {
+  process.env.PORT = port;
+  process.env.TELNETPORT = telnetPort;
+
+  server.listen(process.env.PORT, async () => {
+    logger.info("server Listening on port: " + process.env.PORT);
     await plugins(join(__dirname, "../commands/"));
     logger.info("Commands directory loaded.");
     await plugins(join(__dirname, "../plugins/"));
@@ -79,7 +92,7 @@ export const start = (cb = () => {}) => {
     logger.info("Text files loaded.");
     hooks.startup.use(checkLimbo);
     hooks.input.use(verifyToken, checkCmd);
-    cb();
+    load();
     await hooks.startup.execute({});
   });
 };
