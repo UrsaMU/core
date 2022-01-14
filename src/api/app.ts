@@ -85,11 +85,11 @@ export const start = ({
     logger.info("server Listening on port: " + process.env.PORT);
     await plugins(join(__dirname, "../commands/"));
     logger.info("Commands directory loaded.");
-    await plugins(join(__dirname, "../plugins/"));
+    // await plugins(join(__dirname, "../plugins/"));
     getPlugins();
-    logger.info("Plugins directory loaded.");
-    await plugins(join(__dirname, "../../text/"));
-    logger.info("Text files loaded.");
+    logger.info("Plugins loaded.");
+    // await plugins(join(__dirname, "../../text/"));
+    // logger.info("Text files loaded.");
     hooks.startup.use(checkLimbo);
     hooks.input.use(verifyToken, checkCmd);
     load();
