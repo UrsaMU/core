@@ -14,4 +14,40 @@ export const setFlag = (list: string, data = {}, flgs = "") => {
   return { flags: tags, data };
 };
 
+flags.add(
+  {
+    name: "superuser",
+    code: "*",
+    lock: "superuser",
+    lvl: 10,
+  },
+  {
+    name: "admin",
+    code: "a",
+    lock: "superuser",
+    lvl: 9,
+  },
+  {
+    name: "staff",
+    code: "s",
+    lock: "superuser",
+    lvl: 8,
+  },
+  {
+    name: "player",
+    code: "p",
+    lock: "superuser",
+  },
+  {
+    name: "room",
+    code: "r",
+    lock: "superuser",
+  },
+  {
+    name: "connected",
+    code: "c",
+    lock: "superuser",
+  }
+);
+
 export { flags };

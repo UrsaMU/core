@@ -1,16 +1,23 @@
 import { Socket, Server as IoServer } from "socket.io";
+import { MUSocket } from "..";
 import { hooks } from "./hooks";
 
-const io = new IoServer();
+const server = new IoServer();
 
-io.on("connection", (socket: Socket) => {
+server.on("connection", (socket: MUSocket) => {
   socket.join(socket.id);
 
   socket.on("message", (ctx) => {
+    socket.cid = ctx.data.cid;
     ctx.id = socket.id;
     ctx.socket = socket;
+
     hooks.input.execute(ctx);
+  });
+
+  socket.on("disconnect", () => {
+    hooks.disconnect.execute({ socket });
   });
 });
 
-export { io };
+export { server };

@@ -1,5 +1,5 @@
 import { readdir, readFile } from "fs/promises";
-import { resolve } from "path";
+import { join, resolve } from "path";
 
 /**
  * Load all js files from a directory.
@@ -19,7 +19,7 @@ export const plugins = async (path: string) => {
         "utf-8"
       );
       const data = JSON.parse(pack);
-      const module = await import(path + data.main);
+      const module = await import(join(path, `/${file.name}/`, data.main));
       if (module.default) await module.default();
     }
   }

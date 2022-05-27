@@ -12,18 +12,21 @@ export * from "./api/security";
 
 export interface DBObj {
   _id?: string;
-  dbref?: number;
-
-  data: { [key: string]: any; channels?: ChannelEntry[] };
-  temp: { [key: string]: any };
-  description: string;
-  alias?: string;
-  attrs: { [key: string]: Attribute };
-  name: string;
+  dbref?: string;
   flags: string;
-  location: string;
-  owner: string;
-  password?: string;
+
+  data: {
+    [key: string]: any;
+    channels?: ChannelEntry[];
+    description: string;
+    alias?: string;
+    attrs?: { [key: string]: Attribute };
+    name: string;
+    location?: string;
+    owner: string;
+    destination?: number;
+    password?: string;
+  };
 }
 
 export interface Attribute {
@@ -39,6 +42,7 @@ export type Data = { [key: string]: any };
 export interface Database<T> {
   create: (data: T) => Promise<T>;
   find: (query: Query, params?: Data) => Promise<T[]>;
+  fineOne: (query: Query, params?: Data) => Promise<T>;
   get: (id: string, params?: Data) => Promise<T>;
   update: (query: Partial<T>, data: T) => Promise<T>;
   delete: (id: string) => Promise<any>;
@@ -90,3 +94,5 @@ export interface Channel {
 export interface MuRequest extends Request {
   player?: DBObj;
 }
+
+const startup = async (callback: () => {}) => {};

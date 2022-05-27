@@ -92,6 +92,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#destination" class="tsd-kind-icon">destination</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#headers" class="tsd-kind-icon">headers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#integrity" class="tsd-kind-icon">integrity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#isHistoryNavigation" class="tsd-kind-icon">is<wbr>History<wbr>Navigation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#isReloadNavigation" class="tsd-kind-icon">is<wbr>Reload<wbr>Navigation</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#keepalive" class="tsd-kind-icon">keepalive</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#method" class="tsd-kind-icon">method</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="MuRequest.html#mode" class="tsd-kind-icon">mode</a></li>
@@ -126,7 +128,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.body</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2444</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2583</li>
 						</ul>
 					</aside>
 				</section>
@@ -137,7 +139,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.bodyUsed</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2445</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2584</li>
 						</ul>
 					</aside>
 				</section>
@@ -148,7 +150,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.cache</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12051</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12450</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -164,7 +166,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.credentials</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12055</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12454</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,7 +182,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.destination</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12059</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12458</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -196,7 +198,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.headers</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12063</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12462</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -212,12 +214,44 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.integrity</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12067</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12466</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Returns request&#39;s subresource integrity metadata, which is a cryptographic hash of the resource being fetched. Its value consists of multiple hashes separated by whitespace. [SRI]</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="isHistoryNavigation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>History<wbr>Navigation</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>History<wbr>Navigation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Request.isHistoryNavigation</p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12470</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns a boolean indicating whether or not request is for a history navigation (a.k.a. back-foward navigation).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="isReloadNavigation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Reload<wbr>Navigation</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Reload<wbr>Navigation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Request.isReloadNavigation</p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12474</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns a boolean indicating whether or not request is for a reload navigation.</p>
 						</div>
 					</div>
 				</section>
@@ -228,7 +262,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.keepalive</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12071</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12478</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -244,7 +278,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.method</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12075</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12482</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,7 +294,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.mode</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12079</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12486</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -275,7 +309,7 @@
 					<div class="tsd-signature tsd-kind-icon">player<span class="tsd-signature-symbol">:</span> <a href="DBObj.html" class="tsd-signature-type" data-tsd-kind="Interface">DBObj</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ursamu/core/blob/34f0200/src/index.ts#L91">src/index.ts:91</a></li>
+							<li>Defined in <a href="https://github.com/ursamu/core/blob/b30d7e5/src/index.ts#L95">src/index.ts:95</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -286,7 +320,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.redirect</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12083</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12490</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -302,7 +336,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.referrer</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12087</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12494</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -318,7 +352,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.referrerPolicy</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12091</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12498</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -334,7 +368,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.signal</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12095</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12502</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -350,7 +384,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Request.url</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12099</li>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12506</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -373,7 +407,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.arrayBuffer</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2446</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2585</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -391,7 +425,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.blob</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2447</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2586</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Blob</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -409,7 +443,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.clone</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12100</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:12507</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Request</span></h4>
@@ -427,7 +461,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.formData</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2448</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2587</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormData</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -445,7 +479,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.json</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2449</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2588</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -463,7 +497,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Request.text</p>
 								<ul>
-									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2450</li>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:2589</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -533,6 +567,12 @@
 								<a href="MuRequest.html#integrity" class="tsd-kind-icon">integrity</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="MuRequest.html#isHistoryNavigation" class="tsd-kind-icon">is<wbr>History<wbr>Navigation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="MuRequest.html#isReloadNavigation" class="tsd-kind-icon">is<wbr>Reload<wbr>Navigation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="MuRequest.html#keepalive" class="tsd-kind-icon">keepalive</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
@@ -600,10 +640,10 @@
 						<a href="../modules.html#hooks" class="tsd-kind-icon">hooks</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="../modules.html#io" class="tsd-kind-icon">io</a>
+						<a href="../modules.html#parser" class="tsd-kind-icon">parser</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="../modules.html#parser" class="tsd-kind-icon">parser</a>
+						<a href="../modules.html#server" class="tsd-kind-icon">server</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#addCmd" class="tsd-kind-icon">add<wbr>Cmd</a>

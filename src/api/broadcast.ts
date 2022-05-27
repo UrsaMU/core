@@ -1,6 +1,6 @@
 import { Data } from "..";
 import { parser } from "./parser";
-import { io } from "./app";
+import { server } from "./app";
 
 /**
  * Send a message to a client.
@@ -11,7 +11,7 @@ import { io } from "./app";
  * @returns
  */
 export const send = async (id: string, msg: string, data: Data = {}) => {
-  io.to(id).emit("message", {
+  server.to(id).emit("message", {
     msg: parser.substitute(
       "telnet",
       (await parser.run({
@@ -37,7 +37,7 @@ export const send = async (id: string, msg: string, data: Data = {}) => {
  * @returns
  */
 export const broadcast = async (msg: string, data: Data = {}) => {
-  io.emit("message", {
+  server.emit("message", {
     msg: parser.substitute(
       "telnet",
       (await parser.run({
