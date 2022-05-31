@@ -19,9 +19,9 @@ export { Next };
  * @example force(ctx, "look");
  */
 export const force = async (ctx: Context, command: string) => {
-  await hooks.input.execute({
-    ...ctx,
-    ...{ msg: command },
-    ...{ ...ctx.data, ...{ found: false } },
-  });
+  ctx.msg = command;
+  ctx.data ||= {};
+  ctx.data.force = true;
+
+  await hooks.input.execute(ctx);
 };

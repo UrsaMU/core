@@ -14,6 +14,7 @@ parser.addSubs(
   { before: /%cy/g, after: "\u001b[33m" },
   { before: /%cb/g, after: "\u001b[34m" },
   { before: /%cm/g, after: "\u001b[35m" },
+  { before: /%cc/g, after: "\u001b[36m" },
   { before: /%cw/g, after: "\u001b[37m" },
 
   // Extra ansi definitions

@@ -20,11 +20,11 @@ export interface DBObj {
     channels?: ChannelEntry[];
     description: string;
     alias?: string;
-    attrs?: { [key: string]: Attribute };
+    attrs?: { [key: string]: any };
     name: string;
     location?: string;
     owner: string;
-    destination?: number;
+    destination?: string;
     password?: string;
   };
 }
