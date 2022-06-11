@@ -6,6 +6,8 @@ export interface Cmd {
   render: (ctx: Context, args: string[]) => Promise<void>;
   flags?: string;
   help?: string;
+  category?: string;
+  lock?: string;
   hidden?: boolean;
 }
 

@@ -13,7 +13,7 @@ import { server } from "./app";
 export const send = async (id: string, msg: string, data: Data = {}) => {
   server.to(id).emit("message", {
     msg: parser.substitute(
-      "telnet",
+      data.type || "telnet",
       (await parser.run({
         msg,
         data,
@@ -39,7 +39,7 @@ export const send = async (id: string, msg: string, data: Data = {}) => {
 export const broadcast = async (msg: string, data: Data = {}) => {
   server.emit("message", {
     msg: parser.substitute(
-      "telnet",
+      data.type || "telnet",
       (await parser.run({
         msg,
         data,
